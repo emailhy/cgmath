@@ -1,0 +1,68 @@
+/*!
+\mainpage math3d Homepage
+
+
+\section introduction Introduction
+
+%math3d is a collection of useful C++ classes and utility functions 
+for computer graphics projects.
+
+
+\section features Features:
+
+- Written in portable ANSI-C++
+- 2D/3D vectors
+- Quaternions
+- 3x3/4x4 Matrices
+- etc
+ 
+ 
+\section license License
+
+Copyright (C) 1995-2007 by Jan Eric Kyprianidis <<a href="http://www.kyprianidis.com">www.kyprianidis.com</a>><br>
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the <b>GNU General Public License</b> as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but <b>WITHOUT ANY WARRANTY</b>; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<a href="http://www.gnu.org/copyleft/gpl.htm">GNU General Public License</a> for more details.
+
+
+\section participation Project Participation
+
+  - <a href="http://sourceforge.net/tracker/?group_id=3997&atid=103997">Bugs</a>
+  - <a href="http://sourceforge.net/tracker/?group_id=3997&atid=303997">Patches</a>
+  - Sourceforge.NET <a href="http://sourceforge.net/projects/math3d">project</a> page
+
+
+\section download Download
+
+Access to the current version is available through <a href="http://sourceforge.net/svn/?group_id=3997">SVN</a>.
+
+
+\htmlonly
+<center>
+<a href="http://sourceforge.net/donate/index.php?group_id=3997">
+<img src="http://images.sourceforge.net/images/project-support.jpg" width="88" height="32" border="0" alt="Support This Project" />
+</a>
+</center>
+\endhtmlonly
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
