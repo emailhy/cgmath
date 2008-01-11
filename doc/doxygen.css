@@ -1,13 +1,16 @@
 BODY,H1,H2,H3,H4,H5,H6,P,CENTER,TD,TH,UL,DL,DIV {
 	font-family: Geneva, Arial, Helvetica, sans-serif;
 }
+BODY,TD {
+	font-size: 80%;
+}
 H1 {
 	text-align: center;
 }
 CAPTION { font-weight: bold }
 DIV.qindex {
 	width: 100%;
-	background-color: #eeeeff;
+	background-color: #FAFAFA;
 	border: 1px solid #b0b0b0;
 	text-align: center;
 	margin: 2px;
@@ -16,7 +19,7 @@ DIV.qindex {
 }
 DIV.nav {
 	width: 100%;
-	background-color: #eeeeff;
+	background-color: #FAFAFA;
 	border: 1px solid #b0b0b0;
 	text-align: center;
 	margin: 2px;
@@ -74,9 +77,9 @@ PRE.fragment {
 	padding-bottom: 4px;
 }
 DIV.ah { background-color: black; font-weight: bold; color: #ffffff; margin-bottom: 3px; margin-top: 3px }
-TD.md { background-color: #F4F4FB; font-weight: bold; }
-TD.mdname1 { background-color: #F4F4FB; font-weight: bold; color: #602020; }
-TD.mdname { background-color: #F4F4FB; font-weight: bold; color: #602020; width: 600px; }
+TD.md { background-color: #FAFAFA; font-weight: bold; }
+TD.mdname1 { background-color: #FAFAFA; font-weight: bold; }
+TD.mdname { background-color: #FAFAFA; font-weight: bold; }
 DIV.groupHeader {
        margin-left: 16px;
        margin-top: 12px;
@@ -91,7 +94,8 @@ BODY {
 	margin-left: 20px;
 }
 TD.indexkey {
-	background-color: #eeeeff;
+	width: 200px;
+	background-color: #FAFAFA;
 	font-weight: bold;
 	padding-right  : 10px;
 	padding-top    : 2px;
@@ -101,10 +105,11 @@ TD.indexkey {
 	margin-right   : 0px;
 	margin-top     : 2px;
 	margin-bottom  : 2px;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #E0E0E0;
 }
 TD.indexvalue {
-	background-color: #eeeeff;
+	width: 600px;
+	background-color: #FAFAFA;
 	font-style: italic;
 	padding-right  : 10px;
 	padding-top    : 2px;
@@ -114,7 +119,7 @@ TD.indexvalue {
 	margin-right   : 0px;
 	margin-top     : 2px;
 	margin-bottom  : 2px;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #E0E0E0;
 }
 TR.memlist {
    background-color: #f0f0f0; 
@@ -131,14 +136,13 @@ SPAN.stringliteral { color: #002080 }
 SPAN.charliteral   { color: #008080 }
 .mdTable {
 	border: 1px solid #868686;
-	background-color: #F4F4FB;
+	background-color: #FAFAFA;
 }
 .mdRow {
 	padding: 8px 10px;
 }
 .mdescLeft {
        padding: 0px 8px 4px 8px;
-	font-size: 12px;
 	font-style: italic;
 	background-color: #FAFAFA;
 	border-top: 1px none #E0E0E0;
@@ -149,7 +153,6 @@ SPAN.charliteral   { color: #008080 }
 }
 .mdescRight {
        padding: 0px 8px 4px 8px;
-	font-size: 12px;
 	font-style: italic;
 	background-color: #FAFAFA;
 	border-top: 1px none #E0E0E0;
@@ -159,6 +162,7 @@ SPAN.charliteral   { color: #008080 }
 	margin: 0px;
 }
 .memItemLeft {
+	width: 200px;
 	padding: 1px 0px 0px 8px;
 	margin: 4px;
 	border-top-width: 1px;
@@ -174,9 +178,9 @@ SPAN.charliteral   { color: #008080 }
 	border-bottom-style: none;
 	border-left-style: none;
 	background-color: #FAFAFA;
-	font-size: 12px;
 }
 .memItemRight {
+	width: 600px;
 	padding: 1px 8px 0px 8px;
 	margin: 4px;
 	border-top-width: 1px;
@@ -192,7 +196,6 @@ SPAN.charliteral   { color: #008080 }
 	border-bottom-style: none;
 	border-left-style: none;
 	background-color: #FAFAFA;
-	font-size: 13px;
 }
 .memTemplItemLeft {
 	padding: 1px 0px 0px 8px;
@@ -210,7 +213,6 @@ SPAN.charliteral   { color: #008080 }
 	border-bottom-style: none;
 	border-left-style: none;
 	background-color: #FAFAFA;
-	font-size: 12px;
 }
 .memTemplItemRight {
 	padding: 1px 8px 0px 8px;
@@ -228,7 +230,6 @@ SPAN.charliteral   { color: #008080 }
 	border-bottom-style: none;
 	border-left-style: none;
 	background-color: #FAFAFA;
-	font-size: 13px;
 }
 .memTemplParams {
 	padding: 1px 0px 0px 8px;
@@ -247,7 +248,7 @@ SPAN.charliteral   { color: #008080 }
 	border-left-style: none;
        color: #606060;
 	background-color: #FAFAFA;
-	font-size: 12px;
+	font-size: 80%;
 }
 .search     { color: #003399;
               font-weight: bold;
