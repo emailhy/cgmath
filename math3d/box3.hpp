@@ -26,6 +26,7 @@ namespace math3d {
     class mat33;
     class mat44;
 
+    /// 3-dimensional bounding box class
     class box3 {
     public:
         box3() 

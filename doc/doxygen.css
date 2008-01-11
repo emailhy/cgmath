@@ -11,16 +11,16 @@ CAPTION { font-weight: bold }
 DIV.qindex {
 	width: 100%;
 	background-color: #FAFAFA;
-	border: 1px solid #b0b0b0;
+	border: 1px solid #E0E0E0;
 	text-align: center;
-	margin: 2px;
-	padding: 2px;
-	line-height: 140%;
+	margin: 0px;
+	padding: 0px;
+	line-height: 250%;
 }
 DIV.nav {
 	width: 100%;
 	background-color: #FAFAFA;
-	border: 1px solid #b0b0b0;
+	border: 1px solid #E0E0E0;
 	text-align: center;
 	margin: 2px;
 	padding: 2px;
@@ -29,42 +29,43 @@ DIV.nav {
 A.qindex {
        text-decoration: none;
        font-weight: bold;
-       color: #1A419D;
+       color: #333366;
 }
 A.qindex:visited {
        text-decoration: none;
        font-weight: bold;
-       color: #1A419D
+       color: #333366
 }
 A.qindex:hover {
 	text-decoration: none;
-	background-color: #ddddff;
 }
 A.qindexHL {
 	text-decoration: none;
 	font-weight: bold;
-	background-color: #6666cc;
+	background-color: #333366;
 	color: #ffffff;
-	border: 1px double #9295C2;
+	border: 1px double #E0E0E0;
 }
 A.qindexHL:hover {
 	text-decoration: none;
 	background-color: #6666cc;
 	color: #ffffff;
 }
-A.qindexHL:visited { text-decoration: none; background-color: #6666cc; color: #ffffff }
+A.qindexHL:visited { text-decoration: none; background-color: #333366; color: #ffffff }
 A.el { text-decoration: none; font-weight: bold }
 A.elRef { font-weight: bold }
 A.code:link { text-decoration: none; font-weight: normal; color: #0000FF}
 A.code:visited { text-decoration: none; font-weight: normal; color: #0000FF}
 A.codeRef:link { font-weight: normal; color: #0000FF}
 A.codeRef:visited { font-weight: normal; color: #0000FF}
-A:hover { text-decoration: none; background-color: #f2f2ff }
+A:hover { text-decoration: none; }
+code { font-family: monospace; font-size: 120%; };
 DL.el { margin-left: -1cm }
 .fragment {
        font-family: monospace
 }
 PRE.fragment {
+    font-size: 11px;
 	border: 1px solid #CCCCCC;
 	background-color: #f5f5f5;
 	margin-top: 4px;
@@ -152,7 +153,7 @@ SPAN.charliteral   { color: #008080 }
 	margin: 0px;
 }
 .mdescRight {
-       padding: 0px 8px 4px 8px;
+    padding: 0px 8px 4px 8px;
 	font-style: italic;
 	background-color: #FAFAFA;
 	border-top: 1px none #E0E0E0;
@@ -246,9 +247,9 @@ SPAN.charliteral   { color: #008080 }
 	border-right-style: none;
 	border-bottom-style: none;
 	border-left-style: none;
-       color: #606060;
+    color: #606060;
 	background-color: #FAFAFA;
-	font-size: 80%;
+	font-size: 60%;
 }
 .search     { color: #003399;
               font-weight: bold;
@@ -265,8 +266,8 @@ INPUT.search { font-size: 75%;
 TD.tiny      { font-size: 75%;
 }
 a {
-	color: #252E78;
+	color: #333366;
 }
 a:visited {
-	color: #3D2185;
+	color: #333366;
 }

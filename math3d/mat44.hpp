@@ -25,6 +25,7 @@ namespace math3d {
 
     class mat33;
 
+    /// 4 x 4 matrix class (double precision)
     class mat44 {
     public:
         typedef double value_type;

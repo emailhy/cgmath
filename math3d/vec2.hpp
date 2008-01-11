@@ -22,6 +22,7 @@
 
 namespace math3d {
 
+    /// 2-dimensional vector template (T = float|double)
     template <typename T = double> class vec2 {
     public:
         enum { dim = 2 };

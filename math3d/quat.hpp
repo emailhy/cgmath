@@ -22,6 +22,7 @@
 
 namespace math3d {
 
+    /// Quaternion template (T = float|double)
     template <typename T = double> class quat {
     public:
         typedef T value_type;

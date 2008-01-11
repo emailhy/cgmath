@@ -29,6 +29,7 @@
 #undef M_PI
 #endif
 
+/// Global namespace of math3d 
 namespace math3d {
 
     static const double PI    = 3.14159265358979323846;
