@@ -17,10 +17,10 @@
 */
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <math3d/vec3.hpp>
+#include <cgmath/vec3.hpp>
 
 
-using namespace math3d;
+using namespace cgmath;
 
 
 template <typename T> void test_basic_vec3() {

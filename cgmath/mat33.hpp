@@ -15,13 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef MATH3D_INCLUDED_MAT33_HPP
-#define MATH3D_INCLUDED_MAT33_HPP
+#ifndef CGMATH_INCLUDED_MAT33_HPP
+#define CGMATH_INCLUDED_MAT33_HPP
 
-#include <math3d/vec3.hpp>
-#include <math3d/quat.hpp>
+#include <cgmath/vec3.hpp>
+#include <cgmath/quat.hpp>
 
-namespace math3d {
+namespace cgmath {
 
     class mat44;
 

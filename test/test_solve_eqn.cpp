@@ -17,7 +17,7 @@
 */
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <math3d/solve_eqn.hpp>
+#include <cgmath/solve_eqn.hpp>
 
 
 using namespace math3d;

@@ -15,13 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef MATH3D_INCLUDED_BOX3_HPP
-#define MATH3D_INCLUDED_BOX3_HPP
+#ifndef CGMATH_INCLUDED_BOX3_HPP
+#define CGMATH_INCLUDED_BOX3_HPP
 
-#include <math3d/range.hpp>
-#include <math3d/vec3.hpp>
+#include <cgmath/range.hpp>
+#include <cgmath/vec3.hpp>
 
-namespace math3d {
+namespace cgmath {
 
     class mat33;
     class mat44;

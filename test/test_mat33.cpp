@@ -17,12 +17,12 @@
 */
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <math3d/mat33.hpp>
-#include <math3d/mat44.hpp>
+#include <cgmath/mat33.hpp>
+#include <cgmath/mat44.hpp>
 #include <iostream>
 
 
-using namespace math3d;
+using namespace cgmath;
 
 
 BOOST_AUTO_TEST_CASE( test_mat33 )

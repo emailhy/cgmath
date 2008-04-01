@@ -15,17 +15,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef LIBMATH3D_INCLUDED_SOLVE_EQN_HPP
-#define LIBMATH3D_INCLUDED_SOLVE_EQN_HPP
+#ifndef CGMATH_INCLUDED_SOLVE_EQN_HPP
+#define CGMATH_INCLUDED_SOLVE_EQN_HPP
 
-#include <math3d/types.hpp>
-#include <GL/glew.h>
+#include <cgmath/types.hpp>
 
-namespace math3d {
+namespace cgmath {
 
     bool solve_eqn_linear( double a, double b, double *x );
     bool solve_eqn_quadratic( double a, double b, double c, double *x1, double *x2 );
     bool solve_eqn_cubic( double a, double b, double c, double d, double *x1, double *x2, double *x3 );
 
-} 
+}
 #endif

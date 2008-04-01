@@ -15,11 +15,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <math3d/types.hpp>
-#include <math3d/mat44.hpp>
+#include <cgmath/types.hpp>
+#include <cgmath/mat44.hpp>
 #include <iostream>
 
-namespace math3d {
+namespace cgmath {
 
     mat44::mat44( const float *src, bool column_major /*= true */ ) {
         if (column_major) {
@@ -90,7 +90,7 @@ namespace math3d {
     bool mat44::is_valid() const {
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
-                if (!math3d::is_valid(m[i][j])) return false;
+                if (!cgmath::is_valid(m[i][j])) return false;
             }
         }
         return true;

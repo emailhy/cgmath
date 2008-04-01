@@ -15,12 +15,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef MATH3D_INCLUDED_RANGE_HPP
-#define MATH3D_INCLUDED_RANGE_HPP
+#ifndef CGMATH_INCLUDED_RANGE_HPP
+#define CGMATH_INCLUDED_RANGE_HPP
 
-#include <math3d/types.hpp>
+#include <cgmath/types.hpp>
 
-namespace math3d {
+namespace cgmath {
 
     template <typename T> class range {
     public:

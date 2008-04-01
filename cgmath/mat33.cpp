@@ -15,13 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <math3d/types.hpp>
-#include <math3d/mat33.hpp>
-#include <math3d/mat44.hpp>
-#include <math3d/quat.hpp>
+#include <cgmath/types.hpp>
+#include <cgmath/mat33.hpp>
+#include <cgmath/mat44.hpp>
+#include <cgmath/quat.hpp>
 #include <iostream>
 
-namespace math3d {
+namespace cgmath {
 
     mat33::mat33( const float *src, bool column_major /*= true */ ) {
         if (column_major) {
@@ -179,7 +179,7 @@ namespace math3d {
     bool mat33::is_valid() const {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
-                if (!math3d::is_valid(m[i][j])) return false;
+                if (!cgmath::is_valid(m[i][j])) return false;
             }
         }
         return true;

@@ -15,10 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <math3d/types.hpp>
-#include <math3d/solve_eqn.hpp>
+#include <cgmath/types.hpp>
+#include <cgmath/solve_eqn.hpp>
 
-namespace math3d {
+namespace cgmath {
 
     bool solve_eqn_linear( double a, double b, double *x ) {
         if (a == 0) 

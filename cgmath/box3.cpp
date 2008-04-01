@@ -15,11 +15,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <math3d/types.hpp>
-#include <math3d/box3.hpp>
+#include <cgmath/types.hpp>
+#include <cgmath/box3.hpp>
 #include <iostream>
 
-namespace math3d {
+namespace cgmath {
 
     double box3::get_volume() const {
         vec3<> sz = get_size();

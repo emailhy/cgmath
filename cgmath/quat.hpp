@@ -15,12 +15,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef MATH3D_INCLUDED_QUAT_HPP
-#define MATH3D_INCLUDED_QUAT_HPP
+#ifndef CGMATH_INCLUDED_QUAT_HPP
+#define CGMATH_INCLUDED_QUAT_HPP
 
-#include <math3d/vec3.hpp>
+#include <cgmath/vec3.hpp>
 
-namespace math3d {
+namespace cgmath {
 
     /// Quaternion template (T = float|double)
     template <typename T = double> class quat {
@@ -62,7 +62,7 @@ namespace math3d {
         }
 
         bool is_valid() const {
-            return math3d::is_valid(x) && math3d::is_valid(y) && math3d::is_valid(z) && math3d::is_valid(w);
+            return cgmath::is_valid(x) && math3d::is_valid(y) && math3d::is_valid(z) && math3d::is_valid(w);
         }
 
         T& operator[](int index) {

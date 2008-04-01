@@ -15,8 +15,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef MATH3D_INCLUDED_TYPES_HPP
-#define MATH3D_INCLUDED_TYPES_HPP
+#ifndef CGMATH_INCLUDED_TYPES_HPP
+#define CGMATH_INCLUDED_TYPES_HPP
 
 #ifdef _MSC_VER
 #pragma once
@@ -29,8 +29,8 @@
 #undef M_PI
 #endif
 
-/// Global namespace of math3d 
-namespace math3d {
+/// Global namespace of cgmath 
+namespace cgmath {
 
     static const double PI    = 3.14159265358979323846;
     static const double PI_2  = 1.57079632679489661923;
