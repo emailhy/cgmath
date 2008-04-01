@@ -1,10 +1,10 @@
 /*!
-\mainpage %math3d Homepage
+\mainpage %cgmath Homepage
 
 
 \section introduction Introduction
 
-%math3d is a collection of useful C++ classes and utility functions 
+%cgmath is a collection of useful C++ classes and utility functions 
 for computer graphics projects.
 
 
@@ -37,7 +37,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 
   - <a href="http://sourceforge.net/tracker/?group_id=3997&atid=103997">Bugs</a>
   - <a href="http://sourceforge.net/tracker/?group_id=3997&atid=303997">Patches</a>
-  - Sourceforge.NET <a href="http://sourceforge.net/projects/math3d">project</a> page
+  - Sourceforge.NET <a href="http://sourceforge.net/projects/cgmath">project</a> page
 
 
 \section download Download
