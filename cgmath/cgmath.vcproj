@@ -165,6 +165,22 @@
 			>
 		</File>
 		<File
+			RelativePath=".\noise.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\perlin_improved.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\perlin_original.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\perlin_simplex.cpp"
+			>
+		</File>
+		<File
 			RelativePath=".\quat.hpp"
 			>
 		</File>
