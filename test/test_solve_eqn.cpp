@@ -20,7 +20,7 @@
 #include <cgmath/solve_eqn.hpp>
 
 
-using namespace math3d;
+using namespace cgmath;
 
 
 BOOST_AUTO_TEST_CASE( test_solve_eqn_quadratic )
