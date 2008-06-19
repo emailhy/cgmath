@@ -61,7 +61,7 @@ namespace cgmath {
         }
 
         bool is_valid() const {
-            return yp::is_valid(x) && yp::is_valid(y);
+            return cgmath::is_valid(x) && cgmath::is_valid(y);
         }
 
         const vec2& operator+=(const vec2& v) {
