@@ -19,6 +19,7 @@
 #include <cgmath/mat33.hpp>
 #include <cgmath/mat44.hpp>
 #include <cgmath/quat.hpp>
+#include <cgmath/det.hpp>
 #include <iostream>
 
 namespace cgmath {
@@ -45,7 +46,7 @@ namespace cgmath {
     }
 
 
-    mat33::mat33( const vec3<double>& a, const vec3<double>& b, const vec3<double>& c ) {
+    mat33::mat33( const vec<3,double>& a, const vec<3,double>& b, const vec<3,double>& c ) {
         for (int i = 0; i < 3; ++i) {
             m[i][0] = a[i];
             m[i][1] = b[i];
@@ -60,10 +61,10 @@ namespace cgmath {
     }
 
 
-    mat33::mat33( double angle, const vec3<double>& axis ) {
-        vec3<double> u(axis);
+    mat33::mat33( double angle, const vec<3,double>& axis ) {
+        vec<3,double> u(axis);
         if (u.normalize() > 0) {
-            const double rangle = to_rad(angle);
+            const double rangle = radians(angle);
             const double c = cos(rangle);
             const double s = sin(rangle);
             
@@ -152,27 +153,27 @@ namespace cgmath {
     }
 
 
-    void mat33::set_column( int column, const vec3<double>& v ) {
+    void mat33::set_column( int column, const vec<3,double>& v ) {
         m[0][column] = v.x;
         m[1][column] = v.y;
         m[2][column] = v.z;
     }
 
 
-    vec3<double> mat33::get_column( int column ) const {
-        return vec3<double>(m[0][column], m[1][column], m[2][column]);
+    vec<3,double> mat33::get_column( int column ) const {
+        return vec<3,double>(m[0][column], m[1][column], m[2][column]);
     }
 
 
-    void mat33::set_row( int row, const vec3<double>& v ){
+    void mat33::set_row( int row, const vec<3,double>& v ){
         m[row][0] = v.x;
         m[row][1] = v.y;
         m[row][2] = v.z;
     }
 
 
-    vec3<double> mat33::get_row( int row ) const {
-        return vec3<double>(m[row][0], m[row][1], m[row][2]);
+    vec<3,double> mat33::get_row( int row ) const {
+        return vec<3,double>(m[row][0], m[row][1], m[row][2]);
     }
 
 

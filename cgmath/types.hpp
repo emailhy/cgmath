@@ -28,6 +28,12 @@
 #ifdef M_PI
 #undef M_PI
 #endif
+#ifdef min
+#undef min
+#endif
+#ifdef max
+#undef max
+#endif
 
 /// Global namespace of cgmath 
 namespace cgmath {
@@ -37,12 +43,12 @@ namespace cgmath {
     static const double PI_4  = 0.785398163397448309616;
     static const float EPSILON  = 1e-5f;
 
-    inline double to_rad(double deg) { return deg * PI / 180.0; }
-    inline double to_deg(double rad) { return rad * 180.0 / PI; }
-    inline float to_rad(float deg) { return static_cast<float>(deg * PI / 180.0 ); }
-    inline float to_deg(float rad) { return static_cast<float>(rad * 180.0 / PI); }
+    inline double radians(double deg) { return deg * PI / 180.0; }
+    inline double degrees(double rad) { return rad * 180.0 / PI; }
+    inline float radians(float deg) { return static_cast<float>(deg * PI / 180.0 ); }
+    inline float degrees(float rad) { return static_cast<float>(rad * 180.0 / PI); }
 
-    template <typename T> inline T abs_value(T v) {
+    template <typename T> inline T abs(T v) {
         return (v < 0)? -v : v;
     }
 
@@ -59,15 +65,15 @@ namespace cgmath {
         #endif
     }
 
-    template <typename T> T min_value(T a, T b) {
+    template <typename T> T min(T a, T b) {
         return (a < b)?  a :  b;
     }
 
-    template <typename T> T max_value(T a, T b) {
+    template <typename T> T max(T a, T b) {
         return (a > b)?  a :  b;
     }
 
-    template <typename T> T clamp_value(T x, T a, T b) {
+    template <typename T> T clamp(T x, T a, T b) {
         return (x < a)?  a : ((x > b)? b : x);
     }
 
@@ -77,14 +83,6 @@ namespace cgmath {
 
     inline bool almost_equal(double a, double b, double epsilon=EPSILON) {
         return abs(a - b) <= epsilon;
-    }
-
-    template <typename T> inline T det2x2(T a, T b, T c, T d) {
-        return (a * d - b * c);
-    }
-
-    template <typename T> inline T det3x3(T a1, T a2, T a3, T b1, T b2, T b3, T c1, T c2, T c3) {
-        return (a1 * det2x2(b2, b3, c2, c3) - b1 * det2x2(a2, a3, c2, c3) + c1 * det2x2(a2, a3, b2, b3));
     }
 
 }

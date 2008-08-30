@@ -48,7 +48,7 @@ namespace cgmath {
         explicit mat44( const float *src, bool column_major = true );
         explicit mat44( const double *src, bool column_major = true );
         explicit mat44( const mat33& M );
-        explicit mat44( double angle, const vec3<double>& axis );
+        explicit mat44( double angle, const vec<3,double>& axis );
         explicit mat44( const quat<double>& q );
 
         mat44( const mat44& A, const mat44& B ) {
@@ -126,15 +126,15 @@ namespace cgmath {
 
         mat44& scale(double sx, double sy, double sz);
         
-        mat44& scale(const vec3<double>& s) {
+        mat44& scale(const vec<3,double>& s) {
             return this->scale(s.x, s.y, s.z);
         }
 
         mat44& rotate( double angle, double ax, double ay, double az ) {
-            return this->rotate(angle, vec3<double>(ax, ay, az));
+            return this->rotate(angle, vec<3,double>(ax, ay, az));
         }
 
-        mat44& rotate( double angle, const vec3<double>& axis ) {
+        mat44& rotate( double angle, const vec<3,double>& axis ) {
             this->operator*=(mat44(angle, axis));
             return *this;
         }
@@ -146,7 +146,7 @@ namespace cgmath {
 
         mat44& translate( double tx, double ty, double tz );
 
-        mat44& translate( const vec3<double>& t ) {
+        mat44& translate( const vec<3,double>& t ) {
             return this->translate(t.x, t.y, t.z);
         }
 
@@ -155,15 +155,16 @@ namespace cgmath {
         mat44& frustum( double left, double right, double bottom, double top, double z_near, double z_far );
         mat44& viewport( double x, double y, double width, double height );
 
-        template <typename T> vec3<T> transform( const vec3<T>& v ) {
+        template <typename T> vec<3,T> transform( const vec<3,T>& v ) {
             T x = static_cast<T>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z);
             T y = static_cast<T>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z);
             T z = static_cast<T>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z);
             T w = static_cast<T>(m[3][0] * v.x + m[3][1] * v.y + m[3][2] * v.z);
-            return vec3<T>(x / w, y / w, z / w);
+            return vec<3,T>(x / w, y / w, z / w);
         }
 
-        static mat44 look_at( const vec3<double>& pos, const vec3<double>& tgt, const vec3<double>& up );
+        // TODO
+        //static mat44 look_at( const vec<3,double>& pos, const vec<3,double>& tgt, const vec<3,double>& up );
 
         double m[4][4];
     };

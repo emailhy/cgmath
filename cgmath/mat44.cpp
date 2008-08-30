@@ -17,6 +17,7 @@
 */
 #include <cgmath/types.hpp>
 #include <cgmath/mat44.hpp>
+#include <cgmath/det.hpp>
 #include <iostream>
 
 namespace cgmath {
@@ -361,7 +362,7 @@ namespace cgmath {
 
 
     mat44& mat44::persp_project( double fov, double aspect_ratio, double z_near, double z_far ) {
-        double w = z_near * tan(0.5 * to_rad(fov));
+        double w = z_near * tan(0.5 * radians(fov));
         double h = w / aspect_ratio;
         mat44 M;
         M[0][0] = 2.0 * z_near / w;
@@ -390,10 +391,11 @@ namespace cgmath {
     }
 
 
-    mat44 look_at( const vec3<double>& pos, const vec3<double>& tgt, const vec3<double>& up )  {
-        vec3<double> n = (tgt - pos).normalized();
-        vec3<double> r = cross_prod(n, up.normalized());
-        vec3<double> u = cross_prod(r, n);
+    /* TODO
+    mat44 look_at( const vec<3,double>& pos, const vec<3,double>& tgt, const vec<3,double>& up )  {
+        vec<3,double> n = normalize(tgt - pos);
+        vec<3,double> r = cross_prod(n, normalize(up));
+        vec<3,double> u = cross_prod(r, n);
         return mat44(
             r.x, u.x, n.x, pos.x,
             r.y, u.y, n.y, pos.y,
@@ -401,6 +403,7 @@ namespace cgmath {
             0,   0,   0,   1
         );
     }
+    */
 
 
     std::ostream& operator<<(std::ostream& os, const mat44& m) {

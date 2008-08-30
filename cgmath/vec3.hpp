@@ -18,25 +18,25 @@
 #ifndef CGMATH_INCLUDED_VEC3_HPP
 #define CGMATH_INCLUDED_VEC3_HPP
 
-#include <cgmath/types.hpp>
+#include <cgmath/vec_base.hpp>
 
 namespace cgmath {
 
     /// 3-dimensional vector template (T = float|double)
-    template <typename T = double> class vec3 {
+    template <typename T> class vec<3, T> {
     public:
         enum { dim = 3 };
         typedef T value_type;
 
-        vec3() { }
+        vec() { }
 
-        vec3(T vx, T vy, T vz) 
+        vec(T vx, T vy, T vz) 
             : x(vx), y(vy), z(vz) { }
 
-        template <typename U> vec3(const vec3<U>& src)
+        template <typename U> vec(const vec<3,U>& src)
             : x(static_cast<T>(src.x)), y(static_cast<T>(src.y)), z(static_cast<T>(src.z)) { }
 
-        template <typename U> explicit vec3(const U *src) 
+        template <typename U> explicit vec(const U *src) 
             : x(static_cast<T>(src[0])), y(static_cast<T>(src[1])), z(static_cast<T>(src[2])) { }
 
         T& operator[](int index) {
@@ -53,56 +53,52 @@ namespace cgmath {
             dst[2] = static_cast<U>(z);
         }
 
-        bool operator==(const vec3& v) const {
+        bool operator==(const vec& v) const {
             return (x == v.x) && (y == v.y) && (z == v.z);
         }
 
-        bool operator!=(const vec3& v) const {
+        bool operator!=(const vec& v) const {
             return !this->operator==(v);
         }
 
-        bool is_valid() const {
-            return yp::is_valid(x) && yp::is_valid(y) && yp::is_valid(z);
-        }
-
-        const vec3& operator+=(const vec3& v) {
+        const vec& operator+=(const vec& v) {
             x += v.x; 
             y += v.y; 
             z += v.z;
             return *this;
         }
 
-        vec3 operator+(const vec3& v) const {
-            return vec3(x + v.x, y + v.y, z + v.z);
+        vec operator+(const vec& v) const {
+            return vec(x + v.x, y + v.y, z + v.z);
         }
 
-        const vec3& operator-=(const vec3& v) {
+        const vec& operator-=(const vec& v) {
             x -= v.x; 
             y -= v.y; 
             z -= v.z;
             return *this;
         }
 
-        vec3 operator-(const vec3& v) const {
-            return vec3(x - v.x, y - v.y, z - v.z);
+        vec operator-(const vec& v) const {
+            return vec(x - v.x, y - v.y, z - v.z);
         }
 
-        vec3 operator-() const {
-            return vec3(-x, -y, -z);
+        vec operator-() const {
+            return vec(-x, -y, -z);
         }
 
-        const vec3& operator*=(T k) {
+        const vec operator*=(T k) {
             x *= k; 
             y *= k; 
             z *= k;
             return *this;
         }
 
-        const vec3& operator/=(T d) {
+        const vec operator/=(T d) {
             return this->operator*=(1 / d);
         }
 
-        vec3 operator/(T d) const {
+        vec operator/(T d) const {
             return operator*(*this, 1 / d);
         }
 
@@ -120,61 +116,24 @@ namespace cgmath {
             return len;
         }
 
-        vec3 normalized() const {
-            return this->operator/(length());
-        }
-
         T x;              
         T y;            
         T z;
     };
 
-    template <typename T> vec3<T> operator*(const vec3<T> v, T k) {
-        return vec3<T>(v.x * k, v.y * k, v.z * k);
+    template <typename T> vec<3,T> operator*(const vec<3,T> v, T k) {
+        return vec<3,T>(v.x * k, v.y * k, v.z * k);
     }
 
-    template <typename T> vec3<T> operator*(T k, const vec3<T>& v) {
-        return vec3<T>(v.x * k, v.y * k, v.z * k);
+    template <typename T> vec<3,T> operator*(T k, const vec<3,T>& v) {
+        return vec<3,T>(v.x * k, v.y * k, v.z * k);
     }
 
-    template <typename T> T dot_prod(const vec3<T>& a, const vec3<T>& b){
-        return (a.x * b.x + a.y * b.y + a.z * b.z);
-    }
-
-    template <typename T> vec3<T> cross_prod(const vec3<T>& a, const vec3<T>& b) {
-        return vec3<T>(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
-    }
-
-    template <typename T> vec3<T> lerp(const vec3<T>& a, const vec3<T>& b, T t) {
-        T u = 1 - t;
-        return vec3<T>(u * a.x + t * b.x, u * a.y + t * b.y, u * a.z + t * b.z);
-    }
-
-    template <typename T> T dist2(const vec3<T>& a, const vec3<T>& b) {
-        return vec3<T>(b - a).length2();
-    }
-
-    template <typename T> T dist(const vec3<T>& a, const vec3<T>& b) {
-        return vec3<T>(b - a).length();
-    }
-
-    template <typename T> T angle_between(const vec3<T>& a, const vec3<T>& b) {
-        return to_deg(atan2(cross_prod(a,b).length(), dot_prod(a,b)));
-    }
-    
-    template <typename T> bool almost_equal(const vec3<T>& a, const vec3<T>& b, T epsilon=EPSILON) {
-        return (
-            almost_equal<T>(a.x, b.x, epsilon) && 
-            almost_equal<T>(a.y, b.y, epsilon) && 
-            almost_equal<T>(a.z, b.z, epsilon)
-        );
-    }
-
-    template<typename T> std::ostream& operator<<(std::ostream& os, const vec3<T>& v) {
+    template<typename T> std::ostream& operator<<(std::ostream& os, const vec<3,T>& v) {
         return (os << v.x << " " << v.y << " " << v.z);
     }
 
-    template<typename T> std::istream& operator>>(std::istream& is, vec3<T>& v) {
+    template<typename T> std::istream& operator>>(std::istream& is, vec<3,T>& v) {
         return is >> v.x >> v.y >> v.z;
     }
 } 

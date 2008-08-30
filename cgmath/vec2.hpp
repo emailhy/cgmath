@@ -18,25 +18,25 @@
 #ifndef CGMATH_INCLUDED_VEC2_HPP
 #define CGMATH_INCLUDED_VEC2_HPP
 
-#include <cgmath/types.hpp>
+#include <cgmath/vec_base.hpp>
 
 namespace cgmath {
 
     /// 2-dimensional vector template (T = float|double)
-    template <typename T = double> class vec2 {
+    template <typename T> class vec<2, T> {
     public:
         enum { dim = 2 };
         typedef T value_type;
 
-        vec2() { }
+        vec() { }
 
-        vec2(T vx, T vy) 
+        vec(T vx, T vy) 
             : x(vx), y(vy){ }
 
-        template <typename U> vec2(const vec2<U>& src)
+        template <typename U> vec(const vec<2,U>& src)
             : x(static_cast<T>(src.x)), y(static_cast<T>(src.y)) { }
 
-        template <typename U> explicit vec2(const U *src) 
+        template <typename U> explicit vec(const U *src) 
             : x(static_cast<T>(src[0])), y(static_cast<T>(src[1])) { }
 
         T& operator[](int index) {
@@ -52,53 +52,49 @@ namespace cgmath {
             dst[1] = static_cast<U>(y);
         }
 
-        bool operator==(const vec2& v) const {
+        bool operator==(const vec& v) const {
             return (x == v.x) && (y == v.y);
         }
 
-        bool operator!=(const vec2& v) const {
+        bool operator!=(const vec& v) const {
             return !this->operator==(v);
         }
 
-        bool is_valid() const {
-            return cgmath::is_valid(x) && cgmath::is_valid(y);
-        }
-
-        const vec2& operator+=(const vec2& v) {
+        const vec& operator+=(const vec& v) {
             x += v.x; 
             y += v.y; 
             return *this;
         }
 
-        vec2 operator+(const vec2& v) const {
-            return vec2(x + v.x, y + v.y);
+        vec operator+(const vec& v) const {
+            return vec(x + v.x, y + v.y);
         }
 
-        const vec2& operator-=(const vec2& v) {
+        const vec& operator-=(const vec& v) {
             x -= v.x; 
             y -= v.y; 
             return *this;
         }
 
-        vec2 operator-(const vec2& v) const {
-            return vec2(x - v.x, y - v.y);
+        vec operator-(const vec& v) const {
+            return vec(x - v.x, y - v.y);
         }
 
-        vec2 operator-() const {
-            return vec2(-x, -y);
+        vec operator-() const {
+            return vec(-x, -y);
         }
 
-        const vec2& operator*=(T k) {
+        const vec& operator*=(T k) {
             x *= k; 
             y *= k; 
             return *this;
         }
 
-        const vec2& operator/=(T d) {
+        const vec& operator/=(T d) {
             return this->operator*=(1 / d);
         }
 
-        vec2 operator/(T d) const {
+        vec operator/(T d) const {
             return operator*(*this, 1 / d);
         }
 
@@ -116,55 +112,23 @@ namespace cgmath {
             return len;
         }
 
-        vec2 normalized() const {
-            return this->operator/(length());
-        }
-
         T x;              
         T y;            
     };
 
-    template <typename T> vec2<T> operator*(const vec2<T> v, T k) {
-        return vec2<T>(v.x * k, v.y * k);
+    template <typename T> vec<2,T> operator*(const vec<2,T> v, T k) {
+        return vec<2,T>(v.x * k, v.y * k);
     }
 
-    template <typename T> vec2<T> operator*(T k, const vec2<T>& v) {
-        return vec2<T>(v.x * k, v.y * k);
+    template <typename T> vec<2,T> operator*(T k, const vec<2,T>& v) {
+        return vec<2,T>(v.x * k, v.y * k);
     }
 
-    template <typename T> T dot_prod(const vec2<T>& a, const vec2<T>& b){
-        return (a.x * b.x + a.y * b.y);
-    }
-
-    template <typename T> vec2<T> lerp(const vec2<T>& a, const vec2<T>& b, T t) {
-        T u = 1 - t;
-        return vec2<T>(u * a.x + t * b.x, u * a.y + t * b.y);
-    }
-
-    template <typename T> T dist2(const vec2<T>& a, const vec2<T>& b) {
-        return vec2<T>(b - a).length2();
-    }
-
-    template <typename T> T dist(const vec2<T>& a, const vec2<T>& b) {
-        return vec2<T>(b - a).length();
-    }
-
-	// TODO
-    //template <typename T> T angle_between(const basic_vec2<T>& a, const basic_vec2<T>& b) {
-    //}
-    
-    template <typename T> bool almost_equal(const vec2<T>& a, const vec2<T>& b, T epsilon=EPSILON) {
-        return (
-            almost_equal<T>(a.x, b.x, epsilon) && 
-            almost_equal<T>(a.y, b.y, epsilon) 
-        );
-    }
-
-    template<typename T> std::ostream& operator<<(std::ostream& os, const vec2<T>& v) {
+    template<typename T> std::ostream& operator<<(std::ostream& os, const vec<2,T>& v) {
         return (os << v.x << " " << v.y);
     }
 
-    template<typename T> std::istream& operator>>(std::istream& is, vec2<T>& v) {
+    template<typename T> std::istream& operator>>(std::istream& is, vec<2,T>& v) {
         return is >> v.x >> v.y;
     }
 } 

@@ -15,6 +15,20 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#define BOOST_TEST_MAIN
-#include <boost/test/included/unit_test.hpp>
+#ifndef CGMATH_INCLUDED_VEC_BASE_HPP
+#define CGMATH_INCLUDED_VEC_BASE_HPP
 
+#include <cgmath/types.hpp>
+
+namespace cgmath {
+
+    /// N-dimensional vector template (T = float|double)
+    template <size_t N, typename T = float> class vec;
+
+    template <size_t N, typename T> 
+    vec<N,T> normalize(const vec<N,T>& v) {
+        return v.operator/(v.length());
+    }
+} 
+
+#endif

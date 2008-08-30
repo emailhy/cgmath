@@ -45,9 +45,9 @@ namespace cgmath {
 
         explicit mat33( const float *src, bool column_major = true );
         explicit mat33( const double *src, bool column_major = true );
-        explicit mat33( const vec3<double>& a, const vec3<double>& b, const vec3<double>& c );
+        explicit mat33( const vec<3,double>& a, const vec<3,double>& b, const vec<3,double>& c );
         explicit mat33( const mat44& M );
-        explicit mat33( double angle, const vec3<double>& axis );
+        explicit mat33( double angle, const vec<3,double>& axis );
         explicit mat33( const quat<double>& q );
 
         mat33( const mat33& A, const mat33& B ) {
@@ -81,10 +81,10 @@ namespace cgmath {
         void get( float *dst, bool column_major = true ) const;
         void get( double *dst, bool column_major = true ) const;
 
-        void set_column( int column, const vec3<double>& v );
-        vec3<double> get_column( int column ) const;
-        void set_row( int row, const vec3<double>& v );
-        vec3<double> get_row( int row ) const;
+        void set_column( int column, const vec<3,double>& v );
+        vec<3,double> get_column( int column ) const;
+        void set_row( int row, const vec<3,double>& v );
+        vec<3,double> get_row( int row ) const;
 
         mat33 operator*( const mat33& rhs ) const {
             return mat33(*this, rhs);
@@ -158,15 +158,15 @@ namespace cgmath {
 
         mat33& scale( double sx, double sy, double sz );
         
-        mat33& scale( const vec3<double>& s ) {
+        mat33& scale( const vec<3,double>& s ) {
             return this->scale(s.x, s.y, s.z);
         }
 
         mat33& rotate( double angle, double ax, double ay, double az ) {
-            return this->rotate(angle, vec3<double>(ax, ay, az));
+            return this->rotate(angle, vec<3,double>(ax, ay, az));
         }
 
-        mat33& rotate( double angle, const vec3<double>& axis ) {
+        mat33& rotate( double angle, const vec<3,double>& axis ) {
             this->operator*=(mat33(angle, axis));
             return *this;
         }
@@ -176,8 +176,8 @@ namespace cgmath {
             return *this;
         }
 
-        template <typename T> vec3<T> transform( const vec3<T>& v ) {
-            return vec3<T>(
+        template <typename T> vec<3,T> transform( const vec<3,T>& v ) {
+            return vec<3,T>(
                 static_cast<T>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z),
                 static_cast<T>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z),
                 static_cast<T>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z)
@@ -195,7 +195,7 @@ namespace cgmath {
         return mat33(rhs) *= k;
     }
 
-    template <typename T> mat33 dyadic_prod( const vec3<T>& u, const vec3<T>& v ) {
+    template <typename T> mat33 dyadic_prod( const vec<3,T>& u, const vec<3,T>& v ) {
         mat33 m;
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {

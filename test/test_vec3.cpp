@@ -19,9 +19,7 @@
 #include <boost/test/floating_point_comparison.hpp>
 #include <cgmath/vec3.hpp>
 
-
 using namespace cgmath;
-
 
 template <typename T> void test_basic_vec3() {
     float src_f[3] = { 1, 2, 3 };
@@ -29,33 +27,33 @@ template <typename T> void test_basic_vec3() {
 
     // constructors
     {
-        vec3<T> a(1, 2, 3);
+        vec<3,T> a(1, 2, 3);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<T> a(src_f);
+        vec<3,T> a(src_f);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<T> a(src_d);
+        vec<3,T> a(src_d);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<float> v(1, 2, 3);
-        vec3<T> a(v);
+        vec<3,float> v(1, 2, 3);
+        vec<3,T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<double> v(1, 2, 3);
-        vec3<T> a(v);
+        vec<3,double> v(1, 2, 3);
+        vec<3,T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
@@ -63,9 +61,9 @@ template <typename T> void test_basic_vec3() {
 
     // operators
     {
-        vec3<T> a(1, 2, 3);
-        const vec3<T> b(4, 5, 6);
-        const vec3<T> e(3, 2, 1);
+        vec<3,T> a(1, 2, 3);
+        const vec<3,T> b(4, 5, 6);
+        const vec<3,T> e(3, 2, 1);
         float f[3];
         double d[3];
 
@@ -90,7 +88,7 @@ template <typename T> void test_basic_vec3() {
         BOOST_CHECK_EQUAL( d[1], 5 );
         BOOST_CHECK_EQUAL( d[2], 6 );
 
-        vec3<T> c(7, 8, 9);
+        vec<3,T> c(7, 8, 9);
         c = a;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 2 );
@@ -150,83 +148,43 @@ template <typename T> void test_basic_vec3() {
         BOOST_CHECK_EQUAL( c.z, 1.5 );
     }
 
-    // methods
+    // length2, length
     {
-        const vec3<T> a(2, 3, 5);
+        const vec<3,T> a(2, 3, 5);
         BOOST_CHECK_EQUAL( a.length2(), 38 );
         BOOST_CHECK_EQUAL( a.length(), sqrt(static_cast<T>(38)) );
+    }
 
-        vec3<T> b;
+
+    {
+        const vec<3,T> a(2, 3, 5);
+        vec<3,T> b;
+        T s = 1 / sqrt(static_cast<T>(38));
+
         b = a;
         T len = b.normalize();
         BOOST_CHECK_EQUAL( len, sqrt(static_cast<T>(38)) );
         BOOST_CHECK_CLOSE_FRACTION( b.length2(), static_cast<T>(1), std::numeric_limits<T>::epsilon());
-        T s = 1 / sqrt(static_cast<T>(38));
         BOOST_CHECK_EQUAL( b.x, 2 * s);
         BOOST_CHECK_EQUAL( b.y, 3 * s);
         BOOST_CHECK_EQUAL( b.z, 5 * s);
-    }
-    {
-        const vec3<T> a(2, 3, 5);
-        vec3<T> b;
-        T len = a.length();
-        b = a.normalized();
+
+        len = a.length();
+        b = normalize(a);
         BOOST_CHECK_EQUAL( len, sqrt(static_cast<T>(38)) );
         BOOST_CHECK_CLOSE_FRACTION( b.length2(), static_cast<T>(1), std::numeric_limits<T>::epsilon());
-        T s = 1 / sqrt(static_cast<T>(38));
         BOOST_CHECK_EQUAL( b.x, 2 * s );
         BOOST_CHECK_EQUAL( b.y, 3 * s );
         BOOST_CHECK_EQUAL( b.z, 5 * s );
     }
-
-    // non-member
-    {
-        const vec3<T> a(2, 3, 5);
-        const vec3<T> b(7, 11, 13);
-        const vec3<T> c(6, 11, 17);
-
-        BOOST_CHECK_EQUAL( dot_prod(a,b),  2 * 7 + 3 * 11 + 5 * 13);
-
-        const vec3<T> vx(1, 0, 0);
-        const vec3<T> vy(0, 1, 0);
-        const vec3<T> vz(0, 0, 1);
-
-        BOOST_CHECK_EQUAL( cross_prod(vx, vy),  vz );
-        BOOST_CHECK_EQUAL( cross_prod(vy, vz),  vx );
-        BOOST_CHECK_EQUAL( cross_prod(vz, vx),  vy );
-
-        BOOST_CHECK_EQUAL( lerp(a, c, static_cast<T>(0.25)),  vec3<T>(3, 5, 8) );
-
-        BOOST_CHECK_EQUAL( dist2(a, c), 16 + 64 + 144 );
-        BOOST_CHECK_EQUAL( dist(a, c), sqrt(static_cast<T>(16 + 64 + 144)) );
-
-        BOOST_CHECK_EQUAL( angle_between(vx, vy), 90);
-        BOOST_CHECK_EQUAL( angle_between(vx, vz), 90);
-        BOOST_CHECK_EQUAL( angle_between(vz, vy), 90);
-
-        const vec3<T> v2(1, 1, 0);
-        const vec3<T> v3(1, 1, 1);
-        BOOST_CHECK_EQUAL( angle_between(vx, v2), 45);
-        BOOST_CHECK_EQUAL( angle_between(v2, v3), to_deg(atan2(1, sqrt(static_cast<T>(2)))));
-        BOOST_CHECK_EQUAL( angle_between(vx, v3), to_deg(atan2(sqrt(static_cast<T>(2)), 1)));
-        BOOST_CHECK_EQUAL( angle_between(vy, v3), to_deg(atan2(sqrt(static_cast<T>(2)), 1)));
-        BOOST_CHECK_EQUAL( angle_between(vy, v3), to_deg(atan2(sqrt(static_cast<T>(2)), 1)));
-
-        /*
-        is_valid
-        almost_equal
-        */
-    }
 }
 
 
-BOOST_AUTO_TEST_CASE( test_vec3 )
-{
-    test_basic_vec3<double>();
-}
-
-
-BOOST_AUTO_TEST_CASE( test_float_vec3 )
-{
+BOOST_AUTO_TEST_CASE( test_float_vec3 ) {
     test_basic_vec3<float>();
+}
+
+
+BOOST_AUTO_TEST_CASE( test_double_vec3 ) {
+    test_basic_vec3<double>();
 }

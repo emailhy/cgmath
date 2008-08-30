@@ -141,11 +141,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\box3.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\box3.hpp"
+			RelativePath=".\det.hpp"
 			>
 		</File>
 		<File
@@ -166,6 +162,14 @@
 		</File>
 		<File
 			RelativePath=".\noise.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\noise.hpp"
+			>
+		</File>
+		<File
+			RelativePath=".\perlin.hpp"
 			>
 		</File>
 		<File
@@ -206,6 +210,10 @@
 		</File>
 		<File
 			RelativePath=".\vec3.hpp"
+			>
+		</File>
+		<File
+			RelativePath=".\vec_base.hpp"
 			>
 		</File>
 	</Files>
