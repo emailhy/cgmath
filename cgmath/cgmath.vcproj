@@ -161,6 +161,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\mat_base.hpp"
+			>
+		</File>
+		<File
+			RelativePath=".\mat_util.hpp"
+			>
+		</File>
+		<File
 			RelativePath=".\noise.cpp"
 			>
 		</File>
@@ -201,6 +209,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\timer.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\timer.hpp"
+			>
+		</File>
+		<File
 			RelativePath=".\types.hpp"
 			>
 		</File>
@@ -214,6 +230,10 @@
 		</File>
 		<File
 			RelativePath=".\vec_base.hpp"
+			>
+		</File>
+		<File
+			RelativePath=".\vec_util.hpp"
 			>
 		</File>
 	</Files>

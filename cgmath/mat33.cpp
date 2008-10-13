@@ -22,6 +22,8 @@
 #include <cgmath/det.hpp>
 #include <iostream>
 
+#if 0
+
 namespace cgmath {
 
     mat33::mat33( const float *src, bool column_major /*= true */ ) {
@@ -355,4 +357,4 @@ namespace cgmath {
     }
 }
 
-
+#endif

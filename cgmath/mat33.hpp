@@ -15,42 +15,46 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_MAT33_HPP
-#define CGMATH_INCLUDED_MAT33_HPP
+#ifndef CGMATH_INCLUDED_mat_HPP
+#define CGMATH_INCLUDED_mat_HPP
 
+#include <cgmath/mat_base.hpp>
 #include <cgmath/vec3.hpp>
 #include <cgmath/quat.hpp>
+
+#if 0
 
 namespace cgmath {
 
     class mat44;
 
     /// 3 x 3 matrix class (double precision)
-    class mat33 {
+    template <typename T> class mat<3, 3, T> {
     public:
-        typedef double value_type;
+        typedef T value_type;
 
-        mat33() {
+        mat() {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] = (i == j)? 1 : 0;
         }
 
-        mat33( double a00, double a01, double a02, 
-               double a10, double a11, double a12, 
-               double a20, double a21, double a22) {
+        template <typename U>
+        mat( U a00, U a01, U a02, 
+             U a10, U a11, U a12, 
+             U a20, U a21, U a22) {
            m[0][0] = a00; m[0][1] = a01; m[0][2] = a02;
            m[1][0] = a10; m[1][1] = a11; m[1][2] = a12;
            m[2][0] = a20; m[2][1] = a21; m[2][2] = a22;
         }
 
-        explicit mat33( const float *src, bool column_major = true );
-        explicit mat33( const double *src, bool column_major = true );
-        explicit mat33( const vec<3,double>& a, const vec<3,double>& b, const vec<3,double>& c );
-        explicit mat33( const mat44& M );
-        explicit mat33( double angle, const vec<3,double>& axis );
-        explicit mat33( const quat<double>& q );
+        template <typename U>
+        explicit mat( const U *src, bool column_major = true );
+        explicit mat( const vec<3,T>& a, const vec<3,T>& b, const vec<3,T>& c );
+        explicit mat( const mat<4,4,T>& M );
+        explicit mat( double angle, const vec<3,double>& axis );
+        explicit mat( const quat<double>& q );
 
-        mat33( const mat33& A, const mat33& B ) {
+        mat( const mat& A, const mat& B ) {
             for (int i = 0; i < 3; ++i) {
                 m[i][0] =  A.m[i][0] * B.m[0][0] + A.m[i][1] * B.m[1][0] + A.m[i][2] * B.m[2][0];
                 m[i][1] =  A.m[i][0] * B.m[0][1] + A.m[i][1] * B.m[1][1] + A.m[i][2] * B.m[2][1];
@@ -58,13 +62,13 @@ namespace cgmath {
             }
         }
 
-        bool operator==(const mat33& rhs) const {
+        bool operator==(const mat& rhs) const {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) if (m[i][j] != rhs.m[i][j]) return false;
             return true;
         }
 
-        bool operator!=(const mat33& rhs) const {
+        bool operator!=(const mat& rhs) const {
             return !this->operator ==(rhs);
         }
 
@@ -76,107 +80,58 @@ namespace cgmath {
             return m[row];
         }
 
-        void set( const float *dst, bool column_major = true );
-        void set( const double *dst, bool column_major = true );
-        void get( float *dst, bool column_major = true ) const;
+        template <typename U>
+        void set( const U *dst, bool column_major = true );
+
+        template <typename U>
+        void get( U *dst, bool column_major = true ) const;
         void get( double *dst, bool column_major = true ) const;
+        
+        void set_column( int column, const vec<3,T>& v );
+        vec<3,T> get_column( int column ) const;
+        void set_row( int row, const vec<3,T>& v );
+        vec<3,T> get_row( int row ) const;
 
-        void set_column( int column, const vec<3,double>& v );
-        vec<3,double> get_column( int column ) const;
-        void set_row( int row, const vec<3,double>& v );
-        vec<3,double> get_row( int row ) const;
-
-        mat33 operator*( const mat33& rhs ) const {
-            return mat33(*this, rhs);
+        mat operator*( const mat& rhs ) const {
+            return mat(*this, rhs);
         }
 
-        const mat33& operator*=( const mat33& rhs ) {
-            return (*this = mat33(*this, rhs));
+        const mat& operator*=( const mat& rhs ) {
+            return (*this = mat(*this, rhs));
         }
 
-        const mat33& operator*=( double k ) {
+        const mat& operator*=( double k ) {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] *= k; 
             return *this;
         }
 
-        const mat33& operator+=( const mat33& rhs ) {
+        const mat& operator+=( const mat& rhs ) {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] += rhs.m[i][j]; 
             return *this;
         }
 
-        mat33 operator+( const mat33& rhs ) const {
-            return mat33(*this) += rhs;
+        mat operator+( const mat& rhs ) const {
+            return mat(*this) += rhs;
         }
 
-        const mat33& operator-=( const mat33& rhs ) {
+        const mat& operator-=( const mat& rhs ) {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] -= rhs.m[i][j]; 
             return *this;
         }
 
-        mat33 operator-( const mat33& rhs ) const {
-            return mat33(*this) -= rhs;
+        mat operator-( const mat& rhs ) const {
+            return mat(*this) -= rhs;
         }
 
-        mat33 operator-() const {
-            return mat33(*this) *= -1;
-        }
-                                
-        bool is_valid() const;
-        bool is_zero( double epsilon=0 ) const;
-        bool is_identity( double epsilon=0 ) const;
-        bool equal_to( const mat33& rhs, double epsilon=0 );
-        
-        double det() const;
-        double norm2() const;
-        double norm() const;
-        quat<double> to_quat() const;
-
-        mat33& zero() {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) m[i][j] = 0;
-            return *this;
+        mat operator-() const {
+            return mat(*this) *= -1;
         }
 
-        mat33& identity() {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) m[i][j] = (i == j)? 1 : 0;
-            return *this;
-        }
-                                            
-        mat33& transpose() {
-            for (int i = 1; i < 3; ++i)
-                for (int j = 0; j < i; ++j) std::swap(m[i][j], m[j][i]);
-            return *this;
-        }
-
-        mat33& adjoint();
-        bool invert();
-        //mat33& reorthogonalize();
-
-        mat33& scale( double sx, double sy, double sz );
-        
-        mat33& scale( const vec<3,double>& s ) {
-            return this->scale(s.x, s.y, s.z);
-        }
-
-        mat33& rotate( double angle, double ax, double ay, double az ) {
-            return this->rotate(angle, vec<3,double>(ax, ay, az));
-        }
-
-        mat33& rotate( double angle, const vec<3,double>& axis ) {
-            this->operator*=(mat33(angle, axis));
-            return *this;
-        }
-
-        mat33& rotate( const quat<double>& q ) {
-            this->operator*=(mat33(q));
-            return *this;
-        }
-
-        template <typename T> vec<3,T> transform( const vec<3,T>& v ) {
+        template <typename T> 
+        vec<3,T> transform( const vec<3,T>& v ) {
             return vec<3,T>(
                 static_cast<T>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z),
                 static_cast<T>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z),
@@ -187,26 +142,17 @@ namespace cgmath {
         double m[3][3];
     };
 
-    inline mat33 operator*( const mat33& lhs, double k ) {
-        return mat33(lhs) *= k;
+    inline mat operator*( const mat& lhs, double k ) {
+        return mat(lhs) *= k;
     }
 
-    inline mat33 operator*( double k, const mat33& rhs ) {
-        return mat33(rhs) *= k;
+    inline mat operator*( double k, const mat& rhs ) {
+        return mat(rhs) *= k;
     }
 
-    template <typename T> mat33 dyadic_prod( const vec<3,T>& u, const vec<3,T>& v ) {
-        mat33 m;
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                m[i][j] = u[i] * v[j];
-            }
-        }
-        return m;
-    }
-
-    std::ostream& operator<<( std::ostream& os, const mat33& m );
-    std::istream& operator>>( std::istream& is, mat33& m );
+    std::ostream& operator<<( std::ostream& os, const mat& m );
+    std::istream& operator>>( std::istream& is, mat& m );
 } 
 
+#endif 
 #endif
