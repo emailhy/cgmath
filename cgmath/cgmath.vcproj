@@ -60,6 +60,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				OutputFile="$(IntDir)\$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -118,6 +119,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				OutputFile="$(IntDir)\$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
