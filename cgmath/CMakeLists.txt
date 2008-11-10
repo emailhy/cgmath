@@ -1,0 +1,29 @@
+INCLUDE_DIRECTORIES( ${cgmath_SOURCE_DIR} )
+ADD_LIBRARY(cgmath STATIC 
+	types.hpp
+	vec_base.hpp
+	vec_util.hpp
+	vec2.hpp
+	vec3.hpp
+	quat.hpp
+	range.hpp
+	mat_base.hpp
+	mat_util.hpp
+	mat33.hpp
+	mat33.cpp
+	mat44.hpp
+	mat44.cpp
+	det.hpp
+	#box3.hpp
+	#box3.cpp
+	noise.hpp
+	noise.cpp
+	perlin.hpp
+	perlin_improved.cpp
+	perlin_original.cpp
+	perlin_simplex.cpp
+	solve_eqn.cpp
+	solve_eqn.hpp
+	timer.hpp
+	timer.cpp
+)
