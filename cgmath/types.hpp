@@ -28,6 +28,7 @@
 
 #include <limits>
 #include <iostream>
+#include <cmath>
 
 #ifdef M_PI
 #undef M_PI
@@ -71,14 +72,15 @@ namespace cgmath {
         return v<0? (T)-1 : (T)1; 
     }
 
+	/*
     inline bool is_valid(double v) {
         #ifdef _MSC_VER
             return _finite(v) != 0;
         #else
-            #error TODO
-            //return std::isnan(v) != 0;
+            return std::isnan(v) != 0;
         #endif
     }
+	*/
 
     template <typename T> T min(T a, T b) {
         return (a < b)?  a :  b;

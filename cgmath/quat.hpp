@@ -215,9 +215,9 @@ namespace cgmath {
         double omega = sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
         if (omega > 0) {
             double s = sin(omega) / omega;
-            return quat(q.x * s, q.y * s, q.z * s, cos(omega));
+            return quat<T>(q.x * s, q.y * s, q.z * s, cos(omega));
         }
-        return quat(0, 0, 0, 1);
+        return quat<T>(0, 0, 0, 1);
     }
 
     template <typename T> 

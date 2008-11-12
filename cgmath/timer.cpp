@@ -18,6 +18,7 @@
 #include <cgmath/types.hpp>
 #include <cgmath/timer.hpp>
 
+#ifdef WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
@@ -28,7 +29,7 @@ namespace cgmath {
 
 
     timer::timer() {
-        if (s_init) {
+		if (s_init) {
             s_init = false;
             LARGE_INTEGER li;
             QueryPerformanceFrequency(&li);
@@ -57,4 +58,5 @@ namespace cgmath {
             
 }
 
+#endif
 

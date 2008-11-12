@@ -88,6 +88,7 @@ namespace cgmath {
     }
 
 
+	/*
     bool mat44::is_valid() const {
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
@@ -96,7 +97,7 @@ namespace cgmath {
         }
         return true;
     }
-
+	*/
 
     bool mat44::is_affine() const {
         return ((m[3][0] == 0.0) && (m[3][1] == 0.0) && (m[3][2] == 0.0) && (m[3][0] == 1.0));
