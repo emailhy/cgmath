@@ -15,23 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_DET_HPP
-#define CGMATH_INCLUDED_DET_HPP
+#ifndef CGMATH_INCLUDED_VEC3_UTIL_HPP
+#define CGMATH_INCLUDED_VEC3_UTIL_HPP
 
-#include <cgmath/types.hpp>
+#include <cgmath/vec3.hpp>
+#include <cgmath/vecn_util.hpp>
 
 namespace cgmath {
 
-    template <typename T> T det2x2(T a, T b, T c, T d) {
-        return a * d - b * c;
-    }
-
-    template <typename T> T det3x3(T a1, T a2, T a3, T b1, T b2, T b3, T c1, T c2, T c3) {
-        return  a1 * det2x2(b2, b3, c2, c3) - 
-                b1 * det2x2(a2, a3, c2, c3) + 
-                c1 * det2x2(a2, a3, b2, b3);
-    }
-
-}
+} 
 
 #endif

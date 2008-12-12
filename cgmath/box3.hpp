@@ -18,11 +18,11 @@
 #ifndef CGMATH_INCLUDED_BOX3_HPP
 #define CGMATH_INCLUDED_BOX3_HPP
 
+#if 0
 #include <cgmath/range.hpp>
 #include <cgmath/vec3.hpp>
 
 namespace cgmath {
-
     class mat33;
     class mat44;
 
@@ -81,7 +81,10 @@ namespace cgmath {
             return vec3<>(x.get_size(), y.get_size(), z.get_size());
         }
 
-        double get_volume() const;
+        double get_volume() const {
+            vec3<> sz = get_size();
+            return sz.x * sz.y * sz.z;
+        }
 
         void clear() {
             x.clear();
@@ -115,8 +118,20 @@ namespace cgmath {
             return *this;
         }
 
-        box3& expand( double dt );
-        box3& expand( double dx, double dy, double dz );
+        box3& expand( double dt ) {
+            x.expand(dt);
+            y.expand(dt);
+            z.expand(dt);
+            return *this;
+        }
+        
+        box3& expand( double dx, double dy, double dz ) {
+            x.expand(dx);
+            y.expand(dy);
+            z.expand(dz);
+            return *this;
+        }
+
         box3& transform_by( const mat33& m );
         box3& transform_by( const mat44& m );
 
@@ -133,6 +148,6 @@ namespace cgmath {
     std::ostream& operator<<( std::ostream& os, const box3& b );
     std::istream& operator>>( std::istream& is, box3& b );
 } 
-
+#endif
 #endif
 

@@ -15,10 +15,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_VEC_BASE_HPP
-#define CGMATH_INCLUDED_VEC_BASE_HPP
-
-#include <cgmath/types.hpp>
+#ifndef CGMATH_INCLUDED_VECN_HPP
+#define CGMATH_INCLUDED_VECN_HPP
 
 namespace cgmath {
 

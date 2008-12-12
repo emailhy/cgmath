@@ -1,21 +1,22 @@
 INCLUDE_DIRECTORIES( ${cgmath_SOURCE_DIR} )
 ADD_LIBRARY(cgmath STATIC 
 	types.hpp
-	vec_base.hpp
-	vec_util.hpp
+	range.hpp
+	vecn.hpp
 	vec2.hpp
 	vec3.hpp
+	vecn_util.hpp
+	vec2_util.hpp
+	vec3_util.hpp
 	quat.hpp
-	range.hpp
-	mat_base.hpp
-	mat_util.hpp
+	matmn.hpp
 	mat33.hpp
-	mat33.cpp
 	mat44.hpp
-	mat44.cpp
-	det.hpp
-	#box3.hpp
-	#box3.cpp
+	matmn_util.hpp
+	mat33_util.hpp
+	mat44_util.hpp
+	determinant.hpp
+	box3.hpp
 	noise.hpp
 	noise.cpp
 	perlin.hpp

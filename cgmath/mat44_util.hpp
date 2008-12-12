@@ -22,6 +22,7 @@
 
 namespace cgmath {
 
+    #if 0
     mat44::mat44( const float *src, bool column_major /*= true */ ) {
         if (column_major) {
             for (int i = 0; i < 4; ++i) 
@@ -427,6 +428,7 @@ namespace cgmath {
         return is;
     }
 
+    #endif
 }
 
 

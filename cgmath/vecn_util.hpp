@@ -15,5 +15,13 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#define BOOST_TEST_MAIN
-#include <boost/test/included/unit_test.hpp>
+#ifndef CGMATH_INCLUDED_VECN_UTIL_HPP
+#define CGMATH_INCLUDED_VECN_UTIL_HPP
+
+#include <cgmath/vecn.hpp>
+
+namespace cgmath {
+
+} 
+
+#endif

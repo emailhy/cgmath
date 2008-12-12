@@ -22,7 +22,7 @@
 #include <cgmath/mat44.hpp>
 
 namespace cgmath {
-
+    #if 0
         quat<double> to_quat() const;
 
         bool is_valid() const;
@@ -76,15 +76,16 @@ namespace cgmath {
             return *this;
         }
 
-    template <typename T> mat33 dyadic_prod( const vec<3,T>& u, const vec<3,T>& v ) {
-        mat33 m;
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                m[i][j] = u[i] * v[j];
+        template <typename T> mat33 dyadic_prod( const vec<3,T>& u, const vec<3,T>& v ) {
+            mat33 m;
+            for (int i = 0; i < 3; ++i) {
+                for (int j = 0; j < 3; ++j) {
+                    m[i][j] = u[i] * v[j];
+                }
             }
+            return m;
         }
-        return m;
-    }
+    #endif
 } 
 
 #endif

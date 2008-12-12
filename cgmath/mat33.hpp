@@ -15,15 +15,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_mat_HPP
-#define CGMATH_INCLUDED_mat_HPP
+#ifndef CGMATH_INCLUDED_MAT33_HPP
+#define CGMATH_INCLUDED_MAT33_HPP
 
-#include <cgmath/mat_base.hpp>
-#include <cgmath/vec3.hpp>
-#include <cgmath/quat.hpp>
+#include <cgmath/matnm.hpp>
 
 #if 0
-
 namespace cgmath {
 
     class mat44;

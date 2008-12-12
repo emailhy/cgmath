@@ -18,7 +18,7 @@
 #ifndef CGMATH_INCLUDED_VEC3_HPP
 #define CGMATH_INCLUDED_VEC3_HPP
 
-#include <cgmath/vec_base.hpp>
+#include <cgmath/vecn.hpp>
 
 namespace cgmath {
 
