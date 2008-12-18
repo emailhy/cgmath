@@ -22,6 +22,11 @@
 
 namespace cgmath {
 
+    template <size_t N, typename T> 
+    vec<N,T> normalize(const vec<N,T>& v) {
+        return v.operator/(v.length());
+    }
+
 } 
 
 #endif

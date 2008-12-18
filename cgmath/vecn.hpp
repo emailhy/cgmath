@@ -23,10 +23,6 @@ namespace cgmath {
     /// N-dimensional vector template (T = float|double)
     template <size_t N, typename T = float> class vec;
 
-    template <size_t N, typename T> 
-    vec<N,T> normalize(const vec<N,T>& v) {
-        return v.operator/(v.length());
-    }
 } 
 
 #endif
