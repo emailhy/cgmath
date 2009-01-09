@@ -27,6 +27,11 @@ namespace cgmath {
         return v.operator/(v.length());
     }
 
+    template <size_t N, typename T> 
+    T distance(const vec<N,T>& a, const vec<N,T>& b) {
+        return (a - b).length();
+    }
+
 } 
 
 #endif

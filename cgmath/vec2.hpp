@@ -30,6 +30,9 @@ namespace cgmath {
 
         vec() { }
 
+        vec(T vx) 
+            : x(vx), y(vx){ }
+
         vec(T vx, T vy) 
             : x(vx), y(vy){ }
 
