@@ -97,6 +97,13 @@ namespace cgmath {
             return *this;
         }
 
+        const vec& operator*=(const vec& v) {
+            x *= v.x; 
+            y *= v.y; 
+            z *= v.z; 
+            return *this;
+        }
+
         const vec operator/=(T d) {
             return this->operator*=(1 / d);
         }

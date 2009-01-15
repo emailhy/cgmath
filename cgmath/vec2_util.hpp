@@ -23,6 +23,11 @@
 
 namespace cgmath {
 
+    template <typename T> 
+    T dot(const vec<2,T>& v1, const vec<2,T>& v2) {
+        return v1.x * v2.x + v1.y * v2.y;
+    }
+
 } 
 
 #endif
