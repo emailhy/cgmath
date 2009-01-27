@@ -18,40 +18,40 @@
 #ifndef CGMATH_INCLUDED_MAT33_HPP
 #define CGMATH_INCLUDED_MAT33_HPP
 
-#include <cgmath/matnm.hpp>
+#include <cgmath/vec3.hpp>
 
-#if 0
 namespace cgmath {
 
-    class mat44;
-
-    /// 3 x 3 matrix class (double precision)
-    template <typename T> class mat<3, 3, T> {
+    /// 3 x 3 matrix class (T=float|double)
+    template <typename T> class mat33 {
     public:
         typedef T value_type;
 
-        mat() {
+        mat33() {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] = (i == j)? 1 : 0;
         }
 
-        template <typename U>
-        mat( U a00, U a01, U a02, 
-             U a10, U a11, U a12, 
-             U a20, U a21, U a22) {
-           m[0][0] = a00; m[0][1] = a01; m[0][2] = a02;
-           m[1][0] = a10; m[1][1] = a11; m[1][2] = a12;
-           m[2][0] = a20; m[2][1] = a21; m[2][2] = a22;
+        template <typename U> mat33(
+            U a00, U a01, U a02, 
+            U a10, U a11, U a12,
+            U a20, U a21, U a22) {
+            m[0][0] = static_cast<T>(a00); m[0][1] = static_cast<T>(a01); m[0][2] = static_cast<T>(a02);
+            m[1][0] = static_cast<T>(a10); m[1][1] = static_cast<T>(a11); m[1][2] = static_cast<T>(a12);
+            m[2][0] = static_cast<T>(a20); m[2][1] = static_cast<T>(a21); m[2][2] = static_cast<T>(a22);
         }
 
-        template <typename U>
-        explicit mat( const U *src, bool column_major = true );
-        explicit mat( const vec<3,T>& a, const vec<3,T>& b, const vec<3,T>& c );
-        explicit mat( const mat<4,4,T>& M );
-        explicit mat( double angle, const vec<3,double>& axis );
-        explicit mat( const quat<double>& q );
+        template <typename U> explicit mat33( const U *src, bool row_major=true ) {
+            set(src, row_major);
+        }
 
-        mat( const mat& A, const mat& B ) {
+        explicit mat33( const vec3<T>& a, const vec3<T>& b, const vec3<T>& c ) {
+            m[0][0] = a.x; m[0][1] = b.x; m[0][2] = b.x;
+            m[1][0] = a.y; m[1][1] = b.y; m[1][2] = b.y;
+            m[2][0] = a.z; m[2][1] = b.z; m[2][2] = b.z;
+        }
+
+        mat33( const mat33& A, const mat33& B ) {
             for (int i = 0; i < 3; ++i) {
                 m[i][0] =  A.m[i][0] * B.m[0][0] + A.m[i][1] * B.m[1][0] + A.m[i][2] * B.m[2][0];
                 m[i][1] =  A.m[i][0] * B.m[0][1] + A.m[i][1] * B.m[1][1] + A.m[i][2] * B.m[2][1];
@@ -59,97 +59,121 @@ namespace cgmath {
             }
         }
 
-        bool operator==(const mat& rhs) const {
+        bool operator==(const mat33& rhs) const {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) if (m[i][j] != rhs.m[i][j]) return false;
             return true;
         }
 
-        bool operator!=(const mat& rhs) const {
+        bool operator!=(const mat33& rhs) const {
             return !this->operator ==(rhs);
         }
 
-        double* operator[]( int row ) {
+        T* operator[]( int row ) {
             return m[row];
         }
 
-        const double* operator[]( int row ) const {
+        const T* operator[]( int row ) const {
             return m[row];
         }
 
-        template <typename U>
-        void set( const U *dst, bool column_major = true );
+        template <typename U> void set(const U *src, bool row_major= true) {
+            if (row_major) {
+                for (int i = 0; i < 3; ++i) 
+                    for (int j = 0; j < 3; ++j) m[i][j] = static_cast<float>(src[i*4+j]);
+            } else {
+                for (int i = 0; i < 3; ++i) 
+                    for (int j = 0; j < 3; ++j) m[i][j] = static_cast<float>(src[i+j*4]);
+            }
+        }
 
-        template <typename U>
-        void get( U *dst, bool column_major = true ) const;
-        void get( double *dst, bool column_major = true ) const;
+        template <typename U>  void get(U *dst, bool row_major=true) const {
+            if (row_major) {
+                for (int i = 0; i < 3; ++i) 
+                    for (int j = 0; j < 3; ++j) dst[i*4+j] = static_cast<float>(m[i][j]);
+            } else {
+                for (int i = 0; i < 3; ++i) 
+                    for (int j = 0; j < 3; ++j) dst[i+j*4] = static_cast<float>(m[i][j]);
+            }
+        }
         
-        void set_column( int column, const vec<3,T>& v );
-        vec<3,T> get_column( int column ) const;
-        void set_row( int row, const vec<3,T>& v );
-        vec<3,T> get_row( int row ) const;
-
-        mat operator*( const mat& rhs ) const {
-            return mat(*this, rhs);
+        void set_column( int column, const vec3<T>& v ) {
+            m[0][column] = v.x;
+            m[1][column] = v.y;
+            m[2][column] = v.z;
         }
 
-        const mat& operator*=( const mat& rhs ) {
-            return (*this = mat(*this, rhs));
+        vec3<T> get_column( int column ) const {
+            return vec3<T>(m[0][column], m[1][column], m[2][column]);
         }
 
-        const mat& operator*=( double k ) {
+        void set_row( int row, const vec3<T>& v ){
+            m[row][0] = v.x;
+            m[row][1] = v.y;
+            m[row][2] = v.z;
+        }
+
+        vec3<T> get_row( int row ) const {
+            return vec3<T>(m[row][0], m[row][1], m[row][2]);
+        }
+
+        mat33 operator*( const mat33& rhs ) const {
+            return mat33(*this, rhs);
+        }
+
+        const mat33& operator*=( const mat33& rhs ) {
+            return (*this = mat33(*this, rhs));
+        }
+
+        const mat33& operator*=( T k ) {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] *= k; 
             return *this;
         }
 
-        const mat& operator+=( const mat& rhs ) {
+        const mat33& operator+=( const mat33& rhs ) {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] += rhs.m[i][j]; 
             return *this;
         }
 
-        mat operator+( const mat& rhs ) const {
+        mat33 operator+( const mat33& rhs ) const {
             return mat(*this) += rhs;
         }
 
-        const mat& operator-=( const mat& rhs ) {
+        const mat33& operator-=( const mat33& rhs ) {
             for (int i = 0; i < 3; ++i) 
                 for (int j = 0; j < 3; ++j) m[i][j] -= rhs.m[i][j]; 
             return *this;
         }
 
-        mat operator-( const mat& rhs ) const {
-            return mat(*this) -= rhs;
+        mat33 operator-( const mat33& rhs ) const {
+            return mat33(*this) -= rhs;
         }
 
-        mat operator-() const {
-            return mat(*this) *= -1;
+        mat33 operator-() const {
+            return mat33(*this) *= -1;
         }
 
-        template <typename T> 
-        vec<3,T> transform( const vec<3,T>& v ) {
-            return vec<3,T>(
+        vec3<T> transform( const vec3<T>& v ) {
+            return vec3<T>(
                 static_cast<T>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z),
                 static_cast<T>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z),
                 static_cast<T>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z)
             );
         }
 
-        double m[3][3];
+    private:
+        T m[3][3];
     };
 
-    inline mat operator*( const mat& lhs, double k ) {
+    template <typename T> mat33<T> operator*( const mat33<T>& lhs, T k ) {
         return mat(lhs) *= k;
     }
 
-    inline mat operator*( double k, const mat& rhs ) {
+    template <typename T> mat33<T> operator*( T k, const mat33<T>& rhs ) {
         return mat(rhs) *= k;
     }
-
-    std::ostream& operator<<( std::ostream& os, const mat& m );
-    std::istream& operator>>( std::istream& is, mat& m );
 } 
 
-#endif 
 #endif

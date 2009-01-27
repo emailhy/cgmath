@@ -15,6 +15,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef CGMATH_INCLUDED_MAT33_UTIL_HPP
+#define CGMATH_INCLUDED_MAT33_UTIL_HPP
+
 #include <cgmath/types.hpp>
 #include <cgmath/mat33.hpp>
 #include <cgmath/mat44.hpp>
@@ -22,10 +25,29 @@
 #include <cgmath/det.hpp>
 #include <iostream>
 
-#if 0
-
 namespace cgmath {
 
+    std::ostream& operator<<( std::ostream& os, const mat33& m ) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                os << m[i][j];
+                if ((i != 2) || (j != 2)) os << " ";
+            }
+        }
+        return os;
+    }
+
+
+    std::istream& operator>>( std::istream& is, mat33& m ) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                is >> m[i][j];
+            }
+        }
+        return is;
+    }
+
+#if 0
     mat33::mat33( const float *src, bool column_major /*= true */ ) {
         if (column_major) {
             for (int i = 0; i < 3; ++i) 
@@ -46,22 +68,6 @@ namespace cgmath {
                 for (int j = 0; j < 3; ++j) m[j][i] = src[3*i+j];
         }
     }
-
-
-    mat33::mat33( const vec<3,double>& a, const vec<3,double>& b, const vec<3,double>& c ) {
-        for (int i = 0; i < 3; ++i) {
-            m[i][0] = a[i];
-            m[i][1] = b[i];
-            m[i][2] = c[i];
-        }
-    }
-
-
-    mat33::mat33( const mat44& M ) {
-        for (int i = 0; i < 3; ++i) 
-            for (int j = 0; j < 3; ++j) m[i][j] = M.m[i][j];
-    }
-
 
     mat33::mat33( double angle, const vec<3,double>& axis ) {
         vec<3,double> u(axis);
@@ -109,75 +115,6 @@ namespace cgmath {
             identity();
         }
     }
-
-
-    void mat33::set( const float *src, bool column_major /*= true */ ) {
-        if (column_major) {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) m[i][j] = static_cast<float>(src[3*i+j]);
-        } else {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) m[j][i] = static_cast<float>(src[3*i+j]);
-        }
-    }
-
-
-    void mat33::set( const double *src, bool column_major /*= true */ ) {
-        if (column_major) {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) m[i][j] = src[3*i+j];
-        } else {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) m[j][i] = src[3*i+j];
-        }
-    }
-
-
-    void mat33::get( float *dst, bool column_major /*= true */ ) const {
-        if (column_major) {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) dst[3*i+j] = static_cast<float>(m[i][j]);
-        } else {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) dst[3*i+j] = static_cast<float>(m[j][i]);
-        }
-    }
-
-
-    void mat33::get( double *dst, bool column_major /*= true */ ) const {
-        if (column_major) {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) dst[3*i+j] = m[i][j];
-        } else {
-            for (int i = 0; i < 3; ++i) 
-                for (int j = 0; j < 3; ++j) dst[3*i+j] = m[j][i];
-        }
-    }
-
-
-    void mat33::set_column( int column, const vec<3,double>& v ) {
-        m[0][column] = v.x;
-        m[1][column] = v.y;
-        m[2][column] = v.z;
-    }
-
-
-    vec<3,double> mat33::get_column( int column ) const {
-        return vec<3,double>(m[0][column], m[1][column], m[2][column]);
-    }
-
-
-    void mat33::set_row( int row, const vec<3,double>& v ){
-        m[row][0] = v.x;
-        m[row][1] = v.y;
-        m[row][2] = v.z;
-    }
-
-
-    vec<3,double> mat33::get_row( int row ) const {
-        return vec<3,double>(m[row][0], m[row][1], m[row][2]);
-    }
-
 
     bool mat33::is_valid() const {
         for (int i = 0; i < 3; ++i) {
@@ -335,26 +272,6 @@ namespace cgmath {
         return *this;
     }
 
-
-    std::ostream& operator<<( std::ostream& os, const mat33& m ) {
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                os << m[i][j];
-                if ((i != 2) || (j != 2)) os << " ";
-            }
-        }
-        return os;
-    }
-
-
-    std::istream& operator>>( std::istream& is, mat33& m ) {
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                is >> m[i][j];
-            }
-        }
-        return is;
-    }
 }
 
 #endif

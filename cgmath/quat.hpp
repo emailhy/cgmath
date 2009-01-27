@@ -165,31 +165,37 @@ namespace cgmath {
         T w;
     };
 
+    /** \related quat */
     template <typename T> 
     quat<T> operator*(T k, const quat<T>& q) {
         return quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
     }
 
+    /** \related quat */
     template <typename T> 
     quat<T> operator*(const quat<T>& q, T k) {
         return quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
     }
 
+    /** \related quat */
     template <typename T> 
     T dot(const quat<T>& p, const quat<T>& q) {
         return (p.x * q.x + p.y * q.y + p.z * q.z + p.w * q.w);
     }
 
+    /** \related quat */
     template <typename T> 
     quat<T> normalize(const quat<T>& q) {
         return q.operator/(q.length());
     }
 
+    /** \related quat */
     template <typename T> 
     quat<T> conjugate(const quat<T>& q) {
         return quat<T>(-q.x, -q.y, -q.z, q.w);
     }
 
+    /** \related quat */
     template <typename T> 
     quat<T> inverse(const quat<T>& q) {
         double l2 = q.length2();
@@ -200,6 +206,7 @@ namespace cgmath {
         return quat<T>();
     }
 
+    /** \related quat */
     template <typename T> 
     quat<T> log(const quat<T>& q) {
         double lv = sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
@@ -210,6 +217,7 @@ namespace cgmath {
         return quat<T>(0, 0, 0, 0);
     }
 
+    /** \related quat */
     template <typename T> 
     quat<T> exp(const quat<T>& q) {
         double omega = sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
@@ -220,11 +228,13 @@ namespace cgmath {
         return quat<T>(0, 0, 0, 1);
     }
 
+    /** \related quat */
     template <typename T> 
     std::ostream& operator<<(std::ostream& os, const quat<T>& q) {
         return (os << q.x << " " << q.y << " " << q.z << " " << q.w);
     }
 
+    /** \related quat */
     template <typename T> 
     std::istream& operator>>(std::istream& is, quat<T>& q) {
         return is >> q.x >> q.y >> q.z >> q.w;

@@ -2,10 +2,9 @@ INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 ADD_LIBRARY(cgmath STATIC 
 	types.hpp
 	range.hpp
-	vecn.hpp
 	vec2.hpp
 	vec3.hpp
-	vecn_util.hpp
+	float_util.hpp
 	vec2_util.hpp
 	vec3_util.hpp
 	quat.hpp
@@ -26,5 +25,4 @@ ADD_LIBRARY(cgmath STATIC
 	solve_eqn.cpp
 	solve_eqn.hpp
 	timer.hpp
-	timer.cpp
-)
+	timer.cpp)

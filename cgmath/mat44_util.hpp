@@ -15,78 +15,110 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <cgmath/types.hpp>
+#ifndef CGMATH_INCLUDED_MAT44_UTIL_HPP
+#define CGMATH_INCLUDED_MAT44_UTIL_HPP
+
 #include <cgmath/mat44.hpp>
 #include <cgmath/det.hpp>
+#include <cgmath/quat.hpp>
 #include <iostream>
 
 namespace cgmath {
 
+    template <typename T> std::ostream& operator<<(std::ostream& os, const mat44<T>& m) {
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                os << m[i][j];
+                if  ((i < 4) && (j < 4)) os << " ";
+            }
+        }
+        return os;
+    }
+
+    template <typename T> std::istream& operator>>(std::istream& is, mat44<T>& m) {
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                is >> m[i][j];
+            }
+        }
+        return is;
+    }
+    
     #if 0
-    mat44::mat44( const float *src, bool column_major /*= true */ ) {
-        if (column_major) {
+        bool is_valid() const;
+        bool is_affine() const;
+        bool is_almost_zero(double epsilon=EPSILON) const;
+        bool is_almost_identity(double epsilon=EPSILON) const;
+        
+        double det() const;
+        double norm2() const;
+        double norm() const;
+
+        mat44& zero() {
             for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[i][j] = static_cast<float>(src[4*i+j]);
-        } else {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[j][i] = static_cast<float>(src[4*i+j]);
+                for (int j = 0; j < 4; ++j) m[i][j] = 0;
+            return *this;
         }
-    }
 
-
-    mat44::mat44( const double *src, bool column_major /*= true */ ) {
-        if (column_major) {
+        mat44& identity() {
             for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[i][j] = src[4*i+j];
-        } else {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[j][i] = src[4*i+j];
+                for (int j = 0; j < 4; ++j) m[i][j] = (i == j)? 1 : 0;
+            return *this;
         }
-    }
 
-
-    void mat44::set( const float *src, bool column_major /*= true */ ) {
-        if (column_major) {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[i][j] = static_cast<float>(src[4*i+j]);
-        } else {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[j][i] = static_cast<float>(src[4*i+j]);
+        mat44& transpose() {
+            for (int i = 1; i < 4; ++i)
+                for (int j = 0; j < i; ++j) std::swap(m[i][j], m[j][i]);
+            return *this;
         }
-    }
 
+        mat44& adjoint();
 
-    void mat44::set( const double *src, bool column_major /*= true */ ) {
-        if (column_major) {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[i][j] = src[4*i+j];
-        } else {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[j][i] = src[4*i+j];
+        bool invert_gauss_jordan();
+        bool invert_direct();
+        bool invert_affine();
+
+        mat44& scale(double sx, double sy, double sz);
+        
+        mat44& scale(const vec<3,double>& s) {
+            return this->scale(s.x, s.y, s.z);
         }
-    }
 
-
-    void mat44::get( float *dst, bool column_major /*= true*/ ) const {
-        if (column_major) {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) dst[4*i+j] = static_cast<float>(m[i][j]);
-        } else {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) dst[4*i+j] = static_cast<float>(m[j][i]);
+        mat44& rotate( double angle, double ax, double ay, double az ) {
+            return this->rotate(angle, vec<3,double>(ax, ay, az));
         }
-    }
 
-
-    void mat44::get( double *dst, bool column_major /*= true*/ ) const {
-        if (column_major) {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) dst[4*i+j] = m[i][j];
-        } else {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) dst[4*i+j] = m[j][i];
+        mat44& rotate( double angle, const vec<3,double>& axis ) {
+            this->operator*=(mat44(angle, axis));
+            return *this;
         }
-    }
+
+        mat44& rotate( const quat<double>& q ) {
+            this->operator*=(mat44(q));
+            return *this;
+        }
+
+        mat44& translate( double tx, double ty, double tz );
+
+        mat44& translate( const vec<3,double>& t ) {
+            return this->translate(t.x, t.y, t.z);
+        }
+
+        mat44& ortho_project( double left, double right, double bottom, double top, double z_near, double z_far );
+        mat44& persp_project( double fov, double aspect_ratio, double z_near, double z_far );
+        mat44& frustum( double left, double right, double bottom, double top, double z_near, double z_far );
+        mat44& viewport( double x, double y, double width, double height );
+
+        template <typename T> vec<3,T> transform( const vec<3,T>& v ) {
+            T x = static_cast<T>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z);
+            T y = static_cast<T>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z);
+            T z = static_cast<T>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z);
+            T w = static_cast<T>(m[3][0] * v.x + m[3][1] * v.y + m[3][2] * v.z);
+            return vec<3,T>(x / w, y / w, z / w);
+        }
+
+        // TODO
+        //static mat44 look_at( const vec<3,double>& pos, const vec<3,double>& tgt, const vec<3,double>& up );
 
 
 	/*
@@ -406,29 +438,8 @@ namespace cgmath {
         );
     }
     */
-
-
-    std::ostream& operator<<(std::ostream& os, const mat44& m) {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                os << m[i][j];
-                if  ((i < 4) && (j < 4)) os << " ";
-            }
-        }
-        return os;
-    }
-
-
-    std::istream& operator>>( std::istream& is, mat44& m ) {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                is >> m[i][j];
-            }
-        }
-        return is;
-    }
-
     #endif
+
 }
 
-
+#endif

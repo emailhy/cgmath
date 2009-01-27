@@ -17,145 +17,125 @@
 */
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <cgmath/vec3.hpp>
+#include <cgmath/vec2.hpp>
 
 using namespace cgmath;
 
 
-template <typename T> void test_vec3() {
-    float src_f[3] = { 1, 2, 3 };
-    double src_d[3] = { 1, 2, 3 };
+template <typename T> void test_vec2() {
+    float src_f[2] = { 1, 2 };
+    double src_d[2] = { 1, 2 };
 
     // constructors
     {
-        vec3<T> a(1, 2, 3);
+        vec2<T> a(1, 2);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
-        BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<T> a(src_f);
+        vec2<T> a(src_f);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
-        BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<T> a(src_d);
+        vec2<T> a(src_d);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
-        BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<float> v(1, 2, 3);
-        vec3<T> a(v);
+        vec2<float> v(1, 2);
+        vec2<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
-        BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<double> v(1, 2, 3);
-        vec3<T> a(v);
+        vec2<double> v(1, 2);
+        vec2<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
-        BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
 
     // operators
     {
-        vec3<T> a(1, 2, 3);
-        const vec3<T> b(4, 5, 6);
-        const vec3<T> e(3, 2, 1);
-        float f[3];
-        double d[3];
+        vec2<T> a(1, 2);
+        const vec2<T> b(4, 5);
+        const vec2<T> e(3, 2);
+        float f[2];
+        double d[2];
 
         BOOST_CHECK_EQUAL( a == a, true );
         BOOST_CHECK_EQUAL( a == b, false );
 
         BOOST_CHECK_EQUAL( a[0], 1 );
         BOOST_CHECK_EQUAL( a[1], 2 );
-        BOOST_CHECK_EQUAL( a[2], 3 );
 
         BOOST_CHECK_EQUAL( b[0], 4 );
         BOOST_CHECK_EQUAL( b[1], 5 );
-        BOOST_CHECK_EQUAL( b[2], 6 );
 
         b.get(f);
         BOOST_CHECK_EQUAL( f[0], 4 );
         BOOST_CHECK_EQUAL( f[1], 5 );
-        BOOST_CHECK_EQUAL( f[2], 6 );
 
         b.get(d);
         BOOST_CHECK_EQUAL( d[0], 4 );
         BOOST_CHECK_EQUAL( d[1], 5 );
-        BOOST_CHECK_EQUAL( d[2], 6 );
 
-        vec3<T> c(7, 8, 9);
+        vec2<T> c(7, 8);
         c = a;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 2 );
-        BOOST_CHECK_EQUAL( c.z, 3 );
 
         c += a;
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
-        BOOST_CHECK_EQUAL( c.z, 6 );
 
         c = a + b;
         BOOST_CHECK_EQUAL( c.x, 5 );
         BOOST_CHECK_EQUAL( c.y, 7 );
-        BOOST_CHECK_EQUAL( c.z, 9 );
 
         c = b;
         c -= e;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 3 );
-        BOOST_CHECK_EQUAL( c.z, 5 );
 
         c = b - e;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 3 );
-        BOOST_CHECK_EQUAL( c.z, 5 );
 
         c = -a;
         BOOST_CHECK_EQUAL( c.x, -1 );
         BOOST_CHECK_EQUAL( c.y, -2 );
-        BOOST_CHECK_EQUAL( c.z, -3 );
 
         c = a;
         c *= 2;
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
-        BOOST_CHECK_EQUAL( c.z, 6 );
 
         c = static_cast<T>(2) * a;
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
-        BOOST_CHECK_EQUAL( c.z, 6 );
 
         c = a * static_cast<T>(2);
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
-        BOOST_CHECK_EQUAL( c.z, 6 );
 
         c = a;
         c /= 2;
         BOOST_CHECK_EQUAL( c.x, 0.5 );
         BOOST_CHECK_EQUAL( c.y, 1 );
-        BOOST_CHECK_EQUAL( c.z, 1.5 );
 
         c = a / 2;
         BOOST_CHECK_EQUAL( c.x, 0.5 );
         BOOST_CHECK_EQUAL( c.y, 1 );
-        BOOST_CHECK_EQUAL( c.z, 1.5 );
     }
 }
 
 
-BOOST_AUTO_TEST_CASE( test_float_vec3 ) {
-    test_vec3<float>();
+BOOST_AUTO_TEST_CASE( test_float_vec2 ) {
+    test_vec2<float>();
 }
 
 
-BOOST_AUTO_TEST_CASE( test_double_vec3 ) {
-    test_vec3<double>();
+BOOST_AUTO_TEST_CASE( test_double_vec2 ) {
+    test_vec2<double>();
 }

@@ -19,12 +19,37 @@
 #define CGMATH_INCLUDED_VEC3_UTIL_HPP
 
 #include <cgmath/vec3.hpp>
-#include <cgmath/vecn_util.hpp>
+#include <cmath>
 
 namespace cgmath {
 
-    template <typename T> 
-    T dot(const vec<3,T>& v1, const vec<3,T>& v2) {
+    /// \related vec3
+    template<typename T> std::ostream& operator<<(std::ostream& os, const vec3<T>& v) {
+        return (os << v.x << " " << v.y << " " << v.z);
+    }
+
+    /// \related vec3
+    template<typename T> std::istream& operator>>(std::istream& is, vec3<T>& v) {
+        return is >> v.x >> v.y >> v.z;
+    }
+
+    /// \related vec3
+    template <typename T> T length2(const vec3<T>& v) {
+        return v.x * v.x + v.y * v.y + v.z * v.z;
+    }
+
+    /// \related vec3
+    template <typename T> T length(const vec3<T>& v) {
+        return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+    }
+
+    /// \related vec3
+    template <typename T> vec3<T> normalize(const vec3<T>& v) {
+        return v / length(v);
+    }
+
+    /// \related vec3
+    template <typename T> T dot(const vec3<T>& v1, const vec3<T>& v2) {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
 

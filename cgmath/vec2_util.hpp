@@ -19,13 +19,36 @@
 #define CGMATH_INCLUDED_VEC2_UTIL_HPP
 
 #include <cgmath/vec2.hpp>
-#include <cgmath/vecn_util.hpp>
+#include <cmath>
 
 namespace cgmath {
 
-    template <typename T> 
-    T dot(const vec<2,T>& v1, const vec<2,T>& v2) {
+    template<typename T> std::ostream& operator<<(std::ostream& os, const vec2<T>& v) {
+        return (os << v.x << " " << v.y);
+    }
+
+    template<typename T> std::istream& operator>>(std::istream& is, vec2<T>& v) {
+        return is >> v.x >> v.y;
+    }
+
+    template <typename T> T dot(const vec2<T>& v1, const vec2<T>& v2) {
         return v1.x * v2.x + v1.y * v2.y;
+    }
+
+    template <typename T> T length2(const vec2<T>& v) {
+        return v.x * v.x + v.y * v.y;
+    }
+
+    template <typename T> T length(const vec2<T>& v) {
+        return sqrt(v.x * v.x + v.y * v.y);
+    }
+
+    template <typename T> vec2<T> normalize(const vec2<T>& v) {
+        return v / length(v);
+    }
+
+    template <typename T> T distance(const vec2<T>& a, const vec2<T>& b) {
+        return length(a - b);
     }
 
 } 
