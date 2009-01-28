@@ -109,13 +109,16 @@ namespace cgmath {
         T y;            
     };
 
+    /// \related vec2
     template <typename T> vec2<T> operator*(const vec2<T> v, T k) {
         return vec2<T>(v.x * k, v.y * k);
     }
 
+    /// \related vec2
     template <typename T> vec2<T> operator*(T k, const vec2<T>& v) {
         return vec2<T>(v.x * k, v.y * k);
     }
+
 } 
 
 #endif

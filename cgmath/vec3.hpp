@@ -115,12 +115,12 @@ namespace cgmath {
         T z;
     };
 
-    /// \related template<typename T>vec3<3,T>
+    /// \related vec3
     template <typename T> vec3<T> operator*(const vec3<T> v, T k) {
         return vec3<T>(v.x * k, v.y * k, v.z * k);
     }
 
-    /// \related vec3<3>
+    /// \related vec3
     template <typename T> vec3<T> operator*(T k, const vec3<T>& v) {
         return vec3<T>(v.x * k, v.y * k, v.z * k);
     }

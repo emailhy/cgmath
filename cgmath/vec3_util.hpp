@@ -49,6 +49,11 @@ namespace cgmath {
     }
 
     /// \related vec3
+    template <typename T> T distance(const vec3<T>& a, const vec3<T>& b) {
+        return length(a - b);
+    }
+
+    /// \related vec3
     template <typename T> T dot(const vec3<T>& v1, const vec3<T>& v2) {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
