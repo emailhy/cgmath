@@ -20,23 +20,15 @@
 
 namespace cgmath {
 
-    bool solve_eqn_linear( double a, double b, double *x ) {
-        if (a == 0) 
-            return false;
-        
-        *x = -b / a;
-        return true;
-    }
-
-    
-/*
-    Calculates the real roots of a quadratic equation: ax^2 + bx + c = 0
+    /*
+    Calculates the real roots of a quadratic equation: ax^2 + bx + c = 0.
     
     James F. Blinn, "How to solve a Quadratic Equation", 
     IEEE Computer Graphics and Applications, 
-    vol. 25,  no. 6,  pp. 76-79,  Nov/Dec,  2005
-*/
-    bool solve_eqn_quadratic( double a, double b, double c, double *x1, double *x2 ) {
+    vol. 25,  no. 6,  pp. 76-79,  Nov/Dec,  2005 
+    */
+    bool solve_eqn_quadratic ( double a, double b, double c, 
+                               double *x1, double *x2 ) {
         if (a != 0) {
             double B = b / 2;
             double d = B*B - a*c;

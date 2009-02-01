@@ -34,28 +34,13 @@ namespace cgmath {
     }
 
     /// \related vec3
-    template <typename T> T length2(const vec3<T>& v) {
-        return v.x * v.x + v.y * v.y + v.z * v.z;
-    }
-
-    /// \related vec3
-    template <typename T> T length(const vec3<T>& v) {
-        return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-    }
-
-    /// \related vec3
-    template <typename T> vec3<T> normalize(const vec3<T>& v) {
-        return v / length(v);
+    template <typename T> T dot(const vec3<T>& v1, const vec3<T>& v2) {
+        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
 
     /// \related vec3
     template <typename T> T distance(const vec3<T>& a, const vec3<T>& b) {
         return length(a - b);
-    }
-
-    /// \related vec3
-    template <typename T> T dot(const vec3<T>& v1, const vec3<T>& v2) {
-        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
 
 } 

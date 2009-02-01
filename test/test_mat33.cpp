@@ -18,6 +18,9 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
 #include <cgmath/mat33.hpp>
+#include <cgmath/vec3_util.hpp>
+#include <cgmath/mat33_util.hpp>
+
 
 using namespace cgmath;
 
@@ -71,10 +74,22 @@ template <typename T> void test_mat33() {
                 BOOST_CHECK_EQUAL(m_f[i][j], 3*i+j+1);
     }
     {
+        mat33<T> m_f(src_f, false);
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                BOOST_CHECK_EQUAL(m_f[i][j], i+j*3+1);
+    }
+    {
         mat33<T> m_d(src_d);
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j)
                 BOOST_CHECK_EQUAL(m_d[i][j], 3*i+j+1);
+    }
+    {
+        mat33<T> m_d(src_d, false);
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                BOOST_CHECK_EQUAL(m_d[i][j], i+3*j+1);
     }
     {
         vec3<T> av(1,4,7);
@@ -94,17 +109,16 @@ template <typename T> void test_mat33() {
                 BOOST_CHECK_EQUAL(mul33[i][j], p_mul[3*i+j]);
     }
 
-#if 0
     // operators
     {
-        mat33 A(1,2,3, 4,5,6, 7,8,9);
+        mat33<T> A(1,2,3, 4,5,6, 7,8,9);
         BOOST_CHECK_EQUAL(A == A, true);
         BOOST_CHECK_EQUAL(A != A, false);
 
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
-                mat33 B(A);
-                B.m[i][j] += 1;
+                mat33<T> B(A);
+                B[i][j] += 1;
                 BOOST_CHECK_EQUAL(A == B, false);
                 BOOST_CHECK_EQUAL(A != B, true);
             }
@@ -114,34 +128,45 @@ template <typename T> void test_mat33() {
             for (int j = 0; j < 3; ++j)
                 BOOST_CHECK_EQUAL(A[i][j], 3*i+j+1);
 
-        const mat33 C(1,2,3, 4,5,6, 7,8,9);
+        const mat33<T> C(1,2,3, 4,5,6, 7,8,9);
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j)
                 BOOST_CHECK_EQUAL(C[i][j], 3*i+j+1);
 
         float fbuf[9];
+        memset(fbuf, sizeof(fbuf), 0);
         C.get(fbuf);
         for (int i = 0; i < 9; ++i)
             BOOST_CHECK_EQUAL(fbuf[i], i+1);
+        memset(fbuf, sizeof(fbuf), 0);
+        C.get(fbuf, false);
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                BOOST_CHECK_EQUAL(fbuf[i+j*3], i*3+j+1);
 
         double dbuf[9];
         C.get(dbuf);
         for (int i = 0; i < 9; ++i)
             BOOST_CHECK_EQUAL(dbuf[i], i+1);
+        memset(dbuf, sizeof(fbuf), 0);
+        C.get(dbuf, false);
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j)
+                BOOST_CHECK_EQUAL(fbuf[i+j*3], i*3+j+1);
 
-        BOOST_CHECK_EQUAL(A.get_column(0), (vec<3,double>(1,4,7)));
-        BOOST_CHECK_EQUAL(A.get_column(1), (vec<3,double>(2,5,8)));
-        BOOST_CHECK_EQUAL(A.get_column(2), (vec<3,double>(3,6,9)));
+        BOOST_CHECK_EQUAL(A.get_column(0), (vec3<T>(1,4,7)));
+        BOOST_CHECK_EQUAL(A.get_column(1), (vec3<T>(2,5,8)));
+        BOOST_CHECK_EQUAL(A.get_column(2), (vec3<T>(3,6,9)));
 
-        BOOST_CHECK_EQUAL(A.get_row(0), (vec<3,double>(1,2,3)));
-        BOOST_CHECK_EQUAL(A.get_row(1), (vec<3,double>(4,5,6)));
-        BOOST_CHECK_EQUAL(A.get_row(2), (vec<3,double>(7,8,9)));
+        BOOST_CHECK_EQUAL(A.get_row(0), (vec3<T>(1,2,3)));
+        BOOST_CHECK_EQUAL(A.get_row(1), (vec3<T>(4,5,6)));
+        BOOST_CHECK_EQUAL(A.get_row(2), (vec3<T>(7,8,9)));
     }
 
     {
         for (int k = 0; k < 3; ++k) {
-            mat33 A(1,2,3, 4,5,6, 7,8,9);
-            A.set_column(k, vec<3,double>(-1, -2, -3));
+            mat33<T> A(1,2,3, 4,5,6, 7,8,9);
+            A.set_column(k, vec3<T>(-1, -2, -3));
 
             for (int i = 0; i < 3; ++i)
                 for (int j = 0; j < 3; ++j)
@@ -149,8 +174,8 @@ template <typename T> void test_mat33() {
         }
 
         for (int k = 0; k < 3; ++k) {
-            mat33 A(1,2,3, 4,5,6, 7,8,9);
-            A.set_row(k, vec<3,double>(-1, -2, -3));
+            mat33<T> A(1,2,3, 4,5,6, 7,8,9);
+            A.set_row(k, vec3<T>(-1, -2, -3));
 
             for (int i = 0; i < 3; ++i)
                 for (int j = 0; j < 3; ++j)
@@ -159,23 +184,23 @@ template <typename T> void test_mat33() {
     }
 
     {
-        mat33 lhs(p_lhs);
-        mat33 rhs(p_rhs);
+        mat33<T> lhs(p_lhs);
+        mat33<T> rhs(p_rhs);
 
         {
-            mat33 mul_result(p_mul);
+            mat33<T> mul_result(p_mul);
             BOOST_CHECK_EQUAL(lhs * rhs, mul_result);
-            mat33 A(lhs);
+            mat33<T> A(lhs);
             A *= rhs;
             BOOST_CHECK_EQUAL(A, mul_result);
         }
 
         {
-            mat33 B(1,2,3, 4,5,6, 7,8,9);
-            mat33 C(B);
+            mat33<T> B(1,2,3, 4,5,6, 7,8,9);
+            mat33<T> C(B);
             B *= 11;
-            mat33 D = C * 11;
-            mat33 E = 11 * C;
+            mat33<T> D = C * static_cast<T>(11);
+            mat33<T> E = static_cast<T>(11) * C;
             for (int i = 0; i < 3; ++i) {
                 for (int j = 0; j < 3; ++j) {
                     BOOST_CHECK_EQUAL(B[i][j], 11 * (3*i+j+1));
@@ -186,26 +211,38 @@ template <typename T> void test_mat33() {
         }
 
         {
-            mat33 add_result(p_add);
+            mat33<T> add_result(p_add);
             BOOST_CHECK_EQUAL(lhs + rhs, add_result);
-            mat33 A(lhs);
+            mat33<T> A(lhs);
             A += rhs;
             BOOST_CHECK_EQUAL(A, add_result);
         }
 
         {
-            mat33 sub_result(p_sub);
+            mat33<T> sub_result(p_sub);
             BOOST_CHECK_EQUAL(lhs - rhs, sub_result);
-            mat33 A(lhs);
+            mat33<T> A(lhs);
             A -= rhs;
             BOOST_CHECK_EQUAL(A, sub_result);
 
-            mat33 B(1,2,3, 4,5,6, 7,8,9);
-            mat33 C = -B;
+            mat33<T> B(1,2,3, 4,5,6, 7,8,9);
+            mat33<T> C = -B;
             for (int i = 0; i < 3; ++i)
                 for (int j = 0; j < 3; ++j)
-                    BOOST_CHECK_EQUAL(C.m[i][j], -(3*i+j+1));
+                    BOOST_CHECK_EQUAL(C[i][j], -(3*i+j+1));
         }
+    }
+
+    {
+        mat33<T> A(2, 3, 5, 7, 11, 13, 17, 19, 23);
+
+        vec3<float> fv(29, 31, 37);
+        vec3<float> fr = A.transform(fv);
+        BOOST_CHECK_EQUAL( fr, (vec3<float>(2*29 + 3*31 + 5*37, 7*29 + 11*31 + 13*37, 17*29 + 19*31 + 23*37)));
+        
+        vec3<double> dv(29, 31, 37);
+        vec3<double> dr = A.transform(dv);
+        BOOST_CHECK_EQUAL( dr, (vec3<double>(2*29 + 3*31 + 5*37, 7*29 + 11*31 + 13*37, 17*29 + 19*31 + 23*37)));
     }
 
     /*{
@@ -370,18 +407,7 @@ template <typename T> void test_mat33() {
         BOOST_CHECK(D.equal_to(C*M, 8*std::numeric_limits<double>::epsilon()));
         BOOST_CHECK(E.equal_to(C*M, 8*std::numeric_limits<double>::epsilon()));
     }
-    {
-        mat33 A(2,  3,  5,  7, 11, 13,  17, 19, 23);
-
-        vec<3,float> fv(29, 31, 37);
-        vec<3,float> fr = A.transform(fv);
-        BOOST_CHECK_EQUAL( fr, (vec<3,float>(2*29 + 3*31 + 5*37, 7*29 + 11*31 + 13*37, 17*29 + 19*31 + 23*37)));
-        
-        vec<3,double> dv(29, 31, 37);
-        vec<3,double> dr = A.transform(dv);
-        BOOST_CHECK_EQUAL( dr, (vec<3,double>(2*29 + 3*31 + 5*37, 7*29 + 11*31 + 13*37, 17*29 + 19*31 + 23*37)));
-    }*/
-#endif
+    */
 }
 
 

@@ -18,13 +18,14 @@
 #ifndef CGMATH_INCLUDED_SOLVE_EQN_HPP
 #define CGMATH_INCLUDED_SOLVE_EQN_HPP
 
-#include <cgmath/types.hpp>
-
 namespace cgmath {
 
-    bool solve_eqn_linear( double a, double b, double *x );
-    bool solve_eqn_quadratic( double a, double b, double c, double *x1, double *x2 );
-    bool solve_eqn_cubic( double a, double b, double c, double d, double *x1, double *x2, double *x3 );
+    bool solve_eqn_quadratic ( double a, double b, double c, 
+                               double *x1, double *x2 );
+
+    bool solve_eqn_cubic ( double a, double b, double c, double d, 
+                           double *x1, double *x2, double *x3 );
 
 }
+
 #endif

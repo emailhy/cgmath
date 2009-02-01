@@ -33,10 +33,10 @@ namespace cgmath {
         quat(T qx, T qy, T qz, T qw) 
             : x(qx), y(qy), z(qz), w(qw) { }
        
-        quat(T angle, const vec<3,T>& axis ) {
-            double len = axis.length();
-            double omega = 0.5 * radians(angle);
-            double s = sin(omega) / len;
+        quat(T angle, const vec3<T>& axis ) {
+            T len = length(axis);
+            T omega = 0.5 * radians(angle);
+            T s = sin(omega) / len;
             x = s * axis.x;
             y = s * axis.y;
             z = s * axis.z;
@@ -132,16 +132,16 @@ namespace cgmath {
             return w;
         }
 
-        vec<3,T> v() const {
-            return vec<3,T>(x, y, z);
+        vec3<T> v() const {
+            return vec3<T>(x, y, z);
         }
 
         T angle() const {
             return to_deg(2.0 * atan2(sqrt(x * x + y * y + z * z), w));
         }
 
-        vec<3,T> axis() const { //FIXME
-            vec<3,T> axis(x, y, z);
+        vec3<T> axis() const { //FIXME
+            vec3<T> axis(x, y, z);
             return normalize(axis);
         }
 
@@ -153,92 +153,22 @@ namespace cgmath {
             return sqrt(length2());
         }
 
-        T normalize() {
-            T len = length();
-            if (len > 0) this->operator/=(len);
-            return len;
-        }
-
         T x;
         T y;
         T z;
         T w;
     };
 
-    /** \related quat */
-    template <typename T> 
-    quat<T> operator*(T k, const quat<T>& q) {
+    /// \related quat
+    template <typename T> quat<T> operator*(T k, const quat<T>& q) {
         return quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
     }
 
-    /** \related quat */
-    template <typename T> 
-    quat<T> operator*(const quat<T>& q, T k) {
+    /// \related quat
+    template <typename T> quat<T> operator*(const quat<T>& q, T k) {
         return quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
     }
 
-    /** \related quat */
-    template <typename T> 
-    T dot(const quat<T>& p, const quat<T>& q) {
-        return (p.x * q.x + p.y * q.y + p.z * q.z + p.w * q.w);
-    }
-
-    /** \related quat */
-    template <typename T> 
-    quat<T> normalize(const quat<T>& q) {
-        return q.operator/(q.length());
-    }
-
-    /** \related quat */
-    template <typename T> 
-    quat<T> conjugate(const quat<T>& q) {
-        return quat<T>(-q.x, -q.y, -q.z, q.w);
-    }
-
-    /** \related quat */
-    template <typename T> 
-    quat<T> inverse(const quat<T>& q) {
-        double l2 = q.length2();
-        if (l2 > 0) {
-            double s = 1 / l2;
-            return quat<T>(-q.x * s, -q.y * s, -q.z * s, q.w * s);
-        }
-        return quat<T>();
-    }
-
-    /** \related quat */
-    template <typename T> 
-    quat<T> log(const quat<T>& q) {
-        double lv = sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
-        if (lv > 0) {
-            double s = atan2(lv, q.w) / lv;
-            return quat<T>(0, q.x * s, q.y * s, q.z * s);
-        }
-        return quat<T>(0, 0, 0, 0);
-    }
-
-    /** \related quat */
-    template <typename T> 
-    quat<T> exp(const quat<T>& q) {
-        double omega = sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
-        if (omega > 0) {
-            double s = sin(omega) / omega;
-            return quat<T>(q.x * s, q.y * s, q.z * s, cos(omega));
-        }
-        return quat<T>(0, 0, 0, 1);
-    }
-
-    /** \related quat */
-    template <typename T> 
-    std::ostream& operator<<(std::ostream& os, const quat<T>& q) {
-        return (os << q.x << " " << q.y << " " << q.z << " " << q.w);
-    }
-
-    /** \related quat */
-    template <typename T> 
-    std::istream& operator>>(std::istream& is, quat<T>& q) {
-        return is >> q.x >> q.y >> q.z >> q.w;
-    }
 } 
 
 #endif

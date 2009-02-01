@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007-2008 by Jan Eric Kyprianidis <www.kyprianidis.com>
+    Copyright (C) 2007-2009 by Jan Eric Kyprianidis <www.kyprianidis.com>
     All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
@@ -15,15 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_MAT_BASE_HPP
-#define CGMATH_INCLUDED_MAT_BASE_HPP
-
-#include <cgmath/types.hpp>
+#ifndef CGMATH_INCLUDED_SOLVE_EIGEN_HPP
+#define CGMATH_INCLUDED_SOLVE_EIGEN_HPP
 
 namespace cgmath {
 
-    /// MxN-matrix template (T = float|double)
-    template <size_t M, size_t N, typename T = float> class mat;
-} 
+    void solve_eigen_symm_2x2 ( double E, double F, double G, 
+                                double* lambda1, double *e1, 
+                                double* lambda2, double *e2 );
+}
 
 #endif

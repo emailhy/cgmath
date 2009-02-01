@@ -39,21 +39,6 @@ namespace cgmath {
     }
 
     /// \related vec2
-    template <typename T> T length2(const vec2<T>& v) {
-        return v.x * v.x + v.y * v.y;
-    }
-
-    /// \related vec2
-    template <typename T> T length(const vec2<T>& v) {
-        return sqrt(v.x * v.x + v.y * v.y);
-    }
-
-    /// \related vec2
-    template <typename T> vec2<T> normalize(const vec2<T>& v) {
-        return v / length(v);
-    }
-
-    /// \related vec2
     template <typename T> T distance(const vec2<T>& a, const vec2<T>& b) {
         return length(a - b);
     }

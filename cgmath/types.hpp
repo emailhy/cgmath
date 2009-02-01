@@ -27,8 +27,6 @@
 #endif
 
 #include <limits>
-#include <iostream>
-#include <cmath>
 
 #ifdef M_PI
 #undef M_PI
@@ -54,53 +52,10 @@ namespace cgmath {
 	typedef signed __int64 int64_t;
 	#endif
 
-    static const double PI    = 3.14159265358979323846;
-    static const double PI_2  = 1.57079632679489661923;
-    static const double PI_4  = 0.785398163397448309616;
+    static const double PI = 3.14159265358979323846;
+    static const double PI_2 = 1.57079632679489661923;
+    static const double PI_4 = 0.785398163397448309616;
     static const float EPSILON  = 1e-5f;
-
-    inline double radians(double deg) { return deg * PI / 180.0; }
-    inline double degrees(double rad) { return rad * 180.0 / PI; }
-    inline float radians(float deg) { return static_cast<float>(deg * PI / 180.0 ); }
-    inline float degrees(float rad) { return static_cast<float>(rad * 180.0 / PI); }
-
-    template <typename T> inline T abs(T v) {
-        return (v < 0)? -v : v;
-    }
-
-    template<typename T> inline T sign(T v) { 
-        return v<0? (T)-1 : (T)1; 
-    }
-
-	/*
-    inline bool is_valid(double v) {
-        #ifdef _MSC_VER
-            return _finite(v) != 0;
-        #else
-            return std::isnan(v) != 0;
-        #endif
-    }
-	*/
-
-    template <typename T> T min(T a, T b) {
-        return (a < b)?  a :  b;
-    }
-
-    template <typename T> T max(T a, T b) {
-        return (a > b)?  a :  b;
-    }
-
-    template <typename T> T clamp(T x, T a, T b) {
-        return (x < a)?  a : ((x > b)? b : x);
-    }
-
-    inline bool almost_equal(float a, float b, float epsilon=EPSILON) {
-        return abs(a - b) <= epsilon;
-    }
-
-    inline bool almost_equal(double a, double b, double epsilon=EPSILON) {
-        return abs(a - b) <= epsilon;
-    }
 
 }
 

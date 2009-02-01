@@ -119,6 +119,16 @@ namespace cgmath {
         return vec2<T>(v.x * k, v.y * k);
     }
 
+    /// \related vec2
+    template <typename T> T length(const vec2<T>& v) {
+        return sqrt(v.x * v.x + v.y * v.y);
+    }
+
+    /// \related vec2
+    template <typename T> vec2<T> normalize(const vec2<T>& v) {
+        return v / length(v);
+    }
+
 } 
 
 #endif

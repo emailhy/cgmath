@@ -8,10 +8,8 @@ ADD_LIBRARY(cgmath STATIC
 	vec2_util.hpp
 	vec3_util.hpp
 	quat.hpp
-	matmn.hpp
 	mat33.hpp
 	mat44.hpp
-	matmn_util.hpp
 	mat33_util.hpp
 	mat44_util.hpp
 	determinant.hpp
@@ -24,5 +22,7 @@ ADD_LIBRARY(cgmath STATIC
 	perlin_simplex.cpp
 	solve_eqn.cpp
 	solve_eqn.hpp
+	solve_eigen.cpp
+	solve_eigen.hpp
 	timer.hpp
 	timer.cpp)

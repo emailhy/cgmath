@@ -46,9 +46,9 @@ namespace cgmath {
         }
 
         explicit mat33( const vec3<T>& a, const vec3<T>& b, const vec3<T>& c ) {
-            m[0][0] = a.x; m[0][1] = b.x; m[0][2] = b.x;
-            m[1][0] = a.y; m[1][1] = b.y; m[1][2] = b.y;
-            m[2][0] = a.z; m[2][1] = b.z; m[2][2] = b.z;
+            m[0][0] = a.x; m[0][1] = b.x; m[0][2] = c.x;
+            m[1][0] = a.y; m[1][1] = b.y; m[1][2] = c.y;
+            m[2][0] = a.z; m[2][1] = b.z; m[2][2] = c.z;
         }
 
         mat33( const mat33& A, const mat33& B ) {
@@ -80,20 +80,20 @@ namespace cgmath {
         template <typename U> void set(const U *src, bool row_major= true) {
             if (row_major) {
                 for (int i = 0; i < 3; ++i) 
-                    for (int j = 0; j < 3; ++j) m[i][j] = static_cast<float>(src[i*4+j]);
+                    for (int j = 0; j < 3; ++j) m[i][j] = static_cast<float>(src[i*3+j]);
             } else {
                 for (int i = 0; i < 3; ++i) 
-                    for (int j = 0; j < 3; ++j) m[i][j] = static_cast<float>(src[i+j*4]);
+                    for (int j = 0; j < 3; ++j) m[i][j] = static_cast<float>(src[i+j*3]);
             }
         }
 
         template <typename U>  void get(U *dst, bool row_major=true) const {
             if (row_major) {
                 for (int i = 0; i < 3; ++i) 
-                    for (int j = 0; j < 3; ++j) dst[i*4+j] = static_cast<float>(m[i][j]);
+                    for (int j = 0; j < 3; ++j) dst[i*3+j] = static_cast<float>(m[i][j]);
             } else {
                 for (int i = 0; i < 3; ++i) 
-                    for (int j = 0; j < 3; ++j) dst[i+j*4] = static_cast<float>(m[i][j]);
+                    for (int j = 0; j < 3; ++j) dst[i+j*3] = static_cast<float>(m[i][j]);
             }
         }
         
@@ -138,7 +138,7 @@ namespace cgmath {
         }
 
         mat33 operator+( const mat33& rhs ) const {
-            return mat(*this) += rhs;
+            return mat33(*this) += rhs;
         }
 
         const mat33& operator-=( const mat33& rhs ) {
@@ -168,12 +168,13 @@ namespace cgmath {
     };
 
     template <typename T> mat33<T> operator*( const mat33<T>& lhs, T k ) {
-        return mat(lhs) *= k;
+        return mat33<T>(lhs) *= k;
     }
 
     template <typename T> mat33<T> operator*( T k, const mat33<T>& rhs ) {
-        return mat(rhs) *= k;
+        return mat33<T>(rhs) *= k;
     }
+
 } 
 
 #endif
