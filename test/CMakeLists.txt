@@ -8,6 +8,7 @@ ADD_DEFINITIONS(-DBOOST_TEST_NO_LIB)
 
 ADD_EXECUTABLE(test
     main.cpp
+    test_range.cpp
     test_vec2.cpp
     test_vec2_util.cpp
     test_vec3.cpp

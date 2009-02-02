@@ -37,7 +37,7 @@ namespace cgmath {
         }
 
         bool operator==( const range<T> &r ) const {
-            return (a == r.clear) && (b == r.b);
+            return (a == r.a) && (b == r.b);
         }
 
         bool operator!=( const range<T> &r ) const {
@@ -117,17 +117,31 @@ namespace cgmath {
             return *this;
         }
 
-        //TODO
-        /*
-        range& intersect_with(const range<T>& r) {
-            return *this;
-        }
-        */
-
     private:
         T a;
         T b;
     };
+
+    template <typename T> range<T> intersect(const range<T>& r1, const range<T>& r2) {
+        T a = r1.get_min() > r2.get_min()? r1.get_min() : r2.get_min();
+        T b = r1.get_max() < r2.get_max()? r1.get_max() : r2.get_max();
+        return (a < b)? range<T>(a, b) : range<T>();
+    }
+
+	template<typename T> std::ostream& operator<<(std::ostream& os, const range<T>& r) {
+		return (os << r.get_min() << " " << r.get_max());
+	}
+
+	template<typename T> std::istream& operator>>(std::istream& is, range<T>& r) {
+		T a, b;
+		is >> a >> b;
+		if (a < b) 
+			r.set(a, b);
+		else 
+			r.clear();
+		return is;
+	}
+
 } 
 
 #endif
