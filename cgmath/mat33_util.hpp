@@ -65,28 +65,6 @@ namespace cgmath {
         }
     }
 
-    mat33::mat33( double angle, const vec<3,double>& axis ) {
-        vec<3,double> u(axis);
-        if (u.normalize() > 0) {
-            const double rangle = radians(angle);
-            const double c = cos(rangle);
-            const double s = sin(rangle);
-            
-            m[0][0] = c + (1 - c) * u.x * u.x;
-            m[0][1] = (1 - c) * u.x * u.y - s * u.z;    
-            m[0][2] = (1 - c) * u.x * u.z + s * u.y;
-            m[1][0] = (1 - c) * u.y * u.x + s * u.z;
-            m[1][1] = c + (1 - c) * u.y * u.y;    
-            m[1][2] = (1 - c) * u.y * u.z - s * u.x;
-            m[2][0] = (1 - c) * u.z * u.x - s * u.y;
-            m[2][1] = (1 - c) * u.z * u.y + s * u.x;
-            m[2][2] = c + (1 - c) * u.z * u.z;
-        } else  {
-            identity();
-        }
-    }
-
-
     mat33::mat33( const quat<double>& q ) {
         double s, xs, ys, zs, wx, wy, wz, xx, xy, xz, yy, yz, zz, l;
         l = q.length2();
