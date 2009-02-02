@@ -26,7 +26,6 @@ template <typename T> void test_vec3_util() {
     // length2, length
     {
         const vec3<T> a(2, 3, 5);
-        BOOST_CHECK_EQUAL( length2(a), 38 );
         BOOST_CHECK_EQUAL( length(a), sqrt(static_cast<T>(38)) );
     }
 
@@ -37,7 +36,6 @@ template <typename T> void test_vec3_util() {
         T s = 1 / sqrt(static_cast<T>(38));
 
         b = normalize(a);
-        BOOST_CHECK_CLOSE_FRACTION( length2(b), static_cast<T>(1), std::numeric_limits<T>::epsilon());
         BOOST_CHECK_EQUAL( b.x, 2 * s);
         BOOST_CHECK_EQUAL( b.y, 3 * s);
         BOOST_CHECK_EQUAL( b.z, 5 * s);
