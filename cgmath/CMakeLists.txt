@@ -4,6 +4,7 @@ ADD_LIBRARY(cgmath STATIC
 	range.hpp
 	vec2.hpp
 	vec3.hpp
+	vec4.hpp
 	float_util.hpp
 	vec2_util.hpp
 	vec3_util.hpp
