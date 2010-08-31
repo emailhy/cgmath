@@ -1,29 +1,29 @@
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 ADD_LIBRARY(cgmath STATIC 
-	types.hpp
-	range.hpp
-	vec2.hpp
-	vec3.hpp
-	vec4.hpp
-	float_util.hpp
-	vec2_util.hpp
-	vec3_util.hpp
-	quat.hpp
-	mat33.hpp
-	mat44.hpp
-	mat33_util.hpp
-	mat44_util.hpp
-	determinant.hpp
-	box3.hpp
-	noise.hpp
+	types.h
+	range.h
+	vec2.h
+	vec3.h
+	vec4.h
+	float_util.h
+	vec2_util.h
+	vec3_util.h
+	quat.h
+	mat33.h
+	mat44.h
+	mat33_util.h
+	mat44_util.h
+	determinant.h
+	box3.h
+	noise.h
 	noise.cpp
-	perlin.hpp
+	perlin.h
 	perlin_improved.cpp
 	perlin_original.cpp
 	perlin_simplex.cpp
+	solve_eqn.h
 	solve_eqn.cpp
-	solve_eqn.hpp
+	solve_eigen.h
 	solve_eigen.cpp
-	solve_eigen.hpp
-	timer.hpp
+	timer.h
 	timer.cpp)
