@@ -18,6 +18,8 @@
 #ifndef CGMATH_INCLUDED_VEC3_H
 #define CGMATH_INCLUDED_VEC3_H
 
+#include <cgmath/float_util.h>
+
 namespace cgmath {
 
     /// 3-dimensional vector template (T = float|double)
@@ -137,6 +139,10 @@ namespace cgmath {
 
     template <typename T> vec3<T> normalize(const vec3<T>& v) {
         return v / length(v);
+    }
+
+    template <typename T> vec3<T> clamp(const vec3<T>& v, T a, T b) {
+        return vec3<T>( clamp(v.x, a, b), clamp(v.y, a, b), clamp(v.z, a, b) );
     }
 
     template<typename T> std::ostream& operator<<(std::ostream& os, const vec3<T>& v) {
