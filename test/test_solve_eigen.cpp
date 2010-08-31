@@ -17,8 +17,8 @@
 */
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <cgmath/solve_eigen.hpp>
-#include <cgmath/mat33.hpp>
+#include <cgmath/solve_eigen.h>
+#include <cgmath/mat33.h>
 
 using namespace cgmath;
 

@@ -15,8 +15,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_SOLVE_EQN_HPP
-#define CGMATH_INCLUDED_SOLVE_EQN_HPP
+#ifndef CGMATH_INCLUDED_SOLVE_EQN_H
+#define CGMATH_INCLUDED_SOLVE_EQN_H
 
 namespace cgmath {
 

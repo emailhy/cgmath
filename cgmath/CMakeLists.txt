@@ -6,12 +6,9 @@ ADD_LIBRARY(cgmath STATIC
 	vec3.h
 	vec4.h
 	float_util.h
-	vec2_util.h
-	vec3_util.h
 	quat.h
 	mat33.h
 	mat44.h
-	mat33_util.h
 	mat44_util.h
 	determinant.h
 	box3.h

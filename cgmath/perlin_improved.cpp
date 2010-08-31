@@ -3,7 +3,7 @@
     JAVA REFERENCE IMPLEMENTATION OF IMPROVED NOISE - COPYRIGHT 2002 KEN PERLIN
     [http://mrl.nyu.edu/~perlin/noise/]
 */
-#include <cgmath/perlin.hpp>
+#include <cgmath/perlin.h>
 #include <cmath>
 
 

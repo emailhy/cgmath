@@ -2,7 +2,7 @@
     Original source code:
     Perlin, Ken, Noise Hardware, SIGGRAPH 2001 Course Notes
 */
-#include <cgmath/perlin.hpp>
+#include <cgmath/perlin.h>
 #include <cmath>
 
 

@@ -15,10 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_MAT33_HPP
-#define CGMATH_INCLUDED_MAT33_HPP
+#ifndef CGMATH_INCLUDED_MAT33_H
+#define CGMATH_INCLUDED_MAT33_H
 
-#include <cgmath/vec3.hpp>
+#include <cgmath/vec3.h>
 
 namespace cgmath {
 
@@ -27,9 +27,7 @@ namespace cgmath {
     public:
         typedef T value_type;
 
-        mat33() {
-			identity();
-        }
+        mat33() {}
 
 		mat33(T s) {
 			m[0][0] = m[1][1] = m[2][2] = s;
@@ -84,11 +82,19 @@ namespace cgmath {
 			}
  		}
 
-        mat33( const mat33& A, const mat33& B ) {
+        explicit mat33( const mat33& A, const mat33& B ) {
             for (int i = 0; i < 3; ++i) {
                 m[i][0] =  A.m[i][0] * B.m[0][0] + A.m[i][1] * B.m[1][0] + A.m[i][2] * B.m[2][0];
                 m[i][1] =  A.m[i][0] * B.m[0][1] + A.m[i][1] * B.m[1][1] + A.m[i][2] * B.m[2][1];
                 m[i][2] =  A.m[i][0] * B.m[0][2] + A.m[i][1] * B.m[1][2] + A.m[i][2] * B.m[2][2];
+            }
+        }
+
+        explicit mat33( const vec3<T>& u, const vec3<T>& v ) {  // dyadic product
+            for (int i = 0; i < 3; ++i) {
+                for (int j = 0; j < 3; ++j) {
+                    m[i][j] = u[i] * v[j];
+                }
             }
         }
 
@@ -109,11 +115,6 @@ namespace cgmath {
         const T* operator[]( int row ) const {
             return m[row];
         }
-
-		void identity() {
-			m[0][0] = m[1][1] = m[2][2] = 1;
-			m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
-		}
 
         template <typename U> void set(const U *src, bool row_major= true) {
             if (row_major) {
@@ -193,17 +194,49 @@ namespace cgmath {
             return mat33(*this) *= -1;
         }
 
-        vec3<T> transform( const vec3<T>& v ) {
-            return vec3<T>(
-                static_cast<T>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z),
-                static_cast<T>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z),
-                static_cast<T>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z)
+        mat33& zero() {
+            for (int i = 0; i < 3; ++i) 
+                for (int j = 0; j < 3; ++j) m[i][j] = 0;
+            return *this;
+        }
+
+		mat33& identity() {
+			m[0][0] = m[1][1] = m[2][2] = 1;
+			m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
+            return *this;
+		}
+
+		mat33& scale(T sx, T sy, T sz) {
+            for (int i = 0; i < 3; ++i) {
+                m[i][0] *= sx;
+                m[i][1] *= sy;
+                m[i][2] *= sz;
+            }
+            return *this;
+		}
+
+		mat33& rotate(T angle, T vx, T vy, T vz) {
+            *this *= mat33(angle, vec3<T>(vx, vy, vz));
+            return *this;
+		}
+
+		mat33& rotate(T angle, const vec3<T>& axis) {
+            *this *= mat33(angle, axis);
+            return *this;
+		}
+
+        template <typename U> vec3<U> transform( const vec3<U>& v ) const {
+            return vec3<U>(
+                static_cast<U>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z),
+                static_cast<U>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z),
+                static_cast<U>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z)
             );
         }
 
     private:
         T m[3][3];
     };
+
 
     template <typename T> mat33<T> operator*( const mat33<T>& lhs, T k ) {
         return mat33<T>(lhs) *= k;
@@ -213,6 +246,100 @@ namespace cgmath {
         return mat33<T>(rhs) *= k;
     }
 
+    template <typename T> T det( const mat33<T>& m ) {
+        return m[0][0]*m[1][1]*m[2][2] + m[0][1]*m[1][2]*m[2][0] + 
+               m[0][2]*m[1][0]*m[2][1] - m[0][2]*m[1][1]*m[2][0] - 
+               m[0][0]*m[1][2]*m[2][1] - m[0][1]*m[1][0]*m[2][2];
+    }
+
+    template <typename T> T norm2( const mat33<T>& m ) {
+        T n2 = 0;
+        for (int i = 0; i < 3; ++i) 
+            for (int j = 0; j < 3; ++j) n2 += m[i][j] * m[i][j];
+        return n2;
+    }
+
+    template <typename T> T norm( const mat33<T>& m ) {
+        return sqrt(norm2(m));
+    }
+
+    template <typename T> mat33<T> adjoint( const mat33<T>& m ) {
+        return mat33<T>(
+             m[1][1]*m[2][2] - m[1][2]*m[2][1],
+            -m[1][0]*m[2][2] + m[1][2]*m[2][0],
+             m[1][0]*m[2][1] - m[1][1]*m[2][0],
+            -m[0][1]*m[2][2] + m[0][2]*m[2][1],
+             m[0][0]*m[2][2] - m[0][2]*m[2][0],
+            -m[0][0]*m[2][1] + m[0][1]*m[2][0],
+             m[0][1]*m[1][2] - m[0][2]*m[1][1],
+            -m[0][0]*m[1][2] + m[0][2]*m[1][0],
+             m[0][0]*m[1][1] - m[0][1]*m[1][0]
+        );
+    }
+    
+    template <typename T> mat33<T> transpose( const mat33<T>& m ) {
+        return mat33<T>( m[0][0], m[1][0], m[2][0],
+                         m[0][1], m[1][1], m[2][1],
+                         m[0][2], m[1][2], m[2][2] );
+    }
+
+    template <typename T> bool invert( mat33<T> *m ) {
+        mat33<T> in(*m);
+        double det_1;
+        double pos, neg, temp;
+
+        pos = neg = 0.0;
+        for (int i = 0; i < 3; ++i) {
+            temp =  in[i][0] * in[(i+1)%3][1] * in[(i+2)%3][2];
+            if (temp >= 0.0) 
+                pos += temp; 
+            else 
+                neg += temp;
+
+            temp =  -in[i][0] * in[(i+2)%3][1] * in[(i+1)%3][2];
+            if (temp >= 0.0) 
+                pos += temp; 
+            else 
+                neg += temp;
+        }
+
+        det_1 = pos + neg;
+        if ((det_1 == 0.0) || (fabs(det_1 / (pos - neg)) < 1e-15)) {
+            return false;
+        }
+
+        det_1 = 1.0 / det_1;
+        (*m)[0][0] =   ( in[1][1] * in[2][2] - in[2][1] * in[1][2] ) * det_1;
+        (*m)[0][1] = - ( in[0][1] * in[2][2] - in[2][1] * in[0][2] ) * det_1;
+        (*m)[0][2] =   ( in[0][1] * in[1][2] - in[1][1] * in[0][2] ) * det_1;
+        (*m)[1][0] = - ( in[1][0] * in[2][2] - in[2][0] * in[1][2] ) * det_1;
+        (*m)[1][1] =   ( in[0][0] * in[2][2] - in[2][0] * in[0][2] ) * det_1;
+        (*m)[1][2] = - ( in[0][0] * in[1][2] - in[1][0] * in[0][2] ) * det_1;
+        (*m)[2][0] =   ( in[1][0] * in[2][1] - in[2][0] * in[1][1] ) * det_1;
+        (*m)[2][1] = - ( in[0][0] * in[2][1] - in[2][0] * in[0][1] ) * det_1;
+        (*m)[2][2] =   ( in[0][0] * in[1][1] - in[1][0] * in[0][1] ) * det_1;
+
+        return true;
+    }
+
+    template <typename T> std::ostream& operator<<( std::ostream& os, const mat33<T>& m ) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                os << m[i][j];
+                if ((i != 2) || (j != 2)) os << " ";
+            }
+        }
+        return os;
+    }
+
+    template <typename T> std::istream& operator>>( std::istream& is, mat33<T>& m ) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                is >> m[i][j];
+            }
+        }
+        return is;
+    }
 } 
 
 #endif

@@ -17,7 +17,7 @@
 */
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <cgmath/vec4.hpp>
+#include <cgmath/vec4.h>
 
 using namespace cgmath;
 

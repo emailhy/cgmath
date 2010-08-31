@@ -15,8 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <cgmath/types.hpp>
-#include <cgmath/timer.hpp>
+#include <cgmath/timer.h>
 
 #ifdef WIN32
 #define WIN32_LEAN_AND_MEAN

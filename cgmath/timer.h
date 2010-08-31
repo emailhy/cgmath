@@ -15,10 +15,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_TIMER_HPP
-#define CGMATH_INCLUDED_TIMER_HPP
+#ifndef CGMATH_INCLUDED_TIMER_H
+#define CGMATH_INCLUDED_TIMER_H
 
-#include <cgmath/types.hpp>
+#include <cgmath/types.h>
 
 namespace cgmath {
 

@@ -17,7 +17,7 @@
 */
 #include <boost/test/unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <cgmath/vec3.hpp>
+#include <cgmath/vec3.h>
 
 using namespace cgmath;
 
@@ -147,6 +147,24 @@ template <typename T> void test_vec3() {
         BOOST_CHECK_EQUAL( c.x, 0.5 );
         BOOST_CHECK_EQUAL( c.y, 1 );
         BOOST_CHECK_EQUAL( c.z, 1.5 );
+    }
+
+    // length
+    {
+        const vec3<T> a(2, 3, 5);
+        BOOST_CHECK_EQUAL( length(a), sqrt(static_cast<T>(38)) );
+    }
+
+    // normalize
+    {
+        const vec3<T> a(2, 3, 5);
+        vec3<T> b;
+        T s = 1 / sqrt(static_cast<T>(38));
+
+        b = normalize(a);
+        BOOST_CHECK_EQUAL( b.x, 2 * s);
+        BOOST_CHECK_EQUAL( b.y, 3 * s);
+        BOOST_CHECK_EQUAL( b.z, 5 * s);
     }
 }
 

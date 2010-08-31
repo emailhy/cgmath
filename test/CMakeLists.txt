@@ -10,11 +10,10 @@ ADD_EXECUTABLE(test
     main.cpp
     test_range.cpp
     test_vec2.cpp
-    test_vec2_util.cpp
     test_vec3.cpp
-    test_vec3_util.cpp
     test_vec4.cpp
     test_mat33.cpp
+    test_quat.cpp
     test_solve_eqn.cpp
     test_solve_eigen.cpp)
 

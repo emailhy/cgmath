@@ -2,8 +2,8 @@
     Copyright (C) 2007 by Jan Eric Kyprianidis <www.kyprianidis.com>
     All rights reserved.
 */
-#ifndef CGMATH_INCLUDED_NOISE_HPP
-#define CGMATH_INCLUDED_NOISE_HPP
+#ifndef CGMATH_INCLUDED_NOISE_H
+#define CGMATH_INCLUDED_NOISE_H
 
 namespace cgmath {
 

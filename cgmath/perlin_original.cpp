@@ -4,7 +4,7 @@
     (copyright Ken Perlin)
 */
 
-#include <cgmath/perlin.hpp>
+#include <cgmath/perlin.h>
 #include <cmath>
 #include <stdlib.h>
 

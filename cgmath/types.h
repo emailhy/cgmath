@@ -15,12 +15,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_TYPES_HPP
-#define CGMATH_INCLUDED_TYPES_HPP
-
-#ifdef _MSC_VER
-#pragma once
-#endif
+#ifndef CGMATH_INCLUDED_TYPES_H
+#define CGMATH_INCLUDED_TYPES_H
 
 #ifndef _MSC_VER
 #include <stdint.h>

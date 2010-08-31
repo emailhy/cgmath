@@ -15,8 +15,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_SOLVE_EIGEN_HPP
-#define CGMATH_INCLUDED_SOLVE_EIGEN_HPP
+#ifndef CGMATH_INCLUDED_SOLVE_EIGEN_H
+#define CGMATH_INCLUDED_SOLVE_EIGEN_H
 
 namespace cgmath {
 

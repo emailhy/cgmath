@@ -15,8 +15,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_VEC3_HPP
-#define CGMATH_INCLUDED_VEC3_HPP
+#ifndef CGMATH_INCLUDED_VEC3_H
+#define CGMATH_INCLUDED_VEC3_H
 
 namespace cgmath {
 
@@ -115,24 +115,36 @@ namespace cgmath {
         T z;
     };
 
-    /// \related vec3
     template <typename T> vec3<T> operator*(const vec3<T> v, T k) {
         return vec3<T>(v.x * k, v.y * k, v.z * k);
     }
 
-    /// \related vec3
     template <typename T> vec3<T> operator*(T k, const vec3<T>& v) {
         return vec3<T>(v.x * k, v.y * k, v.z * k);
     }
 
-    /// \related vec3
+    template <typename T> T dot(const vec3<T>& v1, const vec3<T>& v2) {
+        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    }
+
     template <typename T> T length(const vec3<T>& v) {
         return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
     }
 
-    /// \related vec3
+    template <typename T> T distance(const vec3<T>& a, const vec3<T>& b) {
+        return length(a - b);
+    }
+
     template <typename T> vec3<T> normalize(const vec3<T>& v) {
         return v / length(v);
+    }
+
+    template<typename T> std::ostream& operator<<(std::ostream& os, const vec3<T>& v) {
+        return (os << v.x << " " << v.y << " " << v.z);
+    }
+
+    template<typename T> std::istream& operator>>(std::istream& is, vec3<T>& v) {
+        return is >> v.x >> v.y >> v.z;
     }
 
 } 

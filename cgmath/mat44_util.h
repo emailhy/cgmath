@@ -15,167 +15,17 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_MAT44_UTIL_HPP
-#define CGMATH_INCLUDED_MAT44_UTIL_HPP
-
-#include <cgmath/mat44.hpp>
-#include <cgmath/det.hpp>
-#include <cgmath/quat.hpp>
-#include <iostream>
+#ifndef CGMATH_INCLUDED_MAT44_UTIL_H
+#define CGMATH_INCLUDED_MAT44_UTIL_H
 
 namespace cgmath {
 
-    template <typename T> std::ostream& operator<<(std::ostream& os, const mat44<T>& m) {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                os << m[i][j];
-                if  ((i < 4) && (j < 4)) os << " ";
-            }
-        }
-        return os;
-    }
-
-    template <typename T> std::istream& operator>>(std::istream& is, mat44<T>& m) {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                is >> m[i][j];
-            }
-        }
-        return is;
-    }
-    
-    #if 0
-        bool is_valid() const;
-        bool is_affine() const;
-        bool is_almost_zero(double epsilon=EPSILON) const;
-        bool is_almost_identity(double epsilon=EPSILON) const;
-        
-        double det() const;
-        double norm2() const;
-        double norm() const;
-
-        mat44& zero() {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[i][j] = 0;
-            return *this;
-        }
-
-        mat44& identity() {
-            for (int i = 0; i < 4; ++i) 
-                for (int j = 0; j < 4; ++j) m[i][j] = (i == j)? 1 : 0;
-            return *this;
-        }
-
-        mat44& transpose() {
-            for (int i = 1; i < 4; ++i)
-                for (int j = 0; j < i; ++j) std::swap(m[i][j], m[j][i]);
-            return *this;
-        }
-
-        mat44& adjoint();
-
-        bool invert_gauss_jordan();
-        bool invert_direct();
-        bool invert_affine();
-
-        mat44& scale(double sx, double sy, double sz);
-        
-        mat44& scale(const vec<3,double>& s) {
-            return this->scale(s.x, s.y, s.z);
-        }
-
-        mat44& rotate( double angle, double ax, double ay, double az ) {
-            return this->rotate(angle, vec<3,double>(ax, ay, az));
-        }
-
-        mat44& rotate( double angle, const vec<3,double>& axis ) {
-            this->operator*=(mat44(angle, axis));
-            return *this;
-        }
-
-        mat44& rotate( const quat<double>& q ) {
-            this->operator*=(mat44(q));
-            return *this;
-        }
-
-        mat44& translate( double tx, double ty, double tz );
-
-        mat44& translate( const vec<3,double>& t ) {
-            return this->translate(t.x, t.y, t.z);
-        }
-
-        mat44& ortho_project( double left, double right, double bottom, double top, double z_near, double z_far );
-        mat44& persp_project( double fov, double aspect_ratio, double z_near, double z_far );
-        mat44& frustum( double left, double right, double bottom, double top, double z_near, double z_far );
-        mat44& viewport( double x, double y, double width, double height );
-
-        template <typename T> vec<3,T> transform( const vec<3,T>& v ) {
-            T x = static_cast<T>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z);
-            T y = static_cast<T>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z);
-            T z = static_cast<T>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z);
-            T w = static_cast<T>(m[3][0] * v.x + m[3][1] * v.y + m[3][2] * v.z);
-            return vec<3,T>(x / w, y / w, z / w);
-        }
-
-        // TODO
-        //static mat44 look_at( const vec<3,double>& pos, const vec<3,double>& tgt, const vec<3,double>& up );
-
-
-	/*
-    bool mat44::is_valid() const {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                if (!cgmath::is_valid(m[i][j])) return false;
-            }
-        }
-        return true;
-    }
-	*/
-
-    bool mat44::is_affine() const {
-        return ((m[3][0] == 0.0) && (m[3][1] == 0.0) && (m[3][2] == 0.0) && (m[3][0] == 1.0));
-    }
-
-
-    bool mat44::is_almost_zero( double epsilon ) const {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                if (!almost_equal(m[i][j], 0.0, epsilon)) return false;
-            }
-        }
-        return true;
-    }
-
-
-    bool mat44::is_almost_identity( double epsilon ) const {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                if (!almost_equal(m[i][j], ((i == j)? 1.0 : 0.0), epsilon)) return false;
-            }
-        }
-        return true;
-    }
-
-
+#if 0
     double mat44::det() const {
         return (m[0][0] * det3x3(m[1][1], m[1][2], m[1][3],  m[2][1], m[2][2], m[2][3],  m[3][1], m[3][2], m[3][3])
               - m[0][1] * det3x3(m[1][0], m[1][2], m[1][3],  m[2][0], m[2][2], m[2][3],  m[3][0], m[3][2], m[3][3])
               + m[0][2] * det3x3(m[1][0], m[1][1], m[1][3],  m[2][0], m[2][1], m[2][3],  m[3][0], m[3][1], m[3][3])
               - m[0][3] * det3x3(m[1][0], m[1][1], m[1][2],  m[2][0], m[2][1], m[2][2],  m[3][0], m[3][1], m[3][2]));
-    }
-
-
-    double mat44::norm2() const
-    {
-        double n2 = 0;
-        for (int i = 0; i < 4; ++i) 
-            for (int j = 0; j < 4; ++j) n2 += m[i][j] * m[i][j];
-        return n2;
-    }
-
-    double mat44::norm() const
-    {
-        return sqrt(norm2());
     }
 
 
@@ -362,25 +212,6 @@ namespace cgmath {
             return true;
         }
     }
-
-
-    mat44& mat44::scale(double sx, double sy, double sz) {
-        for (int i = 0; i < 4; ++i) {
-            m[i][0] *= sx;
-            m[i][1] *= sy;
-            m[i][2] *= sz;
-        }
-        return *this;
-    }
-
-
-    mat44& mat44::translate(double tx, double ty, double tz) {
-        for (int i = 0; i < 3; ++i) {
-            m[i][3] += tx * m[i][0] + ty * m[i][1] + tz * m[i][2];
-        }
-        return *this;
-    }
-
 
     mat44& mat44::ortho_project( double left, double right, double bottom, double top, double z_near, double z_far ) {
         mat44 M;

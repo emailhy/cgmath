@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <cgmath/solve_eigen.hpp>
+#include <cgmath/solve_eigen.h>
 #include <cmath>
 
 namespace cgmath {
