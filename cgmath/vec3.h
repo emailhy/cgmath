@@ -141,6 +141,14 @@ namespace cgmath {
         return v / length(v);
     }
 
+    template <typename T> vec3<T> cross(const vec3<T>& v1, const vec3<T>& v2) {
+        return vec3<T>( 
+            v1.y * v2.z - v1.z * v2.y, 
+            v1.z * v2.x - v1.x * v2.z,
+            v1.x * v2.y - v1.y * v2.x
+        );
+    }
+
     template <typename T> vec3<T> clamp(const vec3<T>& v, T a, T b) {
         return vec3<T>( clamp(v.x, a, b), clamp(v.y, a, b), clamp(v.z, a, b) );
     }
