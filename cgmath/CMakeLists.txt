@@ -7,6 +7,7 @@ ADD_LIBRARY(cgmath STATIC
 	vec4.h
 	float_util.h
 	quat.h
+	mat22.h
 	mat33.h
 	mat44.h
 	mat44_util.h
