@@ -1,3 +1,4 @@
+SET(Boost_ADDITIONAL_VERSIONS "1.42")
 FIND_PACKAGE(Boost)
 
 INCLUDE_DIRECTORIES( 
@@ -13,7 +14,6 @@ ADD_EXECUTABLE(test
     test_vec3.cpp
     test_vec4.cpp
     test_mat33.cpp
-    test_quat.cpp
     test_solve_eqn.cpp
     test_solve_eigen.cpp)
 

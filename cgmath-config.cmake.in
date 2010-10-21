@@ -1,0 +1,26 @@
+# ===================================================================================
+#  The cgmath CMake configuration file
+#
+#  Usage from an external project: 
+#    In your CMakeLists.txt, add these lines:
+#
+#    FIND_PACKAGE(cgmath REQUIRED )
+#    INCLUDE_DIRECTORIES(${cgmath_INCLUDE_DIR}) 
+#    TARGET_LINK_LIBRARIES(MY_TARGET_NAME ${cgmath_LIBRARIES})   
+#
+#    This file will define the following variables:
+#      - cgmath_VERSION       : The version of this cgmath build. Example: "1.2.0"
+#      - cgmath_VERSION_MAJOR : Major version part of cgmath_VERSION. Example: "1"
+#      - cgmath_VERSION_MINOR : Minor version part of cgmath_VERSION. Example: "2"
+#      - cgmath_VERSION_PATCH : Patch version part of cgmath_VERSION. Example: "0"
+#      - cgmath_INCLUDEDIR    : The cgmath include directory.
+#      - cgmath_LIBRARIES     : The list of libraries to links against.
+#
+# ===================================================================================
+
+SET(cgmath_VERSION       "@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@.@CPACK_PACKAGE_VERSION_PATCH@" )
+SET(cgmath_VERSION_MAJOR  @CPACK_PACKAGE_VERSION_MAJOR@ )
+SET(cgmath_VERSION_MINOR  @CPACK_PACKAGE_VERSION_MINOR@ )
+SET(cgmath_VERSION_PATCH  @CPACK_PACKAGE_VERSION_PATCH@ )
+SET(cgmath_INCLUDE_DIR    @cgmath_INCLUDE_DIR@ )
+SET(cgmath_LIBRARIES	  @cgmath_LIBRARIES@ )
