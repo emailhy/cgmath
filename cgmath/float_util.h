@@ -66,12 +66,12 @@ namespace cgmath {
         return abs(a - b) <= epsilon;
     }
 
-	template<typename T> inline T smoothstep(T a, T b, T x) {
-		T t = (x - a) / (b - a);
-		if (t < 0) t = 0;
-		if (t > 1) t = 1;
-		return t * t * (3 - 2 * t);
-	}
+    template<typename T> inline T smoothstep(T a, T b, T x) {
+        T t = (x - a) / (b - a);
+        if (t < 0) t = 0;
+        if (t > 1) t = 1;
+        return t * t * (3 - 2 * t);
+    }
 }
 
 #endif

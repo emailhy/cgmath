@@ -36,11 +36,11 @@ namespace cgmath {
 
         template <typename U> vec4(const vec4<U>& src)
             : x(static_cast<T>(src.x)), y(static_cast<T>(src.y)), 
-			  z(static_cast<T>(src.z)), w(static_cast<T>(src.w)) { }
+              z(static_cast<T>(src.z)), w(static_cast<T>(src.w)) { }
 
         template <typename U> explicit vec4(const U *src) 
             : x(static_cast<T>(src[0])), y(static_cast<T>(src[1])), 
-			  z(static_cast<T>(src[2])), w(static_cast<T>(src[3])) { }
+              z(static_cast<T>(src[2])), w(static_cast<T>(src[3])) { }
 
         T& operator[](int index) {
             return (&x)[index];
@@ -54,7 +54,7 @@ namespace cgmath {
             dst[0] = static_cast<U>(x);
             dst[1] = static_cast<U>(y);
             dst[2] = static_cast<U>(z);
-			dst[3] = static_cast<U>(w);
+            dst[3] = static_cast<U>(w);
         }
 
         bool operator==(const vec4& v) const {
@@ -69,7 +69,7 @@ namespace cgmath {
             x += v.x; 
             y += v.y; 
             z += v.z;
-			w += v.w;
+            w += v.w;
             return *this;
         }
 
@@ -81,7 +81,7 @@ namespace cgmath {
             x -= v.x; 
             y -= v.y; 
             z -= v.z;
-			w -= v.w;
+            w -= v.w;
             return *this;
         }
 
@@ -97,7 +97,7 @@ namespace cgmath {
             x *= k; 
             y *= k; 
             z *= k;
-			w *= k;
+            w *= k;
             return *this;
         }
 
@@ -105,7 +105,7 @@ namespace cgmath {
             x *= v.x; 
             y *= v.y; 
             z *= v.z; 
-			w *= v.w; 
+            w *= v.w; 
             return *this;
         }
 
@@ -120,7 +120,7 @@ namespace cgmath {
         T x;              
         T y;            
         T z;
-		T w;
+        T w;
     };
 
     /// \related vec4

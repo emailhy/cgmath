@@ -29,17 +29,17 @@ namespace cgmath {
 
         mat33() {}
 
-		mat33(T s) {
-			m[0][0] = m[1][1] = m[2][2] = s;
-			m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
-		}
+        mat33(T s) {
+            m[0][0] = m[1][1] = m[2][2] = s;
+            m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
+        }
 
-		mat33(T sx, T sy, T sz) {
-			m[0][0] = sx;
-			m[1][1] = sy;
-			m[2][2] = sz;
-			m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
-		}
+        mat33(T sx, T sy, T sz) {
+            m[0][0] = sx;
+            m[1][1] = sy;
+            m[2][2] = sz;
+            m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
+        }
 
         template <typename U> mat33(
             U a00, U a01, U a02, 
@@ -60,27 +60,27 @@ namespace cgmath {
             m[2][0] = a.z; m[2][1] = b.z; m[2][2] = c.z;
         }
 
- 		explicit mat33( T angle, const vec3<T>& axis ) {
-			T len = length(axis);
-			if (len > 0) {
-				vec3<T> u = normalize(axis);
-				T rangle = radians(angle);
-				T c = cos(rangle);
-				T s = sin(rangle);
+        explicit mat33( T angle, const vec3<T>& axis ) {
+            T len = length(axis);
+            if (len > 0) {
+                vec3<T> u = normalize(axis);
+                T rangle = radians(angle);
+                T c = cos(rangle);
+                T s = sin(rangle);
 
-				m[0][0] = c + (1 - c) * u.x * u.x;
-				m[0][1] = (1 - c) * u.x * u.y - s * u.z;    
-				m[0][2] = (1 - c) * u.x * u.z + s * u.y;
-				m[1][0] = (1 - c) * u.y * u.x + s * u.z;
-				m[1][1] = c + (1 - c) * u.y * u.y;    
-				m[1][2] = (1 - c) * u.y * u.z - s * u.x;
-				m[2][0] = (1 - c) * u.z * u.x - s * u.y;
-				m[2][1] = (1 - c) * u.z * u.y + s * u.x;
-				m[2][2] = c + (1 - c) * u.z * u.z;
-			} else  {
-				identity();
-			}
- 		}
+                m[0][0] = c + (1 - c) * u.x * u.x;
+                m[0][1] = (1 - c) * u.x * u.y - s * u.z;    
+                m[0][2] = (1 - c) * u.x * u.z + s * u.y;
+                m[1][0] = (1 - c) * u.y * u.x + s * u.z;
+                m[1][1] = c + (1 - c) * u.y * u.y;    
+                m[1][2] = (1 - c) * u.y * u.z - s * u.x;
+                m[2][0] = (1 - c) * u.z * u.x - s * u.y;
+                m[2][1] = (1 - c) * u.z * u.y + s * u.x;
+                m[2][2] = c + (1 - c) * u.z * u.z;
+            } else  {
+                identity();
+            }
+        }
 
         explicit mat33( const mat33& A, const mat33& B ) {
             for (int i = 0; i < 3; ++i) {
@@ -200,30 +200,30 @@ namespace cgmath {
             return *this;
         }
 
-		mat33& identity() {
-			m[0][0] = m[1][1] = m[2][2] = 1;
-			m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
+        mat33& identity() {
+            m[0][0] = m[1][1] = m[2][2] = 1;
+            m[0][1] = m[0][2] = m[1][0] = m[1][2] = m[2][0] = m[2][1] = 0;
             return *this;
-		}
+        }
 
-		mat33& scale(T sx, T sy, T sz) {
+        mat33& scale(T sx, T sy, T sz) {
             for (int i = 0; i < 3; ++i) {
                 m[i][0] *= sx;
                 m[i][1] *= sy;
                 m[i][2] *= sz;
             }
             return *this;
-		}
+        }
 
-		mat33& rotate(T angle, T vx, T vy, T vz) {
+        mat33& rotate(T angle, T vx, T vy, T vz) {
             *this *= mat33(angle, vec3<T>(vx, vy, vz));
             return *this;
-		}
+        }
 
-		mat33& rotate(T angle, const vec3<T>& axis) {
+        mat33& rotate(T angle, const vec3<T>& axis) {
             *this *= mat33(angle, axis);
             return *this;
-		}
+        }
 
         template <typename U> vec3<U> transform( const vec3<U>& v ) const {
             return vec3<U>(

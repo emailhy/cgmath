@@ -32,21 +32,21 @@ template <typename T> void test_vec4() {
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
-		BOOST_REQUIRE_EQUAL( a.w, 4 );
+        BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
         vec4<T> a(src_f);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
-		BOOST_REQUIRE_EQUAL( a.w, 4 );
+        BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
         vec4<T> a(src_d);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
-		BOOST_REQUIRE_EQUAL( a.w, 4 );
+        BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
         vec4<float> v(1, 2, 3, 4);
@@ -54,7 +54,7 @@ template <typename T> void test_vec4() {
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
-		BOOST_REQUIRE_EQUAL( a.w, 4 );
+        BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
         vec4<double> v(1, 2, 3, 4);
@@ -62,7 +62,7 @@ template <typename T> void test_vec4() {
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
-		BOOST_REQUIRE_EQUAL( a.w, 4 );
+        BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
 
     // operators
@@ -79,94 +79,94 @@ template <typename T> void test_vec4() {
         BOOST_CHECK_EQUAL( a[0], 1 );
         BOOST_CHECK_EQUAL( a[1], 2 );
         BOOST_CHECK_EQUAL( a[2], 3 );
-		BOOST_CHECK_EQUAL( a[3], 4 );
+        BOOST_CHECK_EQUAL( a[3], 4 );
 
         BOOST_CHECK_EQUAL( b[0], 5 );
         BOOST_CHECK_EQUAL( b[1], 6 );
         BOOST_CHECK_EQUAL( b[2], 7 );
-		BOOST_CHECK_EQUAL( b[3], 8 );
+        BOOST_CHECK_EQUAL( b[3], 8 );
 
         b.get(f);
         BOOST_CHECK_EQUAL( f[0], 5 );
         BOOST_CHECK_EQUAL( f[1], 6 );
         BOOST_CHECK_EQUAL( f[2], 7 );
-		BOOST_CHECK_EQUAL( f[3], 8 );
+        BOOST_CHECK_EQUAL( f[3], 8 );
 
         b.get(d);
         BOOST_CHECK_EQUAL( d[0], 5 );
         BOOST_CHECK_EQUAL( d[1], 6 );
         BOOST_CHECK_EQUAL( d[2], 7 );
-		BOOST_CHECK_EQUAL( d[3], 8 );
+        BOOST_CHECK_EQUAL( d[3], 8 );
 
         vec4<T> c(7, 8, 9, 10);
         c = a;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 2 );
         BOOST_CHECK_EQUAL( c.z, 3 );
-		BOOST_CHECK_EQUAL( c.w, 4 );
+        BOOST_CHECK_EQUAL( c.w, 4 );
 
         c += a;
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
         BOOST_CHECK_EQUAL( c.z, 6 );
-		BOOST_CHECK_EQUAL( c.w, 8 );
+        BOOST_CHECK_EQUAL( c.w, 8 );
 
         c = a + b;
         BOOST_CHECK_EQUAL( c.x, 6 );
         BOOST_CHECK_EQUAL( c.y, 8 );
         BOOST_CHECK_EQUAL( c.z, 10 );
-		BOOST_CHECK_EQUAL( c.w, 12 );
+        BOOST_CHECK_EQUAL( c.w, 12 );
 
         c = b;
         c -= e;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 3 );
         BOOST_CHECK_EQUAL( c.z, 5 );
-		BOOST_CHECK_EQUAL( c.w, 7 );
+        BOOST_CHECK_EQUAL( c.w, 7 );
 
         c = b - e;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 3 );
         BOOST_CHECK_EQUAL( c.z, 5 );
-		BOOST_CHECK_EQUAL( c.w, 7 );
+        BOOST_CHECK_EQUAL( c.w, 7 );
 
         c = -a;
         BOOST_CHECK_EQUAL( c.x, -1 );
         BOOST_CHECK_EQUAL( c.y, -2 );
         BOOST_CHECK_EQUAL( c.z, -3 );
-		BOOST_CHECK_EQUAL( c.w, -4 );
+        BOOST_CHECK_EQUAL( c.w, -4 );
 
         c = a;
         c *= 2;
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
         BOOST_CHECK_EQUAL( c.z, 6 );
-		BOOST_CHECK_EQUAL( c.w, 8 );
+        BOOST_CHECK_EQUAL( c.w, 8 );
 
         c = static_cast<T>(2) * a;
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
         BOOST_CHECK_EQUAL( c.z, 6 );
-		BOOST_CHECK_EQUAL( c.w, 8 );
+        BOOST_CHECK_EQUAL( c.w, 8 );
 
         c = a * static_cast<T>(2);
         BOOST_CHECK_EQUAL( c.x, 2 );
         BOOST_CHECK_EQUAL( c.y, 4 );
         BOOST_CHECK_EQUAL( c.z, 6 );
-		BOOST_CHECK_EQUAL( c.w, 8 );
+        BOOST_CHECK_EQUAL( c.w, 8 );
 
         c = a;
         c /= 2;
         BOOST_CHECK_EQUAL( c.x, 0.5 );
         BOOST_CHECK_EQUAL( c.y, 1 );
         BOOST_CHECK_EQUAL( c.z, 1.5 );
-		BOOST_CHECK_EQUAL( c.w, 2 );
+        BOOST_CHECK_EQUAL( c.w, 2 );
 
         c = a / 2;
         BOOST_CHECK_EQUAL( c.x, 0.5 );
         BOOST_CHECK_EQUAL( c.y, 1 );
         BOOST_CHECK_EQUAL( c.z, 1.5 );
-		BOOST_CHECK_EQUAL( c.w, 2 );
+        BOOST_CHECK_EQUAL( c.w, 2 );
     }
 }
 

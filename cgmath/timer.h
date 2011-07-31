@@ -24,13 +24,13 @@ namespace cgmath {
 
     /// Timer utility class
     class timer {
-	public:
-		timer();
+    public:
+        timer();
         void reset();
-		double get_elapsed_time(bool reset = false);
+        double get_elapsed_time(bool reset = false);
 
-	private:
-		uint64_t m_current;
+    private:
+        uint64_t m_current;
     };
 
 } 

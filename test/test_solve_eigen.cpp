@@ -24,62 +24,62 @@ using namespace cgmath;
 
 
 BOOST_AUTO_TEST_CASE( test_solve_eigen_symm_2x2 ) {
-	double l1, l2;
-	double e1[2], e2[2];
-	solve_eigen_symm_2x2(
-		9.0 / 4.0, sqrt(3.0) / 4.0, 11.0 / 4.0,
-		&l1,
-		e1,
-		&l2,
-		e2
-	);
-	BOOST_CHECK_EQUAL(l1, 2);
-	BOOST_CHECK_EQUAL(l2, 3);
-	BOOST_CHECK_CLOSE(e1[0], -0.8660254037, 1e-8);
-	BOOST_CHECK_EQUAL(e1[1], 0.5);
-	BOOST_CHECK_EQUAL(e2[0], 0.5);
-	BOOST_CHECK_CLOSE(e2[1], 0.8660254037, 1e-8);
+    double l1, l2;
+    double e1[2], e2[2];
+    solve_eigen_symm_2x2(
+        9.0 / 4.0, sqrt(3.0) / 4.0, 11.0 / 4.0,
+        &l1,
+        e1,
+        &l2,
+        e2
+    );
+    BOOST_CHECK_EQUAL(l1, 2);
+    BOOST_CHECK_EQUAL(l2, 3);
+    BOOST_CHECK_CLOSE(e1[0], -0.8660254037, 1e-8);
+    BOOST_CHECK_EQUAL(e1[1], 0.5);
+    BOOST_CHECK_EQUAL(e2[0], 0.5);
+    BOOST_CHECK_CLOSE(e2[1], 0.8660254037, 1e-8);
 
-	solve_eigen_symm_2x2(
-		11.0 / 4.0, -sqrt(3.0) / 4.0, 9.0 / 4.0,
-		&l1,
-		e1,
-		&l2,
-		e2
-	);
-	BOOST_CHECK_EQUAL(l1, 2);
-	BOOST_CHECK_EQUAL(l2, 3);
-	BOOST_CHECK_EQUAL(e1[0], -0.5);
-	BOOST_CHECK_CLOSE(e1[1], -0.8660254037, 1e-8);
-	BOOST_CHECK_CLOSE(e2[0], 0.8660254037, 1e-8);
-	BOOST_CHECK_EQUAL(e2[1], -0.5);
+    solve_eigen_symm_2x2(
+        11.0 / 4.0, -sqrt(3.0) / 4.0, 9.0 / 4.0,
+        &l1,
+        e1,
+        &l2,
+        e2
+    );
+    BOOST_CHECK_EQUAL(l1, 2);
+    BOOST_CHECK_EQUAL(l2, 3);
+    BOOST_CHECK_EQUAL(e1[0], -0.5);
+    BOOST_CHECK_CLOSE(e1[1], -0.8660254037, 1e-8);
+    BOOST_CHECK_CLOSE(e2[0], 0.8660254037, 1e-8);
+    BOOST_CHECK_EQUAL(e2[1], -0.5);
 
 
-	solve_eigen_symm_2x2(
-		2, 1e-8, 3,
-		&l1,
-		e1,
-		&l2,
-		e2
-	);
-	BOOST_CHECK_EQUAL(l1, 2);
-	BOOST_CHECK_EQUAL(l2, 3);
-	BOOST_CHECK_EQUAL(e1[0], 1);
-	BOOST_CHECK_EQUAL(e1[1], 0);
-	BOOST_CHECK_EQUAL(e2[0], 0);
-	BOOST_CHECK_EQUAL(e2[1], 1);
+    solve_eigen_symm_2x2(
+        2, 1e-8, 3,
+        &l1,
+        e1,
+        &l2,
+        e2
+    );
+    BOOST_CHECK_EQUAL(l1, 2);
+    BOOST_CHECK_EQUAL(l2, 3);
+    BOOST_CHECK_EQUAL(e1[0], 1);
+    BOOST_CHECK_EQUAL(e1[1], 0);
+    BOOST_CHECK_EQUAL(e2[0], 0);
+    BOOST_CHECK_EQUAL(e2[1], 1);
 
-	solve_eigen_symm_2x2(
-		3, 1e-8, 2,
-		&l1,
-		e1,
-		&l2,
-		e2
-		);
-	BOOST_CHECK_EQUAL(l1, 2);
-	BOOST_CHECK_EQUAL(l2, 3);
-	BOOST_CHECK_EQUAL(e1[0], 0);
-	BOOST_CHECK_EQUAL(e1[1], 1);
-	BOOST_CHECK_EQUAL(e2[0], 1);
-	BOOST_CHECK_EQUAL(e2[1], 0);
+    solve_eigen_symm_2x2(
+        3, 1e-8, 2,
+        &l1,
+        e1,
+        &l2,
+        e2
+        );
+    BOOST_CHECK_EQUAL(l1, 2);
+    BOOST_CHECK_EQUAL(l2, 3);
+    BOOST_CHECK_EQUAL(e1[0], 0);
+    BOOST_CHECK_EQUAL(e1[1], 1);
+    BOOST_CHECK_EQUAL(e2[0], 1);
+    BOOST_CHECK_EQUAL(e2[1], 0);
 }

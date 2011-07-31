@@ -28,7 +28,7 @@ namespace cgmath {
 
 
     timer::timer() {
-		if (s_init) {
+        if (s_init) {
             s_init = false;
             LARGE_INTEGER li;
             QueryPerformanceFrequency(&li);

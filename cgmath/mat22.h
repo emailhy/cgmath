@@ -29,16 +29,16 @@ namespace cgmath {
 
         mat22() {}
 
-		mat22(T s) {
-			m[0][0] = m[1][1] = s;
-			m[0][1] = = m[1][0] = 0;
-		}
+        mat22(T s) {
+            m[0][0] = m[1][1] = s;
+            m[0][1] = = m[1][0] = 0;
+        }
 
-		mat22(T sx, T sy) {
-			m[0][0] = sx;
-			m[1][1] = sy;
-			m[0][1] = m[1][0] = 0;
-		}
+        mat22(T sx, T sy) {
+            m[0][0] = sx;
+            m[1][1] = sy;
+            m[0][1] = m[1][0] = 0;
+        }
 
         template <typename U> mat22(
             U a00, U a01, 
@@ -158,23 +158,23 @@ namespace cgmath {
             return *this;
         }
 
-		mat22& identity() {
-			m[0][0] = m[1][1] = 1;
-			m[0][1] = m[1][0] = 0;
+        mat22& identity() {
+            m[0][0] = m[1][1] = 1;
+            m[0][1] = m[1][0] = 0;
             return *this;
-		}
+        }
 
-		mat22& scale(T sx, T sy) {
+        mat22& scale(T sx, T sy) {
             for (int i = 0; i < 2; ++i) {
                 m[i][0] *= sx;
                 m[i][1] *= sy;
             }
             return *this;
-		}
+        }
 
-		//mat22& rotate(T angle) {
+        //mat22& rotate(T angle) {
         //    return *this;
-		//}
+        //}
 
         template <typename U> vec2<U> transform( const vec2<U>& v ) const {
             return vec3<U>(

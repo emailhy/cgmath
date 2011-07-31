@@ -34,21 +34,21 @@ template <typename T> void test_range() {
         BOOST_REQUIRE_EQUAL( r.get_max(), 2 );
     }
 
-	{
-		range<T> r12(1,2);
-		range<T> r36(3,6);
-		range<T> r14(1,4);
-		range<T> r17(1,7);
-		range<T> r45(4,5);
-		range<T> r57(5,7);
-		range<T> r78(7,8);
-		BOOST_REQUIRE_EQUAL( intersect(r12, r36), range<T>() );
-		BOOST_REQUIRE_EQUAL( intersect(r14, r36), range<T>(3,4) );
-		BOOST_REQUIRE_EQUAL( intersect(r17, r36), range<T>(3,6) );
-		BOOST_REQUIRE_EQUAL( intersect(r45, r36), range<T>(4,5) );
-		BOOST_REQUIRE_EQUAL( intersect(r57, r36), range<T>(5,6) );
-		BOOST_REQUIRE_EQUAL( intersect(r78, r36), range<T>() );
-	}
+    {
+        range<T> r12(1,2);
+        range<T> r36(3,6);
+        range<T> r14(1,4);
+        range<T> r17(1,7);
+        range<T> r45(4,5);
+        range<T> r57(5,7);
+        range<T> r78(7,8);
+        BOOST_REQUIRE_EQUAL( intersect(r12, r36), range<T>() );
+        BOOST_REQUIRE_EQUAL( intersect(r14, r36), range<T>(3,4) );
+        BOOST_REQUIRE_EQUAL( intersect(r17, r36), range<T>(3,6) );
+        BOOST_REQUIRE_EQUAL( intersect(r45, r36), range<T>(4,5) );
+        BOOST_REQUIRE_EQUAL( intersect(r57, r36), range<T>(5,6) );
+        BOOST_REQUIRE_EQUAL( intersect(r78, r36), range<T>() );
+    }
 }
 
 
