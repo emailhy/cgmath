@@ -133,6 +133,7 @@ namespace cgmath {
         return v / length(v);
     }
 
+    /*
     template<typename T> std::ostream& operator<<(std::ostream& os, const vec2<T>& v) {
         return (os << v.x << " " << v.y);
     }
@@ -140,6 +141,7 @@ namespace cgmath {
     template<typename T> std::istream& operator>>(std::istream& is, vec2<T>& v) {
         return is >> v.x >> v.y;
     }
+    */
 } 
 
 #endif

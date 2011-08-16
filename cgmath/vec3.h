@@ -153,6 +153,7 @@ namespace cgmath {
         return vec3<T>( clamp(v.x, a, b), clamp(v.y, a, b), clamp(v.z, a, b) );
     }
 
+    /*
     template<typename T> std::ostream& operator<<(std::ostream& os, const vec3<T>& v) {
         return (os << v.x << " " << v.y << " " << v.z);
     }
@@ -160,6 +161,7 @@ namespace cgmath {
     template<typename T> std::istream& operator>>(std::istream& is, vec3<T>& v) {
         return is >> v.x >> v.y >> v.z;
     }
+    */
 
 } 
 

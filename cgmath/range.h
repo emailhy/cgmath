@@ -128,6 +128,7 @@ namespace cgmath {
         return (a < b)? range<T>(a, b) : range<T>();
     }
 
+    /*
     template<typename T> std::ostream& operator<<(std::ostream& os, const range<T>& r) {
         return (os << r.get_min() << " " << r.get_max());
     }
@@ -141,7 +142,7 @@ namespace cgmath {
             r.clear();
         return is;
     }
-
+    */
 } 
 
 #endif

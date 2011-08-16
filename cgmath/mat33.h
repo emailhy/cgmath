@@ -322,6 +322,7 @@ namespace cgmath {
         return true;
     }
 
+    /*
     template <typename T> std::ostream& operator<<( std::ostream& os, const mat33<T>& m ) {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
@@ -340,6 +341,7 @@ namespace cgmath {
         }
         return is;
     }
+    */
 } 
 
 #endif

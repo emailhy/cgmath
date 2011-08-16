@@ -145,8 +145,10 @@ namespace cgmath {
         range<double> z;
     };
 
+    /*
     std::ostream& operator<<( std::ostream& os, const box3& b );
     std::istream& operator>>( std::istream& is, box3& b );
+    */
 } 
 #endif
 #endif

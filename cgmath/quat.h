@@ -245,6 +245,7 @@ namespace cgmath {
         return quat<T>(0, 0, 0, 1);
     }
 
+    /*
     template <typename T> std::ostream& operator<<(std::ostream& os, const quat<T>& q) {
         return (os << q.x << " " << q.y << " " << q.z << " " << q.w);
     }
@@ -252,6 +253,7 @@ namespace cgmath {
     template <typename T> std::istream& operator>>(std::istream& is, quat<T>& q) {
         return is >> q.x >> q.y >> q.z >> q.w;
     }
+    */
 } 
 
 #endif
