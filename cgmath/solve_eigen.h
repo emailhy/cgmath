@@ -15,8 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_SOLVE_EIGEN_H
-#define CGMATH_INCLUDED_SOLVE_EIGEN_H
+#pragma once
 
 namespace cgmath {
 
@@ -24,5 +23,3 @@ namespace cgmath {
                                 double* lambda1, double *e1, 
                                 double* lambda2, double *e2 );
 }
-
-#endif

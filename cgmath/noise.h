@@ -2,8 +2,7 @@
     Copyright (C) 2007 by Jan Eric Kyprianidis <www.kyprianidis.com>
     All rights reserved.
 */
-#ifndef CGMATH_INCLUDED_NOISE_H
-#define CGMATH_INCLUDED_NOISE_H
+#pragma once
 
 namespace cgmath {
 
@@ -18,6 +17,4 @@ namespace cgmath {
     float pnoise( float x, float y, float z, float w, int px, int py, int pz, int pw );
 
 }
-
-#endif
 

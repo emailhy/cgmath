@@ -15,21 +15,20 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_MAT44_H
-#define CGMATH_INCLUDED_MAT44_H
+#pragma once
 
 #include <cgmath/vec3.h>
 
 namespace cgmath {
 
     /// 4 x 4 matrix class (T=float|double)
-    template <typename T> class mat44 {
+    template <typename T> class Mat44 {
     public:
         typedef T value_type;
 
-        mat44() {}
+        Mat44() {}
 
-        mat44( T a00, T a01, T a02, T a03, 
+        Mat44( T a00, T a01, T a02, T a03, 
                T a10, T a11, T a12, T a13,
                T a20, T a21, T a22, T a23,
                T a30, T a31, T a32, T a33) {
@@ -39,12 +38,12 @@ namespace cgmath {
                m[3][0] = a30; m[3][1] = a31; m[3][2] = a32; m[3][3] = a33;
         }
 
-        template<typename U> mat44( const mat44<U>& src ) {
+        template<typename U> Mat44( const Mat44<U>& src ) {
             for (int i = 0; i < 4; ++i) 
                 for (int j = 0; j < 4; ++j) m[i][j] = static_cast<T>(src.m[i*4+j]);
         }
 
-        template<typename U> mat44( const U *src, bool row_major=true ) {
+        template<typename U> Mat44( const U *src, bool row_major=true ) {
             if (row_major) {
                 for (int i = 0; i < 4; ++i) 
                     for (int j = 0; j < 4; ++j) m[i][j] = static_cast<T>(src[i*4+j]);
@@ -54,7 +53,7 @@ namespace cgmath {
             }
         }
 
-        mat44( const mat44& A, const mat44& B ) {
+        Mat44( const Mat44& A, const Mat44& B ) {
             for (int i = 0; i < 4; ++i) {
                 m[i][0] =  A.m[i][0] * B.m[0][0] + A.m[i][1] * B.m[1][0] + A.m[i][2] * B.m[2][0] + A.m[i][3] * B.m[3][0];
                 m[i][1] =  A.m[i][0] * B.m[0][1] + A.m[i][1] * B.m[1][1] + A.m[i][2] * B.m[2][1] + A.m[i][3] * B.m[3][1];
@@ -63,13 +62,13 @@ namespace cgmath {
             }
         }
 
-        bool operator==( const mat44& rhs ) const {
+        bool operator==( const Mat44& rhs ) const {
             for (int i = 0; i < 4; ++i) 
                 for (int j = 0; j < 4; ++j) if (m[i][j] != rhs.m[i][j]) return false;
             return true;
         }
 
-        bool operator!=( const mat44& rhs ) const {
+        bool operator!=( const Mat44& rhs ) const {
             return !this->operator==(rhs);
         }
 
@@ -101,27 +100,27 @@ namespace cgmath {
             }
         }
 
-        mat44 operator*( const mat44& rhs ) const {
-            return mat44(*this, rhs);
+        Mat44 operator*( const Mat44& rhs ) const {
+            return Mat44(*this, rhs);
         }
 
-        const mat44& operator*=(const mat44& rhs) {
-            return (*this = mat44(*this, rhs));
+        const Mat44& operator*=(const Mat44& rhs) {
+            return (*this = Mat44(*this, rhs));
         }
 
-        mat44& zero() {
+        Mat44& zero() {
             for (int i = 0; i < 4; ++i) 
                 for (int j = 0; j < 4; ++j) m[i][j] = 0;
             return *this;
         }
 
-        mat44& identity() {
+        Mat44& identity() {
             for (int i = 0; i < 4; ++i) 
                 for (int j = 0; j < 4; ++j) m[i][j] = (i == j)? 1 : 0;
             return *this;
         }
 
-        mat44& mat44::scale(T sx, T sy, T sz) {
+        Mat44& Mat44::scale(T sx, T sy, T sz) {
             for (int i = 0; i < 4; ++i) {
                 m[i][0] *= sx;
                 m[i][1] *= sy;
@@ -130,19 +129,19 @@ namespace cgmath {
             return *this;
         }
 
-        mat44& mat44::translate(T tx, T ty, T tz) {
+        Mat44& Mat44::translate(T tx, T ty, T tz) {
             for (int i = 0; i < 3; ++i) {
                 m[i][3] += tx * m[i][0] + ty * m[i][1] + tz * m[i][2];
             }
             return *this;
         }
 
-        template <typename U> vec3<U> transform( const vec3<U>& v ) {
+        template <typename U> Vec3<U> transform( const Vec3<U>& v ) {
             U x = static_cast<U>(m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z);
             U y = static_cast<U>(m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z);
             U z = static_cast<U>(m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z);
             U w = static_cast<U>(m[3][0] * v.x + m[3][1] * v.y + m[3][2] * v.z);
-            return vec3<U>(x / w, y / w, z / w);
+            return Vec3<U>(x / w, y / w, z / w);
         }
 
     private:
@@ -150,19 +149,19 @@ namespace cgmath {
     };
 
 
-    template <typename T> T mat44::norm2() const {
+    template <typename T> T Mat44::norm2() const {
         T n2 = 0;
         for (int i = 0; i < 4; ++i) 
             for (int j = 0; j < 4; ++j) n2 += m[i][j] * m[i][j];
         return n2;
     }
 
-    template <typename T> T mat44::norm() const {
+    template <typename T> T Mat44::norm() const {
         return sqrt(norm2());
     }
 
-    template <typename T> mat44<T> transpose( const mat44<T>& m ) {
-        return mat44<T>( m[0][0], m[1][0], m[2][0], m[3][0],
+    template <typename T> Mat44<T> transpose( const Mat44<T>& m ) {
+        return Mat44<T>( m[0][0], m[1][0], m[2][0], m[3][0],
                          m[0][1], m[1][1], m[2][1], m[3][1],
                          m[0][2], m[1][2], m[2][2], m[3][2],
                          m[0][3], m[1][3], m[2][3], m[3][3] );
@@ -189,5 +188,3 @@ namespace cgmath {
     }
     */
 } 
-
-#endif

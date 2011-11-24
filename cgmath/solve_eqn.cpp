@@ -18,50 +18,49 @@
 #include <cgmath/solve_eqn.h>
 #include <cmath>
 
-namespace cgmath {
 
-    /*
-    Calculates the real roots of a quadratic equation: ax^2 + bx + c = 0.
-    
-    James F. Blinn, "How to solve a Quadratic Equation", 
-    IEEE Computer Graphics and Applications, 
-    vol. 25,  no. 6,  pp. 76-79,  Nov/Dec,  2005 
-    */
-    bool solve_eqn_quadratic ( double a, double b, double c, 
-                               double *x1, double *x2 ) {
-        if (a != 0) {
-            double B = b / 2;
-            double d = B*B - a*c;
+//
+// Calculates the real roots of a quadratic equation: ax^2 + bx + c = 0.
+// 
+// James F. Blinn, "How to solve a Quadratic Equation", 
+// IEEE Computer Graphics and Applications, 
+// vol. 25,  no. 6,  pp. 76-79, 2005. 
+//
+bool cgmath::solve_eqn_quadratic ( double a, double b, double c, 
+                                   double *x1, double *x2 ) 
+{
+    if (a != 0) {
+        double B = b / 2;
+        double d = B*B - a*c;
 
-            if (d < 0) 
-                return false;   
+        if (d < 0) 
+            return false;   
 
-            if (B > 0) {
-                double q = B + sqrt(d);
-                *x1 = -c / q;
-                *x2 = -q / a;
-            } else if (B < 0) {
-                double q = -B + sqrt(d);
-                *x1 = q / a;
-                *x2 = c / q;
-            } else {
-                *x1 = sqrt(d) / a;
-                *x2 = -*x1;
-            }
-
-        } else if (b != 0) {
-            *x1 = *x2 = -c / b;
+        if (B > 0) {
+            double q = B + sqrt(d);
+            *x1 = -c / q;
+            *x2 = -q / a;
+        } else if (B < 0) {
+            double q = -B + sqrt(d);
+            *x1 = q / a;
+            *x2 = c / q;
         } else {
-            return false;
+            *x1 = sqrt(d) / a;
+            *x2 = -*x1;
         }
 
-        return true;
+    } else if (b != 0) {
+        *x1 = *x2 = -c / b;
+    } else {
+        return false;
     }
 
-    //TODO
-    /*
-    bool solve_eqn_cubic( double a, double b, double c, double d, double *x1, double *x2, double *x3 ) {
-    }
-    */
-
+    return true;
 }
+
+
+//TODO
+/*
+bool solve_eqn_cubic( double a, double b, double c, double d, double *x1, double *x2, double *x3 ) {
+}
+*/

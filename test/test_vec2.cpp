@@ -28,38 +28,38 @@ template <typename T> void test_vec2() {
 
     // constructors
     {
-        vec2<T> a(1, 2);
+        Vec2<T> a(1, 2);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
     }
     {
-        vec2<T> a(src_f);
+        Vec2<T> a(src_f);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
     }
     {
-        vec2<T> a(src_d);
+        Vec2<T> a(src_d);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
     }
     {
-        vec2<float> v(1, 2);
-        vec2<T> a(v);
+        Vec2<float> v(1, 2);
+        Vec2<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
     }
     {
-        vec2<double> v(1, 2);
-        vec2<T> a(v);
+        Vec2<double> v(1, 2);
+        Vec2<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
     }
 
     // operators
     {
-        vec2<T> a(1, 2);
-        const vec2<T> b(4, 5);
-        const vec2<T> e(3, 2);
+        Vec2<T> a(1, 2);
+        const Vec2<T> b(4, 5);
+        const Vec2<T> e(3, 2);
         float f[2];
         double d[2];
 
@@ -80,7 +80,7 @@ template <typename T> void test_vec2() {
         BOOST_CHECK_EQUAL( d[0], 4 );
         BOOST_CHECK_EQUAL( d[1], 5 );
 
-        vec2<T> c(7, 8);
+        Vec2<T> c(7, 8);
         c = a;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 2 );
@@ -131,14 +131,14 @@ template <typename T> void test_vec2() {
 
     // length
     {
-        const vec2<T> a(2, 5);
+        const Vec2<T> a(2, 5);
         BOOST_CHECK_EQUAL( length(a), sqrt(static_cast<T>(29)) );
     }
 
     // normalize
     {
-        const vec2<T> a(2, 5);
-        vec2<T> b;
+        const Vec2<T> a(2, 5);
+        Vec2<T> b;
         T s = 1 / sqrt(static_cast<T>(29));
 
         b = normalize(a);

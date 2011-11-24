@@ -28,37 +28,37 @@ template <typename T> void test_vec4() {
 
     // constructors
     {
-        vec4<T> a(1, 2, 3, 4);
+        Vec4<T> a(1, 2, 3, 4);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
         BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
-        vec4<T> a(src_f);
+        Vec4<T> a(src_f);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
         BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
-        vec4<T> a(src_d);
+        Vec4<T> a(src_d);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
         BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
-        vec4<float> v(1, 2, 3, 4);
-        vec4<T> a(v);
+        Vec4<float> v(1, 2, 3, 4);
+        Vec4<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
         BOOST_REQUIRE_EQUAL( a.w, 4 );
     }
     {
-        vec4<double> v(1, 2, 3, 4);
-        vec4<T> a(v);
+        Vec4<double> v(1, 2, 3, 4);
+        Vec4<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
@@ -67,9 +67,9 @@ template <typename T> void test_vec4() {
 
     // operators
     {
-        vec4<T> a(1, 2, 3, 4);
-        const vec4<T> b(5, 6, 7, 8);
-        const vec4<T> e(4, 3, 2, 1);
+        Vec4<T> a(1, 2, 3, 4);
+        const Vec4<T> b(5, 6, 7, 8);
+        const Vec4<T> e(4, 3, 2, 1);
         float f[4];
         double d[4];
 
@@ -98,7 +98,7 @@ template <typename T> void test_vec4() {
         BOOST_CHECK_EQUAL( d[2], 7 );
         BOOST_CHECK_EQUAL( d[3], 8 );
 
-        vec4<T> c(7, 8, 9, 10);
+        Vec4<T> c(7, 8, 9, 10);
         c = a;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 2 );

@@ -15,30 +15,29 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_VEC4_H
-#define CGMATH_INCLUDED_VEC4_H
+#pragma once
 
 namespace cgmath {
 
     /// 4-dimensional vector template (T = float|double)
-    template <typename T> class vec4 {
+    template <typename T> class Vec4 {
     public:
         enum { dim = 4 };
         typedef T value_type;
 
-        vec4() { }
+        Vec4() { }
 
-        vec4(T vx) 
+        Vec4(T vx) 
             : x(vx), y(vx), z(vx), w(vx) { }
 
-        vec4(T vx, T vy, T vz, T vw) 
+        Vec4(T vx, T vy, T vz, T vw) 
             : x(vx), y(vy), z(vz), w(vw) { }
 
-        template <typename U> vec4(const vec4<U>& src)
+        template <typename U> Vec4(const Vec4<U>& src)
             : x(static_cast<T>(src.x)), y(static_cast<T>(src.y)), 
               z(static_cast<T>(src.z)), w(static_cast<T>(src.w)) { }
 
-        template <typename U> explicit vec4(const U *src) 
+        template <typename U> explicit Vec4(const U *src) 
             : x(static_cast<T>(src[0])), y(static_cast<T>(src[1])), 
               z(static_cast<T>(src[2])), w(static_cast<T>(src[3])) { }
 
@@ -57,15 +56,15 @@ namespace cgmath {
             dst[3] = static_cast<U>(w);
         }
 
-        bool operator==(const vec4& v) const {
+        bool operator==(const Vec4& v) const {
             return (x == v.x) && (y == v.y) && (z == v.z) && (w == v.w);
         }
 
-        bool operator!=(const vec4& v) const {
+        bool operator!=(const Vec4& v) const {
             return !this->operator==(v);
         }
 
-        const vec4& operator+=(const vec4& v) {
+        const Vec4& operator+=(const Vec4& v) {
             x += v.x; 
             y += v.y; 
             z += v.z;
@@ -73,11 +72,11 @@ namespace cgmath {
             return *this;
         }
 
-        vec4 operator+(const vec4& v) const {
-            return vec4(x + v.x, y + v.y, z + v.z, w + v.w);
+        Vec4 operator+(const Vec4& v) const {
+            return Vec4(x + v.x, y + v.y, z + v.z, w + v.w);
         }
 
-        const vec4& operator-=(const vec4& v) {
+        const Vec4& operator-=(const Vec4& v) {
             x -= v.x; 
             y -= v.y; 
             z -= v.z;
@@ -85,15 +84,15 @@ namespace cgmath {
             return *this;
         }
 
-        vec4 operator-(const vec4& v) const {
-            return vec4(x - v.x, y - v.y, z - v.z, w - v.w);
+        Vec4 operator-(const Vec4& v) const {
+            return Vec4(x - v.x, y - v.y, z - v.z, w - v.w);
         }
 
-        vec4 operator-() const {
-            return vec4(-x, -y, -z, -w);
+        Vec4 operator-() const {
+            return Vec4(-x, -y, -z, -w);
         }
 
-        const vec4 operator*=(T k) {
+        const Vec4 operator*=(T k) {
             x *= k; 
             y *= k; 
             z *= k;
@@ -101,7 +100,7 @@ namespace cgmath {
             return *this;
         }
 
-        const vec4& operator*=(const vec4& v) {
+        const Vec4& operator*=(const Vec4& v) {
             x *= v.x; 
             y *= v.y; 
             z *= v.z; 
@@ -109,11 +108,11 @@ namespace cgmath {
             return *this;
         }
 
-        const vec4 operator/=(T d) {
+        const Vec4 operator/=(T d) {
             return this->operator*=(1 / d);
         }
 
-        vec4 operator/(T d) const {
+        Vec4 operator/(T d) const {
             return operator*(*this, 1 / d);
         }
 
@@ -124,25 +123,27 @@ namespace cgmath {
     };
 
     /// \related vec4
-    template <typename T> vec4<T> operator*(const vec4<T> v, T k) {
-        return vec4<T>(v.x * k, v.y * k, v.z * k, v.w * k);
+    template <typename T> Vec4<T> operator*(const Vec4<T> v, T k) {
+        return Vec4<T>(v.x * k, v.y * k, v.z * k, v.w * k);
     }
 
     /// \related vec4
-    template <typename T> vec4<T> operator*(T k, const vec4<T>& v) {
-        return vec4<T>(v.x * k, v.y * k, v.z * k, v.w * k);
+    template <typename T> Vec4<T> operator*(T k, const Vec4<T>& v) {
+        return Vec4<T>(v.x * k, v.y * k, v.z * k, v.w * k);
     }
 
     /// \related vec4
-    template <typename T> T length(const vec4<T>& v) {
+    template <typename T> T length(const Vec4<T>& v) {
         return sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
     }
 
     /// \related vec4
-    template <typename T> vec4<T> normalize(const vec4<T>& v) {
+    template <typename T> Vec4<T> normalize(const Vec4<T>& v) {
         return v / length(v);
     }
 
+    typedef Vec4<float> Vec4f;
+    typedef Vec4<float> Point4f;
+    typedef Vec4<double> Vec4d;
+    typedef Vec4<double> Point4d;
 } 
-
-#endif

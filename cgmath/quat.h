@@ -15,8 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_QUAT_H
-#define CGMATH_INCLUDED_QUAT_H
+#pragma once
 
 #include <cgmath/vec3.h>
 #include <cgmath/mat33.h>
@@ -24,17 +23,17 @@
 namespace cgmath {
 
     /// Quaternion template (T = float|double)
-    template <typename T> class quat {
+    template <typename T> class Quat {
     public:
         typedef T value_type;
 
-        quat(void) 
+        Quat(void) 
             : x(0), y(0), z(0), w(1) { }
 
-        quat(T qx, T qy, T qz, T qw) 
+        Quat(T qx, T qy, T qz, T qw) 
             : x(qx), y(qy), z(qz), w(qw) { }
        
-        explicit quat(T angle, const vec3<T>& axis ) {
+        explicit Quat(T angle, const Vec3<T>& axis ) {
             T len = length(axis);
             T omega = 0.5 * radians(angle);
             T s = sin(omega) / len;
@@ -44,7 +43,7 @@ namespace cgmath {
             w = cos(omega);
         }
 
-        explicit quat( const mat33<T> m ) {
+        explicit Quat( const Mat33<T> m ) {
             double tr,s;
             int i, j, k;
             static int NEXT[3] = { 1,2,0 };
@@ -71,21 +70,21 @@ namespace cgmath {
             }
         }
 
-        template <typename U> explicit quat(const U *src) 
+        template <typename U> explicit Quat(const U *src) 
             : x(src[0]), y(src[1]), z(src[2]), w(src[3]) { }
 
-        quat(const quat& p, const quat& q) {
+        Quat(const Quat& p, const Quat& q) {
             x = p.w * q.x + p.x * q.w + p.y * q.z - p.z * q.y;
             y = p.w * q.y + p.y * q.w + p.z * q.x - p.x * q.z;
             z = p.w * q.z + p.z * q.w + p.x * q.y - p.y * q.x;
             w = p.w * q.w - p.x * q.x - p.y * q.y - p.z * q.z;
         }
 
-        bool operator==(const quat& q) const {
+        bool operator==(const Quat& q) const {
             return (x == q.x) && (y == q.y) && (z == q.z) && (w == q.w);
         }
 
-        bool operator!=(const quat& q) const {
+        bool operator!=(const Quat& q) const {
             return !this->operator==(q);
         }
 
@@ -104,7 +103,7 @@ namespace cgmath {
             dst[3] = static_cast<U>(w);
         }
 
-        const quat& operator+=(const quat& q) {
+        const Quat& operator+=(const Quat& q) {
             x += q.x; 
             y += q.y; 
             z += q.z;
@@ -112,11 +111,11 @@ namespace cgmath {
             return *this;
         }
 
-        quat operator+(const quat& q) const {
-            return quat(x + q.x, y + q.y, z + q.z, w + q.w);
+        Quat operator+(const Quat& q) const {
+            return Quat(x + q.x, y + q.y, z + q.z, w + q.w);
         }
 
-        const quat& operator-=(const quat& q) {
+        const Quat& operator-=(const Quat& q) {
             x -= q.x; 
             y -= q.y; 
             z -= q.z;
@@ -124,23 +123,23 @@ namespace cgmath {
             return *this;
         }
 
-        quat operator-(const quat& q) const {
-            return quat(x - q.x, y - q.y, z - q.z, w - q.w);
+        Quat operator-(const Quat& q) const {
+            return Quat(x - q.x, y - q.y, z - q.z, w - q.w);
         }
 
-        quat operator-() const {
-            return quat(-x, -y, -z, -w);
+        Quat operator-() const {
+            return Quat(-x, -y, -z, -w);
         }
 
-        const quat& operator*=(const quat& q) {
-            return (*this = quat(*this, q));
+        const Quat& operator*=(const Quat& q) {
+            return (*this = Quat(*this, q));
         }
 
-        quat operator*(const quat& q) {
-            return quat(*this, q);
+        Quat operator*(const Quat& q) {
+            return Quat(*this, q);
         }
 
-        const quat& operator*=(T k) {
+        const Quat& operator*=(T k) {
             x *= k; 
             y *= k; 
             z *= k;
@@ -148,11 +147,11 @@ namespace cgmath {
             return *this;
         }
 
-        const quat& operator/=(T d) {
+        const Quat& operator/=(T d) {
             return this->operator*=(static_cast<T>(1) / d);
         }
 
-        quat operator/(T d) const {
+        Quat operator/(T d) const {
             return this->operator*(static_cast<T>(1) / d);
         }
 
@@ -160,29 +159,29 @@ namespace cgmath {
             return w;
         }
 
-        vec3<T> v() const {
-            return vec3<T>(x, y, z);
+        Vec3<T> v() const {
+            return Vec3<T>(x, y, z);
         }
 
         T angle() const {
             return to_deg(2.0 * atan2(sqrt(x * x + y * y + z * z), w));
         }
 
-        vec3<T> axis() const { //FIXME
-            vec3<T> axis(x, y, z);
+        Vec3<T> axis() const { //FIXME
+            Vec3<T> axis(x, y, z);
             return normalize(axis);
         }
 
-        mat33 matrix() const {
+        Mat33 matrix() const {
             T l = x * x + y * y + z * z + w * w;
-            if (l == 0) return mat33(1)
+            if (l == 0) return Mat33(1)
             T s = static_cast<T>(2) / l;
             T xs, ys, zs, wx, wy, wz, xx, xy, xz, yy, yz, zz;
             xs = q.x * s;   ys = q.y * s;  zs = q.z * s;
             wx = q.w * xs;  wy = q.w * ys; wz = q.w * zs;
             xx = q.x * xs;  xy = q.x * ys; xz = q.x * zs;
             yy = q.y * ys;  yz = q.y * zs; zz = q.z * zs;
-            return mat33(
+            return Mat33(
                 1.0 - (yy + zz),     xy - wz,         xz + wy,
                     xy + wz,     1.0 - (xx + zz),     yz - wx,
                     xz - wy,         yz + wx,     1.0 - (xx + yy) );
@@ -194,55 +193,55 @@ namespace cgmath {
         T w;
     };
 
-    template <typename T> quat<T> operator*(T k, const quat<T>& q) {
-        return quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
+    template <typename T> Quat<T> operator*(T k, const Quat<T>& q) {
+        return Quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
     }
 
-    template <typename T> quat<T> operator*(const quat<T>& q, T k) {
-        return quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
+    template <typename T> Quat<T> operator*(const Quat<T>& q, T k) {
+        return Quat<T>(q.x * k, q.y * k, q.z * k, q.w * k);
     }
 
-    template <typename T> T dot(const quat<T>& p, const quat<T>& q) {
+    template <typename T> T dot(const Quat<T>& p, const Quat<T>& q) {
         return (p.x * q.x + p.y * q.y + p.z * q.z + p.w * q.w);
     }
 
-    template <typename T> T length(const quat<T>& q) {
+    template <typename T> T length(const Quat<T>& q) {
         return sqrt(q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
     }
 
-    template <typename T> quat<T> normalize(const quat<T>& q) {
+    template <typename T> Quat<T> normalize(const Quat<T>& q) {
         return q.operator/(q.length());
     }
 
-    template <typename T> quat<T> conjugate(const quat<T>& q) {
-        return quat<T>(-q.x, -q.y, -q.z, q.w);
+    template <typename T> Quat<T> conjugate(const Quat<T>& q) {
+        return Quat<T>(-q.x, -q.y, -q.z, q.w);
     }
 
-    template <typename T> quat<T> inverse(const quat<T>& q) {
+    template <typename T> Quat<T> inverse(const Quat<T>& q) {
         double l2 = q.length2();
         if (l2 > 0) {
             double s = 1 / l2;
-            return quat<T>(-q.x * s, -q.y * s, -q.z * s, q.w * s);
+            return Quat<T>(-q.x * s, -q.y * s, -q.z * s, q.w * s);
         }
-        return quat<T>();
+        return Quat<T>();
     }
 
-    template <typename T> quat<T> log(const quat<T>& q) {
+    template <typename T> Quat<T> log(const Quat<T>& q) {
         double lv = sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
         if (lv > 0) {
             double s = atan2(lv, q.w) / lv;
-            return quat<T>(0, q.x * s, q.y * s, q.z * s);
+            return Quat<T>(0, q.x * s, q.y * s, q.z * s);
         }
-        return quat<T>(0, 0, 0, 0);
+        return Quat<T>(0, 0, 0, 0);
     }
 
-    template <typename T> quat<T> exp(const quat<T>& q) {
+    template <typename T> Quat<T> exp(const Quat<T>& q) {
         double omega = sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
         if (omega > 0) {
             double s = sin(omega) / omega;
-            return quat<T>(q.x * s, q.y * s, q.z * s, cos(omega));
+            return Quat<T>(q.x * s, q.y * s, q.z * s, cos(omega));
         }
-        return quat<T>(0, 0, 0, 1);
+        return Quat<T>(0, 0, 0, 1);
     }
 
     /*
@@ -255,5 +254,3 @@ namespace cgmath {
     }
     */
 } 
-
-#endif

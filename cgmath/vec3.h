@@ -15,31 +15,28 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_VEC3_H
-#define CGMATH_INCLUDED_VEC3_H
-
-#include <cgmath/float_util.h>
+#pragma once
 
 namespace cgmath {
 
     /// 3-dimensional vector template (T = float|double)
-    template <typename T> class vec3 {
+    template <typename T> class Vec3 {
     public:
         enum { dim = 3 };
         typedef T value_type;
 
-        vec3() { }
+        Vec3() { }
 
-        vec3(T vx) 
+        Vec3(T vx) 
             : x(vx), y(vx), z(vx) { }
 
-        vec3(T vx, T vy, T vz) 
+        Vec3(T vx, T vy, T vz) 
             : x(vx), y(vy), z(vz) { }
 
-        template <typename U> vec3(const vec3<U>& src)
+        template <typename U> Vec3(const Vec3<U>& src)
             : x(static_cast<T>(src.x)), y(static_cast<T>(src.y)), z(static_cast<T>(src.z)) { }
 
-        template <typename U> explicit vec3(const U *src) 
+        template <typename U> explicit Vec3(const U *src) 
             : x(static_cast<T>(src[0])), y(static_cast<T>(src[1])), z(static_cast<T>(src[2])) { }
 
         T& operator[](int index) {
@@ -56,59 +53,59 @@ namespace cgmath {
             dst[2] = static_cast<U>(z);
         }
 
-        bool operator==(const vec3& v) const {
+        bool operator==(const Vec3& v) const {
             return (x == v.x) && (y == v.y) && (z == v.z);
         }
 
-        bool operator!=(const vec3& v) const {
+        bool operator!=(const Vec3& v) const {
             return !this->operator==(v);
         }
 
-        const vec3& operator+=(const vec3& v) {
+        const Vec3& operator+=(const Vec3& v) {
             x += v.x; 
             y += v.y; 
             z += v.z;
             return *this;
         }
 
-        vec3 operator+(const vec3& v) const {
-            return vec3(x + v.x, y + v.y, z + v.z);
+        Vec3 operator+(const Vec3& v) const {
+            return Vec3(x + v.x, y + v.y, z + v.z);
         }
 
-        const vec3& operator-=(const vec3& v) {
+        const Vec3& operator-=(const Vec3& v) {
             x -= v.x; 
             y -= v.y; 
             z -= v.z;
             return *this;
         }
 
-        vec3 operator-(const vec3& v) const {
-            return vec3(x - v.x, y - v.y, z - v.z);
+        Vec3 operator-(const Vec3& v) const {
+            return Vec3(x - v.x, y - v.y, z - v.z);
         }
 
-        vec3 operator-() const {
-            return vec3(-x, -y, -z);
+        Vec3 operator-() const {
+            return Vec3(-x, -y, -z);
         }
 
-        const vec3 operator*=(T k) {
+        const Vec3 operator*=(T k) {
             x *= k; 
             y *= k; 
             z *= k;
             return *this;
         }
 
-        const vec3& operator*=(const vec3& v) {
+        const Vec3& operator*=(const Vec3& v) {
             x *= v.x; 
             y *= v.y; 
             z *= v.z; 
             return *this;
         }
 
-        const vec3 operator/=(T d) {
+        const Vec3 operator/=(T d) {
             return this->operator*=(1 / d);
         }
 
-        vec3 operator/(T d) const {
+        Vec3 operator/(T d) const {
             return operator*(*this, 1 / d);
         }
 
@@ -117,40 +114,40 @@ namespace cgmath {
         T z;
     };
 
-    template <typename T> vec3<T> operator*(const vec3<T> v, T k) {
-        return vec3<T>(v.x * k, v.y * k, v.z * k);
+    template <typename T> Vec3<T> operator*(const Vec3<T> v, T k) {
+        return Vec3<T>(v.x * k, v.y * k, v.z * k);
     }
 
-    template <typename T> vec3<T> operator*(T k, const vec3<T>& v) {
-        return vec3<T>(v.x * k, v.y * k, v.z * k);
+    template <typename T> Vec3<T> operator*(T k, const Vec3<T>& v) {
+        return Vec3<T>(v.x * k, v.y * k, v.z * k);
     }
 
-    template <typename T> T dot(const vec3<T>& v1, const vec3<T>& v2) {
+    template <typename T> T dot(const Vec3<T>& v1, const Vec3<T>& v2) {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
 
-    template <typename T> T length(const vec3<T>& v) {
+    template <typename T> T length(const Vec3<T>& v) {
         return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
     }
 
-    template <typename T> T distance(const vec3<T>& a, const vec3<T>& b) {
+    template <typename T> T distance(const Vec3<T>& a, const Vec3<T>& b) {
         return length(a - b);
     }
 
-    template <typename T> vec3<T> normalize(const vec3<T>& v) {
+    template <typename T> Vec3<T> normalize(const Vec3<T>& v) {
         return v / length(v);
     }
 
-    template <typename T> vec3<T> cross(const vec3<T>& v1, const vec3<T>& v2) {
-        return vec3<T>( 
+    template <typename T> Vec3<T> cross(const Vec3<T>& v1, const Vec3<T>& v2) {
+        return Vec3<T>( 
             v1.y * v2.z - v1.z * v2.y, 
             v1.z * v2.x - v1.x * v2.z,
             v1.x * v2.y - v1.y * v2.x
         );
     }
 
-    template <typename T> vec3<T> clamp(const vec3<T>& v, T a, T b) {
-        return vec3<T>( clamp(v.x, a, b), clamp(v.y, a, b), clamp(v.z, a, b) );
+    template <typename T> Vec3<T> clamp(const Vec3<T>& v, T a, T b) {
+        return Vec3<T>( clamp(v.x, a, b), clamp(v.y, a, b), clamp(v.z, a, b) );
     }
 
     /*
@@ -163,6 +160,8 @@ namespace cgmath {
     }
     */
 
+    typedef Vec3<float> Vec3f;
+    typedef Vec3<float> Point3f;
+    typedef Vec3<double> Vec3d;
+    typedef Vec3<double> Point3d;
 } 
-
-#endif

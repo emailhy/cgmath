@@ -28,33 +28,33 @@ template <typename T> void test_vec3() {
 
     // constructors
     {
-        vec3<T> a(1, 2, 3);
+        Vec3<T> a(1, 2, 3);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<T> a(src_f);
+        Vec3<T> a(src_f);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<T> a(src_d);
+        Vec3<T> a(src_d);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<float> v(1, 2, 3);
-        vec3<T> a(v);
+        Vec3<float> v(1, 2, 3);
+        Vec3<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
     }
     {
-        vec3<double> v(1, 2, 3);
-        vec3<T> a(v);
+        Vec3<double> v(1, 2, 3);
+        Vec3<T> a(v);
         BOOST_REQUIRE_EQUAL( a.x, 1 );
         BOOST_REQUIRE_EQUAL( a.y, 2 );
         BOOST_REQUIRE_EQUAL( a.z, 3 );
@@ -62,9 +62,9 @@ template <typename T> void test_vec3() {
 
     // operators
     {
-        vec3<T> a(1, 2, 3);
-        const vec3<T> b(4, 5, 6);
-        const vec3<T> e(3, 2, 1);
+        Vec3<T> a(1, 2, 3);
+        const Vec3<T> b(4, 5, 6);
+        const Vec3<T> e(3, 2, 1);
         float f[3];
         double d[3];
 
@@ -89,7 +89,7 @@ template <typename T> void test_vec3() {
         BOOST_CHECK_EQUAL( d[1], 5 );
         BOOST_CHECK_EQUAL( d[2], 6 );
 
-        vec3<T> c(7, 8, 9);
+        Vec3<T> c(7, 8, 9);
         c = a;
         BOOST_CHECK_EQUAL( c.x, 1 );
         BOOST_CHECK_EQUAL( c.y, 2 );
@@ -151,14 +151,14 @@ template <typename T> void test_vec3() {
 
     // length
     {
-        const vec3<T> a(2, 3, 5);
+        const Vec3<T> a(2, 3, 5);
         BOOST_CHECK_EQUAL( length(a), sqrt(static_cast<T>(38)) );
     }
 
     // normalize
     {
-        const vec3<T> a(2, 3, 5);
-        vec3<T> b;
+        const Vec3<T> a(2, 3, 5);
+        Vec3<T> b;
         T s = 1 / sqrt(static_cast<T>(38));
 
         b = normalize(a);

@@ -15,8 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_TYPES_H
-#define CGMATH_INCLUDED_TYPES_H
+#pragma once
 
 #ifndef _MSC_VER
 #include <stdint.h>
@@ -54,5 +53,3 @@ namespace cgmath {
     static const float EPSILON  = 1e-5f;
 
 }
-
-#endif

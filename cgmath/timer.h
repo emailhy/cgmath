@@ -15,8 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CGMATH_INCLUDED_TIMER_H
-#define CGMATH_INCLUDED_TIMER_H
+#pragma once
 
 #include <cgmath/types.h>
 
@@ -34,6 +33,4 @@ namespace cgmath {
     };
 
 } 
-
-#endif
 
