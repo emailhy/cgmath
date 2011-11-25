@@ -169,7 +169,7 @@ namespace cgmath {
 	        Vec2<T> r0 = s*q0 + t*q1;
 	        Vec2<T> r1 = s*q1 + t*q2;
 	        Vec2<T> s0 = s*r0 + t*r1;
-            return BezierCurve2(s0, r1, q20, p[3]);
+            return BezierCurve2(s0, r1, q2, p[3]);
         }
 
         void divide( BezierCurve2 *c1, BezierCurve2 *c2, T t ) const {
