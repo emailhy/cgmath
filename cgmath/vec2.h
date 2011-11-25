@@ -27,56 +27,56 @@ namespace cgmath {
 
         Vec2() { }
 
-        Vec2(T vx) 
+        Vec2( T vx ) 
             : x(vx), y(vx){ }
 
-        Vec2(T vx, T vy) 
+        Vec2( T vx, T vy ) 
             : x(vx), y(vy){ }
 
-        template <typename U> Vec2(const Vec2<U>& src)
+        template <typename U> Vec2( const Vec2<U>& src )
             : x(static_cast<T>(src.x)), y(static_cast<T>(src.y)) { }
 
-        template <typename U> explicit Vec2(const U *src) 
+        template <typename U> explicit Vec2( const U *src ) 
             : x(static_cast<T>(src[0])), y(static_cast<T>(src[1])) { }
 
-        T& operator[](int index) {
+        T& operator[]( int index ) {
             return (&x)[index];
         }
 
-        const T& operator[](int index) const {
+        const T& operator[]( int index ) const {
             return (&x)[index];
         }
 
-        template <typename U> void get(U *dst) const {
+        template <typename U> void get( U *dst ) const {
             dst[0] = static_cast<U>(x);
             dst[1] = static_cast<U>(y);
         }
 
-        bool operator==(const Vec2& v) const {
+        bool operator==( const Vec2& v ) const {
             return (x == v.x) && (y == v.y);
         }
 
-        bool operator!=(const Vec2& v) const {
+        bool operator!=( const Vec2& v ) const {
             return !this->operator==(v);
         }
 
-        const Vec2& operator+=(const Vec2& v) {
+        const Vec2& operator+=( const Vec2& v ) {
             x += v.x; 
             y += v.y; 
             return *this;
         }
 
-        Vec2 operator+(const Vec2& v) const {
+        Vec2 operator+( const Vec2& v ) const {
             return Vec2(x + v.x, y + v.y);
         }
 
-        const Vec2& operator-=(const Vec2& v) {
+        const Vec2& operator-=( const Vec2& v ) {
             x -= v.x; 
             y -= v.y; 
             return *this;
         }
 
-        Vec2 operator-(const Vec2& v) const {
+        Vec2 operator-( const Vec2& v ) const {
             return Vec2(x - v.x, y - v.y);
         }
 
@@ -84,33 +84,49 @@ namespace cgmath {
             return Vec2(-x, -y);
         }
 
-        const Vec2& operator*=(T k) {
+        const Vec2& operator*=( T k ) {
             x *= k; 
             y *= k; 
             return *this;
         }
 
-        const Vec2& operator*=(const Vec2& v) {
+        Vec2<T> operator*( T k ) const {
+            return Vec2<T>( x * k, y * k );
+        }
+
+        const Vec2& operator*=( const Vec2& v ) {
             x *= v.x; 
             y *= v.y; 
             return *this;
         }
 
-        const Vec2& operator/=(T d) {
-            return this->operator*=(1 / d);
+        Vec2 operator*( const Vec2& v ) const {
+            return Vec2( x * v.x, y * v.y );
         }
 
-        Vec2 operator/(T d) const {
-            return operator*(*this, 1 / d);
+        const Vec2& operator/=( T k ) {
+            x /= k; 
+            y /= k; 
+            return *this;
+        }
+
+        Vec2<T> operator/( T k ) const {
+            return Vec2<T>( x / k, y / k );
+        }
+
+        const Vec2& operator/=( const Vec2& v ) {
+            x /= v.x; 
+            y /= v.y; 
+            return *this;
+        }
+
+        Vec2 operator/( const Vec2& v ) const {
+            return Vec2( x / v.x, y / v.y );
         }
 
         T x;              
         T y;            
     };
-
-    template <typename T> Vec2<T> operator*(const Vec2<T> v, T k) {
-        return Vec2<T>(v.x * k, v.y * k);
-    }
 
     template <typename T> Vec2<T> operator*(T k, const Vec2<T>& v) {
         return Vec2<T>(v.x * k, v.y * k);
@@ -129,7 +145,7 @@ namespace cgmath {
     }
 
     template <typename T> Vec2<T> normalize(const Vec2<T>& v) {
-        return v / length(v);
+        return v / length<T>(v);
     }
 
     /*
