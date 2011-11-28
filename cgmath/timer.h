@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007-2008 by Jan Eric Kyprianidis <www.kyprianidis.com>
+    Copyright (C) 2007-2011 by Jan Eric Kyprianidis <www.kyprianidis.com>
     All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
@@ -29,8 +29,7 @@ namespace cgmath {
         double get_elapsed_time(bool reset = false);
 
     private:
-        uint64_t m_current;
+        double m_current;
     };
 
 } 
-

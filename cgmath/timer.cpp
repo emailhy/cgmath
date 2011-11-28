@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007-2008 by Jan Eric Kyprianidis <www.kyprianidis.com>
+    Copyright (C) 2007-2011 by Jan Eric Kyprianidis <www.kyprianidis.com>
     All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
@@ -24,8 +24,7 @@
 namespace cgmath {
 
     static bool s_init = true;
-    static uint64_t s_freq = 0;
-
+    static LONGLONG s_freq = 0;
 
     timer::timer() {
         if (s_init) {
@@ -37,25 +36,50 @@ namespace cgmath {
         reset();
     }
 
-
     void timer::reset() {
         LARGE_INTEGER li;
         QueryPerformanceCounter(&li);
-        m_current = li.QuadPart;
+        m_current = (1000.0 * li.QuadPart) / s_freq;
     }
-
 
     double timer::get_elapsed_time( bool reset ) {
         LARGE_INTEGER li;
         QueryPerformanceCounter(&li);
-        double dt = (double)(li.QuadPart - m_current) / s_freq;
+        double x = (1000.0 * li.QuadPart) / s_freq;
+        double dt = x - m_current;
         if (reset) {
-            m_current = li.QuadPart;
+            m_current = x;
         }
         return dt;
     }
-            
+}
+
+#else
+
+#include <sys/time.h>
+
+namespace cgmath {
+
+    timer::timer() {
+        reset();
+    }
+
+    void timer::reset() {
+        timeval x;
+        gettimeofday(&x, NULL);
+        m_current = 1000.0 * x.tv_sec + x.tv_usec / 1000.0;
+    }
+
+    double timer::get_elapsed_time( bool reset ) {
+        timeval tv;
+        gettimeofday(&tv, NULL);
+        double x = 1000.0 * tv.tv_sec + tv.tv_usec / 1000.0;
+        double dt = x - m_current;
+        if (reset) {
+            m_current = x;
+        }
+        return dt;
+    }
 }
 
 #endif
-
